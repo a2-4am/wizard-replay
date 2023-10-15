@@ -1,0 +1,27 @@
+;license:MIT
+;(c) 2023 by 4am
+;
+
+sChoose
+         !byte 18
+         !raw  "   CHOOSE SCENARIO"
+sBlank
+         !byte 0
+sWiz1
+         !byte 21
+         !raw  " Proving Grounds 3.0 "
+sWiz2
+         !byte 21
+         !raw  " Nihonbashi          "
+sWiz3
+         !byte 21
+         !raw  " O'Connor's Mine     "
+sWiz4
+         !byte 21
+         !raw  " Catacombs of Vlad   "
+sWiz5
+         !byte 21
+         !raw  " The Emperor's Seal  "
+sWiz6
+         !byte 21
+         !raw  " Scarlet Brotherhood "

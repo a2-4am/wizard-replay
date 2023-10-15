@@ -1,0 +1,46 @@
+;license:MIT
+;(c) 2018-2023 by 4am
+;
+; ProDOS - functions for constructing and passing around ProDOS pathnames
+;
+; Public functions
+; - SetPath
+; - AddToPath
+;
+
+;------------------------------------------------------------------------------
+; SetPath/AddToPath
+; append a length-prefixed string to gPathname
+; SetPath will reset the path first
+;
+; in:    A contains low byte of address of length-prefixed string to append
+;        Y contains high byte of address of length-prefixed string to append
+; out:   all registers and flags clobbered
+;        PTR clobbered
+;        gPathname updated with concatenated length-prefixed string
+;------------------------------------------------------------------------------
+SetPath
+         ldx   #0
+         stx   gPathname
+         ; execution falls through here
+
+AddToPath
+         +ST16 PTR
+         ldy   #0
+         lda   (PTR),y               ; length of this segment
+         beq   @done
+         tay
+         iny
+         sty   @max
+         ldx   gPathname             ; current pathname length
+         ldy   #$01
+-        lda   (PTR),y
+         sta   gPathname+1,x
+         inx
+         iny
+@max = *+1
+         cpy   #SELF_MODIFIED_BYTE
+         bcc   -
+         stx   gPathname
+@done
+         rts

@@ -1,0 +1,75 @@
+;license:MIT
+;(c) 2023 by 4am
+;
+!cpu 6502
+!to "build/WZREPLAY.SYSTEM",plain
+*=$2000
+
+         !src  "src/constants.a"     ; no code
+         !src  "src/macros.a"        ; no code
+
+Title
+         jmp   Start
+         !bin  "res/PI.TITLE",$1FFD,3
+
+Start
+         lda   #$80
+         sta   Title
+         sta   Title+1
+         sta   Title+2
+         ldx   #$FF
+         txs
+         stx   SelectedIndex
+         +READ_ROM_NO_WRITE
+         sta   PRIMARYCHARSET
+         sta   CLR80VID
+         sta   STOREOFF
+         sta   READMAINMEM
+         sta   WRITEMAINMEM
+         bit   CLEARKBD
+         jsr   ROM_IN0
+         jsr   ROM_PR0
+
+         +BUILD_HGR_LOOKUP_TABLES HGRLO, HGRHI
+
+         jsr   InitBye
+         jsr   MainMenu
+         bcs   @quit
+         jmp   Launch
+@quit    jmp   Quit
+
+ProvingGraphics
+         !bin  "res/wizgfx/PROVING04"
+         !bin  "res/wizgfx/PROVING11"
+         !bin  "res/wizgfx/PROVING07"
+NihonbashiGraphics
+         !bin  "res/wizgfx/NIHONBASHI02"
+         !bin  "res/wizgfx/NIHONBASHI00"
+         !bin  "res/wizgfx/NIHONBASHI08"
+OConnorGraphics
+         !bin  "res/wizgfx/OCONNOR00"
+         !bin  "res/wizgfx/OCONNOR06"
+         !bin  "res/wizgfx/OCONNOR0C"
+VladGraphics
+         !bin  "res/wizgfx/VLAD06"
+         !bin  "res/wizgfx/VLAD00"
+         !bin  "res/wizgfx/VLAD11"
+EmperorGraphics
+         !bin  "res/wizgfx/EMPEROR01"
+         !bin  "res/wizgfx/EMPEROR04"
+         !bin  "res/wizgfx/EMPEROR11"
+BrotherhoodGraphics
+         !bin  "res/wizgfx/SCARLET00"
+         !bin  "res/wizgfx/SCARLET01"
+         !bin  "res/wizgfx/SCARLET06"
+
+         !src  "src/wizgfx.a"
+         !src  "src/ui.strings.a"
+         !src  "src/paths.a"
+         !src  "src/glue.bye.a"
+         !src  "src/glue.mli.a"
+         !src  "src/glue.path.a"
+         !src  "src/glue.launch.a"
+         !src  "src/ui.font.a"
+         !src  "src/ui.font.data.a"
+         !src  "src/ui.main.menu.a"

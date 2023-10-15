@@ -1,0 +1,34 @@
+;license:MIT
+;(c) 2023 by 4am
+;
+DrawWizGraphic
+; (A/Y) -> start of graphic data (500 bytes)
+; X contains starting column (0..39)
+         +ST16 inputptr
+         stx   @offset+1
+         ldx   #$8E
+         stx   gfxRowIndex
+@rowloop
+         lda   HGRLO, x
+         clc
+@offset  adc   #SELF_MODIFIED_BYTE
+         sta   outputptr
+         lda   HGRHI, x
+         sta   outputptr+1
+         ldy   #$09
+@colloop
+         lda   (inputptr), y
+         sta   (outputptr), y
+         dey
+         bpl   @colloop
+         lda   inputptr
+         clc
+         adc   #$0A
+         sta   inputptr
+         bcc   +
+         inc   inputptr+1
++        inc   gfxRowIndex
+         ldx   gfxRowIndex
+         cpx   #$C0
+         bcc   @rowloop
+         rts

@@ -1,0 +1,28 @@
+;license:MIT
+;(c) 2023 by 4am
+;
+
+sGameDirectory
+         !byte 2
+         !raw  "X/"
+sLauncherFilename
+         !byte 9
+         !raw  "WIZARDRY1"
+sVolProvingGrounds
+         !byte 11
+         !raw  "WIZARDRY.PG"
+sVolNihonbashi
+         !byte 10
+         !raw  "NIHONBASHI"
+sVolOConnor
+         !byte 13
+         !raw  "OCONNORS.MINE"
+sVolVlad
+         !byte 11
+         !raw  "CAT.OF.VLAD"
+sVolEmperor
+         !byte 13
+         !raw  "EMPERORS.SEAL"
+sVolBrotherhood
+         !byte 15
+         !raw  "SCARLET.BROTHER"

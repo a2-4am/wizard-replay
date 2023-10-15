@@ -1,0 +1,65 @@
+0123456789012345678901234567890123456789
+Proving Grounds of the Mad Overlord 3.0
+Wizimore: Nihonbashi
+Wizimore: O'Connor's Mine
+Wizimore: Catacombs of Vlad
+Wizimore: The Emperor's Seal
+Wizimore: Scarlet Brotherhood of Hsi Ho
+
+
+
+ 0123456789012345678901234567890123456789
+0{{{{{{{{{{{{{{{{{{{{}}}}}}}}}}}}}}}}}}}}
+1{{{{{{{{{{{{{{{{{{{{}}}}}}}}}}}}}}}}}}}}
+2{{{{{{{{{{{{{{{{{{{{}}}}}}}}}}}}}}}}}}}}
+3{{{{{{{{{{{{{{{{{{{{}}}}}}}}}}}}}}}}}}}}
+4^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+5
+6
+7 CHOOSE SCENARIO
+8
+9[Proving Grounds 3.0   ]      XXXXXXXXXX
+0[Nihonbashi            ]      XXXXXXXXXX
+1[O'Connor's Mine       ]      XXXXXXXXXX
+2[Catacombs of Vlad     ]      XXXXXXXXXX
+3[The Emperor's Seal    ]      ^^^^^^^^^^
+4[Scarlet Brotherhood   ]
+5[The Knight of Diamonds]
+6[Legacy of Llylgamyn   ]
+7[The Return of Werdna  ]
+8[Heart of the Maelstrom]
+9
+0
+1
+2
+3
+
+
+
+
+
+ 0123456789012345678901234567890123456789
+0{{{{{{{{{{{{{{{{{{{{}}}}}}}}}}}}}}}}}}}}
+1{{{{{{{{{{{{{{{{{{{{}}}}}}}}}}}}}}}}}}}}
+2{{{{{{{{{{{{{{{{{{{{}}}}}}}}}}}}}}}}}}}}
+3{{{{{{{{{{{{{{{{{{{{}}}}}}}}}}}}}}}}}}}}
+4^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+5
+6
+7
+8             CHOOSE SCENARIO
+9
+0          [Proving Grounds 3.0]
+1          [Nihonbashi         ]
+2          [O'Connor's Mine    ]
+3          [Catacombs of Vlad  ]
+4          [The Emperor's Seal ]
+5          [Scarlet Brotherhood]
+6
+7
+8
+9 XXXXXXXXXX    XXXXXXXXXX    XXXXXXXXXX
+0 XXXXXXXXXX    XXXXXXXXXX    XXXXXXXXXX
+1 XXXXXXXXXX    XXXXXXXXXX    XXXXXXXXXX
+2 XXXXXXXXXX    XXXXXXXXXX    XXXXXXXXXX
+3 ^^^^^^^^^^    ^^^^^^^^^^    ^^^^^^^^^^

@@ -1,0 +1,49 @@
+;license:MIT
+;(c) 2023 by 4am
+;
+
+SELF_MODIFIED_BYTE = $FD
+SELF_MODIFIED_WORD = $FDFD
+
+; soft switches
+KBD            = $C000    ; last key pressed (if any)
+STOREOFF       = $C000    ; STA only
+READMAINMEM    = $C002    ; STA to read from main mem
+WRITEMAINMEM   = $C004    ; STA to write to main mem
+CLR80VID       = $C00C    ; 40 columns
+PRIMARYCHARSET = $C00E    ; no mousetext for you
+CLEARKBD       = $C010    ; clear last key pressed
+CLOCKCTL       = $C034    ; bits 0-3 are IIgs border color
+GFXMODE        = $C050
+TEXTMODE       = $C051
+FULLGFX        = $C052
+PAGE1          = $C054    ; page 1 (affects text, HGR, DHGR)
+PAGE2          = $C055    ; page 2 (affects text, HGR, DHGR)
+HIRES          = $C057
+
+; ROM routines and addresses
+HTAB           = $24      ; byte
+VTAB           = $25      ; byte
+RNDSEED        = $4E      ; word
+PRODOS_MLI     = $BF00
+ROM_TEXT       = $FB2F
+ROM_MACHINEID  = $FBB3
+ROM_HOME       = $FC58
+ROM_WAIT       = $FCA8
+ROM_NORMAL     = $FE84    ; NORMAL text (instead of INVERSE or FLASH)
+ROM_IN0        = $FE89    ; SETKBD
+ROM_PR0        = $FE93    ; SETVID
+
+; application-specific addresses
+PARAM          = $F0      ; word (used by PARAMS_ON_STACK macro)
+PTR            = $F2      ; word (used by font drawing routine)
+startptr       = $F4      ; word (used by Wiz graphics drawing routine)
+inputptr       = $F6      ; word (used by Wiz graphics drawing routine)
+outputptr      = $F8      ; word (used by Wiz graphics drawing routine)
+gfxRowIndex    = $FA      ; byte (used by Wiz graphics drawing routine)
+PrintMenuIndex = $FB      ; byte (used by main menu)
+SelectedIndex  = $FC      ; byte (used by main menu)
+
+HGRLO          = $1E00    ; 0xC0 bytes, should not cross page boundary (lifetime)
+HGRHI          = $1F00    ; 0xC0 bytes, should not cross page boundary (lifetime)
+gPathname      = $1FC0    ; 0x40 bytes

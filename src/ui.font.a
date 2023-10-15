@@ -1,0 +1,107 @@
+;license:MIT
+;(c) 2018-2023 by 4am
+;
+; hi-res font drawing routines
+;
+; Public functions
+; - DrawString
+;
+
+FontHGRTops
+         !byte $00,$08,$10,$18,$20,$28,$30,$38
+         !byte $40,$48,$50,$58,$60,$68,$70,$78
+         !byte $80,$88,$90,$98,$A0,$A8,$B0,$B8
+
+-        rts
+DrawString
+; A/Y contains address of length-prefixed string (length can be 0)
+; X contains starting column (0..39)
+; $25 contains textpage line (0..23) (this is the standard VTAB address)
+; characters MUST have high bit off (0x00..0x7F)
+; special characters (0x00..0x1F) will be drawn
+; all characters are drawn on the same line
+; clobbers A/X/Y
+         +ST16 PTR
+         stx   HTAB
+         ldy   #0
+         lda   (PTR), y
+         beq   -
+         tax
+         dex
+         inc   PTR
+         bne   +
+         inc   PTR+1
++        +LD16 PTR
+         +ST16 @src+1
+         ldy   VTAB
+         lda   FontHGRTops, y
+         tay
+         lda   HGRLO, y
+         clc
+         adc   HTAB
+         sta   @row0+1
+         lda   HGRHI, y
+         sta   @row0+2
+         iny
+         lda   HGRLO, y
+         adc   HTAB
+         sta   @row1+1
+         lda   HGRHI, y
+         sta   @row1+2
+         iny
+         lda   HGRLO, y
+         adc   HTAB
+         sta   @row2+1
+         lda   HGRHI, y
+         sta   @row2+2
+         iny
+         lda   HGRLO, y
+         adc   HTAB
+         sta   @row3+1
+         lda   HGRHI, y
+         sta   @row3+2
+         iny
+         lda   HGRLO, y
+         adc   HTAB
+         sta   @row4+1
+         lda   HGRHI, y
+         sta   @row4+2
+         iny
+         lda   HGRLO, y
+         adc   HTAB
+         sta   @row5+1
+         lda   HGRHI, y
+         sta   @row5+2
+         iny
+         lda   HGRLO, y
+         adc   HTAB
+         sta   @row6+1
+         lda   HGRHI, y
+         sta   @row6+2
+         iny
+         lda   HGRLO, y
+         adc   HTAB
+         sta   @row7+1
+         lda   HGRHI, y
+         sta   @row7+2
+@loop
+@src     ldy   $FDFD, x
+         lda   FontDataRow0, y
+@row0    sta   $FDFD, x
+         lda   FontDataRow1, y
+@row1    sta   $FDFD, x
+         lda   FontDataRow2, y
+@row2    sta   $FDFD, x
+         lda   FontDataRow3, y
+@row3    sta   $FDFD, x
+         lda   FontDataRow4, y
+@row4    sta   $FDFD, x
+         lda   FontDataRow5, y
+@row5    sta   $FDFD, x
+         lda   FontDataRow6, y
+@row6    sta   $FDFD, x
+         lda   FontDataRow7, y
+@row7    sta   $FDFD, x
+         dex
+         bpl   @loop
+@exit    rts

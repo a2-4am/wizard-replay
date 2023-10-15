@@ -1,0 +1,203 @@
+;license:MIT
+;(c) 2023 by 4am
+;
+!cpu 6502
+!to "build/WZREPLAY.SYSTEM",plain
+*=$2000
+
+         !source "src/constants.a"              ; no code
+         !source "src/macros.a"                 ; no code
+RELOC=$6000
+         ldx   #$FF
+         txs
+         +READ_ROM_NO_WRITE
+         sta   PRIMARYCHARSET
+         sta   CLR80VID
+         sta   STOREOFF
+         sta   READMAINMEM
+         sta   WRITEMAINMEM
+         jsr   ROM_TEXT
+         jsr   ROM_HOME
+         jsr   ROM_NORMAL
+         jsr   ROM_IN0
+         jsr   ROM_PR0
+         bit   PAGE1
+         bit   FULLGFX
+         bit   HIRES
+         bit   GFXMODE
+
+         +BUILD_HGR_LOOKUP_TABLES HGRLO, HGRHI
+
+         ; relocate program code
+-        inc   FM+2
+         inc   FMDEST+2
+         lda   FM+2
+         cmp   #>LastMover
+         bcc   -
+         ldx   #0
+FM       lda   FirstMover, x
+FMDEST   sta   RELOC, x
+         inx
+         bne   FM
+         dec   FM+2
+         dec   FMDEST+2
+         lda   FMDEST+2
+         cmp   #>RELOC
+         bcs   FM
+
+         jmp   Start
+
+FirstMover
+!pseudopc RELOC {
+Start
+         ldx   #$20
+         lda   #0
+         tay
+clr      sta   $2000, y
+         iny
+         bne   clr
+         inc   clr+2
+         dex
+         bne   clr
+
+         +LDADDR data
+         +ST16 startptr
+
+drawloop
+         +LD16 startptr
+         +ST16 inputptr
+
+         ldx   #0
+         stx   gfxRowIndex
+
+rowloop
+         lda   HGRLO, x
+         sta   outputptr
+         lda   HGRHI, x
+         sta   outputptr+1
+         ldy   #9
+colloop
+         lda   (inputptr), y
+         sta   (outputptr), y
+         dey
+         bpl   colloop
+         lda   inputptr
+         clc
+         adc   #10
+         sta   inputptr
+         bcc   +
+         inc   inputptr+1
++        inc   gfxRowIndex
+         ldx   gfxRowIndex
+         cpx   #50
+         bcc   rowloop
+
+keyloop
+         bit   CLEARKBD
+-        lda   KBD
+         bpl   -
+         cmp   #$9B
+         beq   exit
+         cmp   #$A0       ; space
+         bne   +
+         inc   startptr+1
+         inc   startptr+1
+         jmp   drawloop
++        cmp   #$88       ; left arrow
+         bne   +
+         +LD16 startptr
+         +DEC16
+         +ST16 startptr
+         jmp   drawloop
++        cmp   #$95       ; right arrow
+         bne   +
+         +LD16 startptr
+         +INC16
+         +ST16 startptr
+         jmp   drawloop
++        cmp   #$8A       ; down arrow
+         bne   +
+         +LD16 startptr
+         ldx   #10
+-
+         +DEC16
+         dex
+         bne   -
+         +ST16 startptr
+         jmp   drawloop
++        cmp   #$8B       ; up arrow
+         bne   +
+         +LD16 startptr
+         ldx   #10
+-
+         +INC16
+         dex
+         bne   -
+         +ST16 startptr
+         jmp   drawloop
++        jmp   keyloop
+exit
+         jsr   PRODOS_MLI
+         !byte $65
+         !word +
++        !byte 4
+
+data
+         !bin "res/SCARLET.BC00"
+         ;
+         ;Proving Grounds
+         ;$00=slime
+         ;$04=man in armor (2)
+         ;$07=mage (3)
+         ;$08=undead priest
+         ;$09=samurai
+         ;$11=boss (1)
+         ;
+         ;Nihonbashi
+         ;$00=purple guy with sword (2)
+}        ;$02=green guy with sword looking right (1)
+         ;$08=green guy pointing left (3)
+         ;
+         ;O'Connor's Mine
+         ;$00=snake (2)
+         ;$01=bat
+         ;$02=angry guy
+         ;$03=oaf
+         ;$04=mushroom
+         ;$05=slime
+         ;$06=samurai (1)
+         ;$07=mage
+         ;$08=undead priest
+         ;$09=man in armor
+         ;$0C=devil (3)
+         ;$0D=demon
+         ;$0E=skeleton
+         ;$0F=dragon
+         ;$10=troll
+         ;
+         ;Catacombs of Vlad
+         ;$00=angry purple guy with stick (1)
+         ;$01=bat
+         ;$03=angry purple guy
+         ;$04=unhappy guy
+         ;$05=guy with scythe
+         ;$06=skeleton with sword (2)
+         ;$07=mage
+         ;$08=undead priest
+         ;$09=man in armor
+         ;$11=green boss (3)
+         ;
+         ;The Emperor's Seal
+         ;$00=same as Nihonbashi
+         ;$01=brute (1)
+         ;$02=same as Nihonbashi
+         ;$04=monkey (2)
+         ;$11=boss (3)
+         ;
+         ;Scarlet Brotherhood
+         ;all graphics identical to Proving Ground
+         ;$00=purple slime (1)
+         ;$01=oaf (2)
+         ;$02=skeleton
+         ;$06=blue thing (3)
+LastMover
