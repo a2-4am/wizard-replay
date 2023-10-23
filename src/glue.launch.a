@@ -27,29 +27,30 @@ VolNamesHi
          !byte >sVolEmperor
          !byte >sVolBrotherhood
 
-LauncherFilenamesLo
-         !byte <sLauncherFilename1
-         !byte <sLauncherFilename2
-         !byte <sLauncherFilename3
-         !byte <sLauncherFilename1
-         !byte <sLauncherFilename1
-         !byte <sLauncherFilename1
-         !byte <sLauncherFilename1
-         !byte <sLauncherFilename1
-LauncherFilenamesHi
-         !byte >sLauncherFilename1
-         !byte >sLauncherFilename2
-         !byte >sLauncherFilename3
-         !byte >sLauncherFilename1
-         !byte >sLauncherFilename1
-         !byte >sLauncherFilename1
-         !byte >sLauncherFilename1
-         !byte >sLauncherFilename1
+LoadersLo
+         !byte <sLoader1
+         !byte <sLoader2
+         !byte <sLoader3
+         !byte <sLoader1
+         !byte <sLoader1
+         !byte <sLoader1
+         !byte <sLoader1
+         !byte <sLoader1
+LoadersHi
+         !byte >sLoader1
+         !byte >sLoader2
+         !byte >sLoader3
+         !byte >sLoader1
+         !byte >sLoader1
+         !byte >sLoader1
+         !byte >sLoader1
+         !byte >sLoader1
 
 ;------------------------------------------------------------------------------
 ; Launch
 ; load game and jump to it
-; in:    SelectedIndex contains index of game to launch (index into VolNamesLo/Hi)
+; in:    SelectedIndex contains index of game to launch
+;          (used a index into VolNamesLo/Hi and other arrays)
 ;------------------------------------------------------------------------------
 Launch
          +LDADDR sGameDirectory
@@ -64,15 +65,15 @@ Launch
          !word gPathname
 
          ldx   SelectedIndex
-         lda   LauncherFilenamesLo, x
-         ldy   LauncherFilenamesHi, x
+         lda   LoadersLo, x
+         ldy   LoadersHi, x
          jsr   SetPath
 
          jsr   LoadFile1Shot
-         !word gPathname
-         !word $0800
-         !word $1400
-         !word $1C00
+         !word gPathname             ; filename
+         !word $0800                 ; load address
+         !word $1400                 ; max size
+         !word $1C00                 ; ProDOS file buffer address ($400 bytes)
 
          jsr   ROM_TEXT
          jsr   ROM_HOME

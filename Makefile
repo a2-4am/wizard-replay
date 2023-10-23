@@ -29,18 +29,35 @@ dsk: preconditions asm extract
 	cp res/_FileInformation.txt build/ >>build/log
 	$(CADIUS) ADDFILE "${BUILDDISK}" "/WIZARD.REPLAY/" "build/WZREPLAY.SYSTEM" >>build/log
 	$(CADIUS) CREATEFOLDER "$(BUILDDISK)" "/$(VOLUME)/X/" -C >>build/log
-	for f in build/X/*; do \
-		$(CADIUS) ADDFOLDER "$(BUILDDISK)" "/$(VOLUME)/X/$$(basename $$f)" "$$f" -C >>build/log; \
-	done
-	$(CADIUS) ADDFILE "$(BUILDDISK)" "/$(VOLUME)/X/WIZARDRY.PG/" "build/LOADERS/WIZ1V30/WIZARDRY1#060800" -C >>build/log
-	$(CADIUS) ADDFILE "$(BUILDDISK)" "/$(VOLUME)/X/KOD/" "build/LOADERS/WIZ2/WIZARDRY2#060800" -C >>build/log
-	$(CADIUS) ADDFILE "$(BUILDDISK)" "/$(VOLUME)/X/WIZARDRY3/" "build/LOADERS/WIZ3/WIZARDRY3#060800" -C >>build/log
+	$(CADIUS) CREATEFOLDER "$(BUILDDISK)" "/$(VOLUME)/X/WIZ123/" -C >>build/log
+#
+# add loader and disk images for Wizardry I: Proving Grounds of the Mad Overlord
+#
+	$(CADIUS) ADDFILE "$(BUILDDISK)" "/$(VOLUME)/X/WIZ123/" "build/LOADERS/WIZ1V30/WIZARDRY1#060800" -C >>build/log
+	$(CADIUS) ADDFILE "$(BUILDDISK)" "/$(VOLUME)/X/WIZ123/" "build/X/WIZARDRY.PG/WIZARDRY1.A#000000" -C >>build/log
+	$(CADIUS) ADDFILE "$(BUILDDISK)" "/$(VOLUME)/X/WIZ123/" "build/X/WIZARDRY.PG/WIZARDRY1.B#000000" -C >>build/log
+#
+# add loader and disk images for Wizardry II: Knight of Diamonds
+#
+	$(CADIUS) ADDFILE "$(BUILDDISK)" "/$(VOLUME)/X/WIZ123/" "build/LOADERS/WIZ2/WIZARDRY2#060800" -C >>build/log
+	$(CADIUS) ADDFILE "$(BUILDDISK)" "/$(VOLUME)/X/WIZ123/" "build/X/KOD/WIZARDRY2.A#000000" -C >>build/log
+	$(CADIUS) ADDFILE "$(BUILDDISK)" "/$(VOLUME)/X/WIZ123/" "build/X/KOD/WIZARDRY2.B#000000" -C >>build/log
+#
+# add loader and disk images for Wizardry III: Legacy of Llylgamyn
+#
+	$(CADIUS) ADDFILE "$(BUILDDISK)" "/$(VOLUME)/X/WIZ123/" "build/LOADERS/WIZ3/WIZARDRY3#060800" -C >>build/log
+	$(CADIUS) ADDFILE "$(BUILDDISK)" "/$(VOLUME)/X/WIZ123/" "build/X/WIZARDRY3/WIZARDRY3.A#000000" -C >>build/log
+	$(CADIUS) ADDFILE "$(BUILDDISK)" "/$(VOLUME)/X/WIZ123/" "build/X/WIZARDRY3/WIZARDRY3.B#000000" -C >>build/log
+#
+# add loader and disk images for third-party Wizardry scenarios (all based on Proving Grounds v2.1, so same loader)
+#
 	for f in CAT.OF.VLAD EMPERORS.SEAL NIHONBASHI OCONNORS.MINE SCARLET.BROTHER; do \
+		$(CADIUS) ADDFOLDER "$(BUILDDISK)" "/$(VOLUME)/X/$$(basename $$f)" "$$f" -C >>build/log; \
 		$(CADIUS) ADDFILE "$(BUILDDISK)" "/$(VOLUME)/X/$$(basename $$f)" "build/LOADERS/WIZ1V21/WIZARDRY1#060800" -C >>build/log; \
 	done
 
 dirs:
-	mkdir -p build/X
+	mkdir -p build/X/WIZ123
 	mkdir -p build/LOADERS/WIZ1V30
 	mkdir -p build/LOADERS/WIZ1V21
 	mkdir -p build/LOADERS/WIZ2
@@ -57,7 +74,13 @@ asm: preconditions dirs
 
 extract: preconditions dirs
 	$(PARALLEL) '$(CADIUS) EXTRACTVOLUME {} build/X/ >>build/log' ::: res/dsk/*.po
+#
+# remove files we don't use (allows using ADDFOLDER later)
+#
 	rm -f build/X/**/.DS_Store build/X/**/PRODOS* build/X/**/LOADER.SYSTEM*
+#
+# remove loaders because we will assemble fresh versions of them from source
+#
 	rm build/X/**/"WIZARDRY1#060800"
 	rm build/X/**/"WIZARDRY2#060800"
 	rm build/X/**/"WIZARDRY3#060800"
