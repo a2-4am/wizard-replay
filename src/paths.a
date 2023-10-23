@@ -16,6 +16,25 @@ sLoader3
          !byte 9
          !raw  "WIZARDRY3"
 
+sScenario1
+         !byte 11
+         !raw  "WIZARDRY1.A"
+sScenario1Backup
+         !byte 15
+         !raw  "WIZARDRY1.A.BAK"
+sScenario2
+         !byte 11
+         !raw  "WIZARDRY2.A"
+sScenario2Backup
+         !byte 15
+         !raw  "WIZARDRY2.A.BAK"
+sScenario3
+         !byte 11
+         !raw  "WIZARDRY3.A"
+sScenario3Backup
+         !byte 15
+         !raw  "WIZARDRY3.A.BAK"
+
 sVolProvingGrounds
 sVolKnightOfDiamonds
 sVolLegacyOfLlylgamyn

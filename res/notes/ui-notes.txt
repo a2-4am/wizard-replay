@@ -63,3 +63,66 @@ Wizimore: Scarlet Brotherhood of Hsi Ho
 1 XXXXXXXXXX    XXXXXXXXXX    XXXXXXXXXX
 2 XXXXXXXXXX    XXXXXXXXXX    XXXXXXXXXX
 3 ^^^^^^^^^^    ^^^^^^^^^^    ^^^^^^^^^^
+
+
+
+
+
+ 0123456789012345678901234567890123456789
+0{{{{{{{{{{{{{{{{{{{{}}}}}}}}}}}}}}}}}}}}
+1{{{{{{{{{{{{{{{{{{{{}}}}}}}}}}}}}}}}}}}}
+2{{{{{{{{{{{{{{{{{{{{}}}}}}}}}}}}}}}}}}}}  50px logo
+3{{{{{{{{{{{{{{{{{{{{}}}}}}}}}}}}}}}}}}}}
+4{{{{{{{{{{{{{{{{{{{{}}}}}}}}}}}}}}}}}}}}
+5{{{{{{{{{{{{{{{{{{{{}}}}}}}}}}}}}}}}}}}}
+6^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+7                                          14px space
+8         [ Proving Grounds 3.0 ]
+9         [ Knight of Diamonds  ]
+0         [ Legacy of Llylgamyn ]
+1         [ Nihonbashi          ]          64px (8x8) selection list
+2         [ O'Connor's Mine     ]
+3         [ Catacombs of Vlad   ]
+4         [ The Emperor's Seal  ]
+5         [ Scarlet Brotherhood ]
+6                                          14px space
+7 __________    __________    __________
+8 XXXXXXXXXX    XXXXXXXXXX    XXXXXXXXXX
+9 XXXXXXXXXX    XXXXXXXXXX    XXXXXXXXXX
+0 XXXXXXXXXX    XXXXXXXXXX    XXXXXXXXXX   50px game-specific graphics
+1 XXXXXXXXXX    XXXXXXXXXX    XXXXXXXXXX
+2 XXXXXXXXXX    XXXXXXXXXX    XXXXXXXXXX
+3 XXXXXXXXXX    XXXXXXXXXX    XXXXXXXXXX
+
+
+
+
+
+
+
+
+ 0123456789012345678901234567890123456789
+0{{{{{{{{{{{{{{{{{{{{}}}}}}}}}}}}}}}}}}}}
+1{{{{{{{{{{{{{{{{{{{{}}}}}}}}}}}}}}}}}}}}
+2{{{{{{{{{{{{{{{{{{{{}}}}}}}}}}}}}}}}}}}}
+3{{{{{{{{{{{{{{{{{{{{}}}}}}}}}}}}}}}}}}}}
+4{{{{{{{{{{{{{{{{{{{{}}}}}}}}}}}}}}}}}}}}
+5{{{{{{{{{{{{{{{{{{{{}}}}}}}}}}}}}}}}}}}}
+6^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+7
+8           Proving Grounds 3.0
+9
+0         [ Play                ]
+1         [ Edit characters     ]
+2         [ Backup characters   ]
+3         [ Restore from backup ]
+4         [ Back to main menu   ]
+5
+6
+7 __________    __________    __________
+8 XXXXXXXXXX    XXXXXXXXXX    XXXXXXXXXX
+9 XXXXXXXXXX    XXXXXXXXXX    XXXXXXXXXX
+0 XXXXXXXXXX    XXXXXXXXXX    XXXXXXXXXX
+1 XXXXXXXXXX    XXXXXXXXXX    XXXXXXXXXX
+2 XXXXXXXXXX    XXXXXXXXXX    XXXXXXXXXX
+3 XXXXXXXXXX    XXXXXXXXXX    XXXXXXXXXX

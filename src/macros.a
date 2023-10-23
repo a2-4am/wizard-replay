@@ -65,6 +65,19 @@
          tay
          pla
 }
+
+; for functions that take parameters on the stack
+; load an 8-bit value from the parameters on the stack
+; then store it as new source
+; (assumes PARAMS_ON_STACK was used first)
+; clobbers A,Y
+; preserves X
+!macro   LDPARAM8 .offset,.dest {
+         ldy   #.offset
+         lda   (PARAM),y
+         sta   .dest
+}
+
 ; for functions that take parameters on the stack
 ; load a 16-bit value from the parameters on the stack
 ; then store it as new source
@@ -81,15 +94,24 @@
 }
 
 ; for functions that take parameters on the stack
-; load an 8-bit value from the parameters on the stack
+; load a 32-bit value from the parameters on the stack
 ; then store it as new source
 ; (assumes PARAMS_ON_STACK was used first)
 ; clobbers A,Y
 ; preserves X
-!macro   LDPARAM8 .offset,.dest {
+!macro   LDPARAM32 .offset,.dest {
          ldy   #.offset
          lda   (PARAM),y
          sta   .dest
+         iny
+         lda   (PARAM),y
+         sta   .dest+1
+         iny
+         lda   (PARAM),y
+         sta   .dest+2
+         iny
+         lda   (PARAM),y
+         sta   .dest+3
 }
 
 ; load the address of .ptr into A (low) and Y (high)

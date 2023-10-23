@@ -9,6 +9,8 @@
 ; - CreateFile
 ; - OpenFile
 ; - ReadFile
+; - SetEOF
+; - SetPrefix
 ; - WriteFile
 ; - SetMarkTo0
 ; - FlushFile
@@ -193,8 +195,7 @@ CreateFile
 ;------------------------------------------------------------------------------
 OpenFile
          +PARAMS_ON_STACK 4
-         +LDPARAM16 1, mliparam+1    ; address of filename
-         +LDPARAM16 3, mliparam+3    ; address of ProDOS file buffer
+         +LDPARAM32 1, mliparam+1    ; address of filename (2) and ProDOS file buffer (2)
          +LDADDR CMD_OPEN
          jsr   mli
          bcs   +
@@ -222,21 +223,18 @@ OpenFile
 ReadFile
          +PARAMS_ON_STACK 5
          +LDPARAM8 1, mliparam+1     ; file reference number
-         +LDPARAM16 2, mliparam+2    ; address of data buffer
-         +LDPARAM16 4, mliparam+4    ; data length
+         +LDPARAM32 2, mliparam+2    ; address of data buffer (2) and length (2)
          +LDADDR CMD_READ
+         bne   CallMLIAndReturnParam1; always branches
+
+SetEOF
+         +PARAMS_ON_STACK 4
+         +LDPARAM32 1, mliparam+1    ; file reference number (1) + new EOF position (3)
+         +LDADDR CMD_SETEOF
+CallMLIAndReturnParam1
          jsr   mli
          bcs   +
          lda   mliparam+1            ; if no error, return file reference number
-+        rts
-
-SetPrefix
-         +PARAMS_ON_STACK 2
-         +LDPARAM16 1, mliparam+1
-         +LDADDR CMD_SETPREFIX
-         jsr   mli
-         bcs   +
-         lda   mliparam+1
 +        rts
 
 ;------------------------------------------------------------------------------
@@ -257,13 +255,15 @@ SetPrefix
 WriteFile
          sta   mliparam+1            ; file reference number
          +PARAMS_ON_STACK 4
-         +LDPARAM16 1, mliparam+2    ; data buffer address
-         +LDPARAM16 3, mliparam+4    ; data buffer length
+         +LDPARAM32 1, mliparam+2    ; data buffer address (2) and length (2)
          +LDADDR CMD_WRITE
-         jsr   mli
-         bcs   +                     ; error, A = MLI error code
-         lda   mliparam+1            ; no error, return file reference number
-+        rts
+         bne   CallMLIAndReturnParam1; always branches
+
+SetPrefix
+         +PARAMS_ON_STACK 2
+         +LDPARAM16 1, mliparam+1
+         +LDADDR CMD_SETPREFIX
+         bne   mli                   ; always branches
 
 ;------------------------------------------------------------------------------
 ; SetMarkTo0
