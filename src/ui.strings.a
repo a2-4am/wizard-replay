@@ -2,26 +2,27 @@
 ;(c) 2023 by 4am
 ;
 
-sChoose
-         !byte 18
-         !raw  "   CHOOSE SCENARIO"
-sBlank
-         !byte 0
 sWiz1
          !byte 21
          !raw  " Proving Grounds 3.0 "
 sWiz2
          !byte 21
-         !raw  " Nihonbashi          "
+         !raw  " Knight of Diamonds  "
 sWiz3
          !byte 21
+         !raw  " Legacy of Llylgamyn "
+sMore1
+         !byte 21
+         !raw  " Nihonbashi          "
+sMore2
+         !byte 21
          !raw  " O'Connor's Mine     "
-sWiz4
+sMore3
          !byte 21
          !raw  " Catacombs of Vlad   "
-sWiz5
+sMore4
          !byte 21
          !raw  " The Emperor's Seal  "
-sWiz6
+sMore5
          !byte 21
          !raw  " Scarlet Brotherhood "

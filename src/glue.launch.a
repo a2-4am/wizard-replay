@@ -9,6 +9,8 @@
 
 VolNamesLo
          !byte <sVolProvingGrounds
+         !byte <sVolKnightOfDiamonds
+         !byte <sVolLegacyOfLlylgamyn
          !byte <sVolNihonbashi
          !byte <sVolOConnor
          !byte <sVolVlad
@@ -17,11 +19,32 @@ VolNamesLo
 
 VolNamesHi
          !byte >sVolProvingGrounds
+         !byte >sVolKnightOfDiamonds
+         !byte >sVolLegacyOfLlylgamyn
          !byte >sVolNihonbashi
          !byte >sVolOConnor
          !byte >sVolVlad
          !byte >sVolEmperor
          !byte >sVolBrotherhood
+
+LauncherFilenamesLo
+         !byte <sLauncherFilename1
+         !byte <sLauncherFilename2
+         !byte <sLauncherFilename3
+         !byte <sLauncherFilename1
+         !byte <sLauncherFilename1
+         !byte <sLauncherFilename1
+         !byte <sLauncherFilename1
+         !byte <sLauncherFilename1
+LauncherFilenamesHi
+         !byte >sLauncherFilename1
+         !byte >sLauncherFilename2
+         !byte >sLauncherFilename3
+         !byte >sLauncherFilename1
+         !byte >sLauncherFilename1
+         !byte >sLauncherFilename1
+         !byte >sLauncherFilename1
+         !byte >sLauncherFilename1
 
 ;------------------------------------------------------------------------------
 ; Launch
@@ -31,6 +54,7 @@ VolNamesHi
 Launch
          +LDADDR sGameDirectory
          jsr   SetPath
+
          ldx   SelectedIndex
          lda   VolNamesLo, x
          ldy   VolNamesHi, x
@@ -39,7 +63,9 @@ Launch
          jsr   SetPrefix
          !word gPathname
 
-         +LDADDR sLauncherFilename
+         ldx   SelectedIndex
+         lda   LauncherFilenamesLo, x
+         ldy   LauncherFilenamesHi, x
          jsr   SetPath
 
          jsr   LoadFile1Shot

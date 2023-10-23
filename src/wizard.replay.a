@@ -42,6 +42,10 @@ ProvingGraphics
          !bin  "res/wizgfx/PROVING04"
          !bin  "res/wizgfx/PROVING11"
          !bin  "res/wizgfx/PROVING07"
+KODGraphics
+         !bin  "res/wizgfx/KOD09"
+         !bin  "res/wizgfx/KOD11"
+         !bin  "res/wizgfx/KOD0B"
 NihonbashiGraphics
          !bin  "res/wizgfx/NIHONBASHI02"
          !bin  "res/wizgfx/NIHONBASHI00"

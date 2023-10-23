@@ -32,20 +32,35 @@ dsk: preconditions asm extract
 	for f in build/X/*; do \
 		$(CADIUS) ADDFOLDER "$(BUILDDISK)" "/$(VOLUME)/X/$$(basename $$f)" "$$f" -C >>build/log; \
 	done
-#		$(CADIUS) ADDFILE "$(BUILDDISK)" "/$(VOLUME)/X/$$(basename $$f)/" build/"WIZARDRY1#060800" -C >>build/log;
+	$(CADIUS) ADDFILE "$(BUILDDISK)" "/$(VOLUME)/X/WIZARDRY.PG/" "build/LOADERS/WIZ1V30/WIZARDRY1#060800" -C >>build/log
+	$(CADIUS) ADDFILE "$(BUILDDISK)" "/$(VOLUME)/X/KOD/" "build/LOADERS/WIZ2/WIZARDRY2#060800" -C >>build/log
+	$(CADIUS) ADDFILE "$(BUILDDISK)" "/$(VOLUME)/X/WIZARDRY3/" "build/LOADERS/WIZ3/WIZARDRY3#060800" -C >>build/log
+	for f in CAT.OF.VLAD EMPERORS.SEAL NIHONBASHI OCONNORS.MINE SCARLET.BROTHER; do \
+		$(CADIUS) ADDFILE "$(BUILDDISK)" "/$(VOLUME)/X/$$(basename $$f)" "build/LOADERS/WIZ1V21/WIZARDRY1#060800" -C >>build/log; \
+	done
 
 dirs:
 	mkdir -p build/X
+	mkdir -p build/LOADERS/WIZ1V30
+	mkdir -p build/LOADERS/WIZ1V21
+	mkdir -p build/LOADERS/WIZ2
+	mkdir -p build/LOADERS/WIZ3
 	touch build/log
 
 asm: preconditions dirs
+	$(ACME) -r build/loader.wizardry1.v21.lst src/loader.wizardry1.v21.a 2>build/log
+	$(ACME) -r build/loader.wizardry1.v30.lst src/loader.wizardry1.v30.a 2>build/log
+	$(ACME) -r build/loader.wizardry2.lst src/loader.wizardry2.a 2>build/log
+	$(ACME) -r build/loader.wizardry3.lst src/loader.wizardry3.a 2>build/log
 	$(ACME) -r build/wizard.replay.lst src/wizard.replay.a 2>build/log
-#	$(ACME) -r build/wizardry1.lst src/wizardry1.a 2>build/log
+#	$(ACME) -r build/graphics.explorer.lst src/Attic/graphics.explorer.a 2>build/log
 
 extract: preconditions dirs
 	$(PARALLEL) '$(CADIUS) EXTRACTVOLUME {} build/X/ >>build/log' ::: res/dsk/*.po
 	rm -f build/X/**/.DS_Store build/X/**/PRODOS* build/X/**/LOADER.SYSTEM*
-#	rm build/X/**/"WIZARDRY1#060800"
+	rm build/X/**/"WIZARDRY1#060800"
+	rm build/X/**/"WIZARDRY2#060800"
+	rm build/X/**/"WIZARDRY3#060800"
 
 clean:
 	rm -rf build/

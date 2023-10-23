@@ -10,7 +10,7 @@ ver_02 = 1
 } else { ;ver_02 = 0
   !cpu 65c02
 } ;ver_02
-!to "build/WIZARDRY1#060800",plain
+!to "build/LOADERS/WIZ1V21/WIZARDRY1#060800",plain
 *=$800
 
 ;place no code before init label below.
@@ -872,7 +872,7 @@ copysect        lda     (adrlo),y
 
                 ldx     #0
                 ldy     PatchCount
-                sty     bloklo
+                sty     adrlo
 
 find_volume
                 clv
@@ -880,7 +880,7 @@ find_volume
                 bpl     +
                 and     #$7f
                 bit     knownret
-+               sta     blokhi
++               sta     adrhi
                 lda     PatchArray, x
                 bmi     +
                 cmp     curvolidx + 1
@@ -902,7 +902,7 @@ copy_patch
                 bvs     +
                 inx
 +               iny
-                dec     blokhi
+                dec     adrhi
                 bne     copy_patch
                 pla
                 tax
@@ -915,7 +915,7 @@ next_patch
                 adc     PatchArray + 4, x
 +               adc     #5
                 tax
-                dec     bloklo
+                dec     adrlo
                 bne     find_volume
 
 nextsect        inc     $CD
@@ -1188,7 +1188,7 @@ pblock          !byte   2, 0, 0
   }
 
 !set labels=0
-PatchCount      !byte   16
+PatchCount      !byte   17
 !do {
 PatchArray
 ; disable protection check
@@ -1371,6 +1371,18 @@ patch_wizardry_utils6_b
          !byte $D2, $02
 patch_wizardry_utils6_e
 
+;insert scenario with "out" chars
+patch_wizardry_utils7
+!set labels=labels+1
+         !byte $01        ; disk
+         !byte $21        ; track
+         !byte $00        ; sector
+         !byte $89        ; byte offset
+         !byte 32+$80     ; length
+patch_wizardry_utils7_b
+         !byte $20
+patch_wizardry_utils7_e
+
 ; intercept quit
 patch_wizardry_quit
 !set labels=labels+1
@@ -1401,10 +1413,7 @@ patch_wizardry_utils1_e
 !ifdef count {
   !error "patch count: ",labels
 }
-!warn "patch size: ",*-PatchCount
-!if *>$b3bf {
-  !error "patch table too large"
-}
+
 hddcodeend
 blokloarray
 blokhiarray = blokloarray + 3

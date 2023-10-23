@@ -5,12 +5,26 @@
 sGameDirectory
          !byte 2
          !raw  "X/"
-sLauncherFilename
+
+sLauncherFilename1
          !byte 9
          !raw  "WIZARDRY1"
+sLauncherFilename2
+         !byte 9
+         !raw  "WIZARDRY2"
+sLauncherFilename3
+         !byte 9
+         !raw  "WIZARDRY3"
+
 sVolProvingGrounds
          !byte 11
          !raw  "WIZARDRY.PG"
+sVolKnightOfDiamonds
+         !byte 3
+         !raw  "KOD"
+sVolLegacyOfLlylgamyn
+         !byte 9
+         !raw  "WIZARDRY3"
 sVolNihonbashi
          !byte 10
          !raw  "NIHONBASHI"

@@ -143,7 +143,26 @@ exit
 +        !byte 4
 
 data
-         !bin "res/SCARLET.BC00"
+         !bin "res/Attic/LOL.6E00"
+         ;KOD
+         ;$00=smiling slime
+         ;$01=flying bugs
+         ;$02=big bug
+         ;$03=angry hippo
+         ;$04=oaf
+         ;$05=demon
+         ;$06=chest
+         ;$07=loot
+         ;$08=multi-colored amoeba
+         ;$09=sword (1)
+         ;$0A=scary mask
+         ;$0B=shield (3)
+         ;$0C=giant hand
+         ;$0D=some other damn thing
+         ;$0E=skullface
+         ;$0F=amoeba but purple
+         ;$10=snake
+         ;$11=bat (2)
          ;
          ;Proving Grounds
          ;$00=slime

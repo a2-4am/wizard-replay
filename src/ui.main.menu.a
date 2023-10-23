@@ -5,29 +5,31 @@
 kMainMenuVTAB = $08
 kMainMenuHTAB = $0A
 kMainMenuWidth = $15
-kMainMenuMaxIndex = 6
+kMainMenuMaxIndex = 8
 
 MainMenuStringsLo
-         !byte <sChoose
-         !byte <sBlank
          !byte <sWiz1
          !byte <sWiz2
          !byte <sWiz3
-         !byte <sWiz4
-         !byte <sWiz5
-         !byte <sWiz6
+         !byte <sMore1
+         !byte <sMore2
+         !byte <sMore3
+         !byte <sMore4
+         !byte <sMore5
 MainMenuStringsHi
-         !byte >sChoose
-         !byte >sBlank
          !byte >sWiz1
          !byte >sWiz2
          !byte >sWiz3
-         !byte >sWiz4
-         !byte >sWiz5
-         !byte >sWiz6
+         !byte >sMore1
+         !byte >sMore2
+         !byte >sMore3
+         !byte >sMore4
+         !byte >sMore5
          !byte 0
 
 WizGraphicsLo
+         !byte <ProvingGraphics
+         !byte <KODGraphics
          !byte <ProvingGraphics
          !byte <NihonbashiGraphics
          !byte <OConnorGraphics
@@ -36,6 +38,8 @@ WizGraphicsLo
          !byte <BrotherhoodGraphics
 WizGraphicsHi0
          !byte >ProvingGraphics
+         !byte >KODGraphics
+         !byte >ProvingGraphics
          !byte >NihonbashiGraphics
          !byte >OConnorGraphics
          !byte >VladGraphics
@@ -43,12 +47,16 @@ WizGraphicsHi0
          !byte >BrotherhoodGraphics
 WizGraphicsHi1
          !byte >(ProvingGraphics+$200)
+         !byte >(KODGraphics+$200)
+         !byte >(ProvingGraphics+$200)
          !byte >(NihonbashiGraphics+$200)
          !byte >(OConnorGraphics+$200)
          !byte >(VladGraphics+$200)
          !byte >(EmperorGraphics+$200)
          !byte >(BrotherhoodGraphics+$200)
 WizGraphicsHi2
+         !byte >(ProvingGraphics+$400)
+         !byte >(KODGraphics+$400)
          !byte >(ProvingGraphics+$400)
          !byte >(NihonbashiGraphics+$400)
          !byte >(OConnorGraphics+$400)
@@ -161,9 +169,10 @@ SetSelectedIndex
 Unhighlight
 ; in:    A contains index to unhighlight
 ; out:   clobbers A/X/Y
-         clc
-         adc   #2
+;         clc
+;         adc   #2
          tax
+         clc
          adc   #kMainMenuVTAB
          sta   VTAB
          lda   MainMenuStringsLo, x
@@ -177,7 +186,8 @@ Highlight
 ; out:   clobbers A/X/Y
          lda   SelectedIndex
          clc
-         adc   #(kMainMenuVTAB+2)
+;         adc   #(kMainMenuVTAB+2)
+         adc   #kMainMenuVTAB
          tax
          lda   FontHGRTops, x
          tax
