@@ -263,8 +263,8 @@ FontDataRow1
          !byte %10000000 ;  $7F  cursor
 FontDataRow2
          !byte %11111111 ;  $00  horizontal bar
-         !byte %11111100 ;  $01  horizontal bar with rounded left side
-         !byte %10011111 ;  $02  horizontal bar with rounded right side
+         !byte %11100000 ;  $01  horizontal bar with rounded left side
+         !byte %10000011 ;  $02  horizontal bar with rounded right side
          !byte %10111110 ;  $03  vertical bar
          !byte %10111110 ;  $04  vertical bar with rounded top
          !byte %10111110 ;  $05  vertical bar with rounded bottom
@@ -392,8 +392,8 @@ FontDataRow2
          !byte %11111110 ;  $7F  cursor
 FontDataRow3
          !byte %11111111 ;  $00  horizontal bar
-         !byte %11111110 ;  $01  horizontal bar with rounded left side
-         !byte %10111111 ;  $02  horizontal bar with rounded right side
+         !byte %11110000 ;  $01  horizontal bar with rounded left side
+         !byte %10000111 ;  $02  horizontal bar with rounded right side
          !byte %10111110 ;  $03  vertical bar
          !byte %10111110 ;  $04  vertical bar with rounded top
          !byte %10111110 ;  $05  vertical bar with rounded bottom
@@ -521,8 +521,8 @@ FontDataRow3
          !byte %11111110 ;  $7F  cursor
 FontDataRow4
          !byte %11111111 ;  $00  horizontal bar
-         !byte %11111110 ;  $01  horizontal bar with rounded left side
-         !byte %10111111 ;  $02  horizontal bar with rounded right side
+         !byte %11110000 ;  $01  horizontal bar with rounded left side
+         !byte %10000111 ;  $02  horizontal bar with rounded right side
          !byte %10111110 ;  $03  vertical bar
          !byte %10111110 ;  $04  vertical bar with rounded top
          !byte %10111110 ;  $05  vertical bar with rounded bottom
@@ -650,8 +650,8 @@ FontDataRow4
          !byte %11111110 ;  $7F  cursor
 FontDataRow5
          !byte %11111111 ;  $00  horizontal bar
-         !byte %11111110 ;  $01  horizontal bar with rounded left side
-         !byte %10111111 ;  $02  horizontal bar with rounded right side
+         !byte %11110000 ;  $01  horizontal bar with rounded left side
+         !byte %10000111 ;  $02  horizontal bar with rounded right side
          !byte %10111110 ;  $03  vertical bar
          !byte %10111110 ;  $04  vertical bar with rounded top
          !byte %10111110 ;  $05  vertical bar with rounded bottom
@@ -779,8 +779,8 @@ FontDataRow5
          !byte %11111110 ;  $7F  cursor
 FontDataRow6
          !byte %11111111 ;  $00  horizontal bar
-         !byte %11111100 ;  $01  horizontal bar with rounded left side
-         !byte %10011111 ;  $02  horizontal bar with rounded right side
+         !byte %11100000 ;  $01  horizontal bar with rounded left side
+         !byte %10000011 ;  $02  horizontal bar with rounded right side
          !byte %10111110 ;  $03  vertical bar
          !byte %10111110 ;  $04  vertical bar with rounded top
          !byte %10011100 ;  $05  vertical bar with rounded bottom
