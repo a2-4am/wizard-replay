@@ -217,3 +217,19 @@ Highlight
          dec   PrintMenuIndex
          bpl   @rowloop
          rts
+
+Home
+         ldx   #(kMainMenuVTAB*8)
+@rowloop lda   HGRLO, x
+         sta   @clear+1
+         lda   HGRHI, x
+         sta   @clear+2
+         ldy   #39
+         lda   #$80
+@clear   sta   SELF_MODIFIED_WORD, y
+         dey
+         bpl   @clear
+         inx
+         cpx   #((kMainMenuVTAB+kMainMenuMaxIndex)*8)
+         bcc   @rowloop
+         rts

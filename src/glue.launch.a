@@ -7,45 +7,6 @@
 ; - Launch
 ;
 
-VolNamesLo
-         !byte <sVolProvingGrounds
-         !byte <sVolKnightOfDiamonds
-         !byte <sVolLegacyOfLlylgamyn
-         !byte <sVolNihonbashi
-         !byte <sVolOConnor
-         !byte <sVolVlad
-         !byte <sVolEmperor
-         !byte <sVolBrotherhood
-
-VolNamesHi
-         !byte >sVolProvingGrounds
-         !byte >sVolKnightOfDiamonds
-         !byte >sVolLegacyOfLlylgamyn
-         !byte >sVolNihonbashi
-         !byte >sVolOConnor
-         !byte >sVolVlad
-         !byte >sVolEmperor
-         !byte >sVolBrotherhood
-
-LoadersLo
-         !byte <sLoader1
-         !byte <sLoader2
-         !byte <sLoader3
-         !byte <sLoader1
-         !byte <sLoader1
-         !byte <sLoader1
-         !byte <sLoader1
-         !byte <sLoader1
-LoadersHi
-         !byte >sLoader1
-         !byte >sLoader2
-         !byte >sLoader3
-         !byte >sLoader1
-         !byte >sLoader1
-         !byte >sLoader1
-         !byte >sLoader1
-         !byte >sLoader1
-
 ;------------------------------------------------------------------------------
 ; Launch
 ; load game and jump to it

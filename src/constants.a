@@ -44,6 +44,6 @@ gfxRowIndex    = $FA      ; byte (used by Wiz graphics drawing routine)
 PrintMenuIndex = $FB      ; byte (used by main menu)
 SelectedIndex  = $FC      ; byte (used by main menu)
 
-HGRLO          = $1E00    ; 0xC0 bytes, should not cross page boundary (lifetime)
-HGRHI          = $1F00    ; 0xC0 bytes, should not cross page boundary (lifetime)
-gPathname      = $1FC0    ; 0x40 bytes
+HGRLO          = $0100    ; 0xC0 bytes, should not cross page boundary (lifetime)
+HGRHI          = $0300    ; 0xC0 bytes, should not cross page boundary (lifetime)
+gPathname      = $02C0    ; 0x40 bytes

@@ -1,0 +1,133 @@
+;license:MIT
+;(c) 2023 by 4am
+;
+
+BackupScenario
+; in:    SelectedIndex populated
+; out:   C=0 if success
+;        C=1 if failure, and A=MLI error code
+         jsr   Home
+         lda   #$0A
+         sta   VTAB
+         +LDADDR sBackup
+         ldx   #$0A
+         jsr   DrawString
+         inc   VTAB
+         inc   VTAB
+         +LDADDR sInitialProgressBar
+         ldx   #$02
+         jsr   DrawString
+         lda   #$03
+         sta   HTAB
+
+         jsr   BuildPathToScenario
+         jsr   OpenSourceFile
+         bcs   ExitBackupRestore
+         sta   BackupRestoreSourceRefNum
+
+         jsr   BuildPathToScenarioBackup
+         jsr   OpenDestFile
+         bcs   ExitBackupRestore
+         sta   BackupRestoreDestRefNum
+         bcc   BackupRestoreLoop     ; always branches
+
+RestoreScenario
+         jsr   BuildPathToScenarioBackup
+         jsr   OpenSourceFile
+         bcs   ExitBackupRestore
+         sta   BackupRestoreSourceRefNum
+
+         jsr   BuildPathToScenario
+         jsr   OpenDestFile
+         bcs   ExitBackupRestore
+         sta   BackupRestoreDestRefNum
+         ; /!\ execution falls through here
+
+BackupRestoreLoop
+         jsr   ReadFile
+BackupRestoreSourceRefNum
+         !byte SELF_MODIFIED_BYTE
+         !word $0800
+         !word $1000
+         bcc   +
+         cmp   #$4C                  ; EOF = done
+         beq   ExitBackupRestoreWithNoError
+         bne   ExitBackupRestoreWithError
+
++
+         +LDADDR sProgressBlock
+         ldx   HTAB
+         jsr   DrawString
+         inc   HTAB
+
+         jsr   WriteFile
+BackupRestoreDestRefNum
+         !byte SELF_MODIFIED_BYTE
+         !word $0800
+         !word $1000
+         bcc   BackupRestoreLoop
+
+ExitBackupRestoreWithError
+         sec
+         +HIDE_NEXT_BYTE
+ExitBackupRestoreWithNoError
+         clc
+ExitBackupRestore
+         php                         ; save status
+         pha                         ; save error code (if C=1)
+         jsr   CloseAllFiles
+         pla                         ; restore error code
+         plp                         ; restore status
+         rts
+
+OpenSourceFile
+         jsr   OpenFile
+         !word gPathname
+         !word $1800
+         bcs   +
+         jsr   SetMarkTo0
++        rts
+
+OpenDestFile
+         jsr   OpenFile
+         !word gPathname
+         !word $1C00
+         bcs   +
+         jsr   SetMarkTo0
++        rts
+
+BuildPathToScenario
+; in:    SelectedIndex populated
+         +LDADDR sGameDirectory
+         jsr   SetPath
+
+         ldx   SelectedIndex
+         lda   VolNamesLo, x
+         ldy   VolNamesHi, x
+         jsr   AddToPath
+
+         +LDADDR sSlash
+         jsr   AddToPath
+
+         ldx   SelectedIndex
+         lda   ScenariosLo, x
+         ldy   ScenariosHi, x
+         jmp   AddToPath
+
+BuildPathToScenarioBackup
+; in:    SelectedIndex populated
+         +LDADDR sGameDirectory
+         jsr   SetPath
+
+         ldx   SelectedIndex
+         lda   VolNamesLo, x
+         ldy   VolNamesHi, x
+         jsr   AddToPath
+
+         +LDADDR sSlash
+         jsr   AddToPath
+
+         ldx   SelectedIndex
+         lda   BackupsLo, x
+         ldy   BackupsHi, x
+         jmp   AddToPath

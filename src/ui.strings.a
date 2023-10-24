@@ -26,3 +26,16 @@ sMore4
 sMore5
          !byte 21
          !raw  " Scarlet Brotherhood "
+sBackup
+         !byte 21
+         !raw  "Backing up your party"
+sInitialProgressBar
+         !byte 37
+         !byte $01,$06,$06,$06,$06,$06,$06,$06
+         !byte $06,$06,$06,$06,$06,$06,$06,$06
+         !byte $06,$06,$06,$06,$06,$06,$06,$06
+         !byte $06,$06,$06,$06,$06,$06,$06,$06
+         !byte $06,$06,$06,$06,$02
+sProgressBlock
+         !byte 1
+         !byte $00

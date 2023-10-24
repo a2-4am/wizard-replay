@@ -126,3 +126,34 @@ Wizimore: Scarlet Brotherhood of Hsi Ho
 1 XXXXXXXXXX    XXXXXXXXXX    XXXXXXXXXX
 2 XXXXXXXXXX    XXXXXXXXXX    XXXXXXXXXX
 3 XXXXXXXXXX    XXXXXXXXXX    XXXXXXXXXX
+
+
+
+
+
+
+ 0123456789012345678901234567890123456789
+0{{{{{{{{{{{{{{{{{{{{}}}}}}}}}}}}}}}}}}}}
+1{{{{{{{{{{{{{{{{{{{{}}}}}}}}}}}}}}}}}}}}
+2{{{{{{{{{{{{{{{{{{{{}}}}}}}}}}}}}}}}}}}}
+3{{{{{{{{{{{{{{{{{{{{}}}}}}}}}}}}}}}}}}}}
+4{{{{{{{{{{{{{{{{{{{{}}}}}}}}}}}}}}}}}}}}
+5{{{{{{{{{{{{{{{{{{{{}}}}}}}}}}}}}}}}}}}}
+6^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+7
+8
+9
+0          Backing up your party
+1
+2  [-----------------------------------]
+3
+4
+5
+6
+7 __________    __________    __________
+8 XXXXXXXXXX    XXXXXXXXXX    XXXXXXXXXX
+9 XXXXXXXXXX    XXXXXXXXXX    XXXXXXXXXX
+0 XXXXXXXXXX    XXXXXXXXXX    XXXXXXXXXX
+1 XXXXXXXXXX    XXXXXXXXXX    XXXXXXXXXX
+2 XXXXXXXXXX    XXXXXXXXXX    XXXXXXXXXX
+3 XXXXXXXXXX    XXXXXXXXXX    XXXXXXXXXX

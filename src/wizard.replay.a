@@ -35,6 +35,8 @@ Start
          jsr   InitBye               ; saves current ProDOS prefix
          jsr   MainMenu
          bcs   @quit
+         jsr   BackupScenario
+         bcs   @quit
          jmp   Launch
 @quit    jmp   Quit
 
@@ -74,6 +76,7 @@ BrotherhoodGraphics
          !src  "src/glue.mli.a"
          !src  "src/glue.path.a"
          !src  "src/glue.launch.a"
+         !src  "src/backup.restore.a"
          !src  "src/ui.font.a"
          !src  "src/ui.font.data.a"
          !src  "src/ui.main.menu.a"

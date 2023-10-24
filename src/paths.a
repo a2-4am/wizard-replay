@@ -6,6 +6,10 @@ sGameDirectory
          !byte 2
          !raw  "X/"
 
+sSlash
+         !byte 1
+         !raw  "/"
+
 sLoader1
          !byte 9
          !raw  "WIZARDRY1"
@@ -55,3 +59,80 @@ sVolEmperor
 sVolBrotherhood
          !byte 15
          !raw  "SCARLET.BROTHER"
+
+VolNamesLo
+         !byte <sVolProvingGrounds
+         !byte <sVolKnightOfDiamonds
+         !byte <sVolLegacyOfLlylgamyn
+         !byte <sVolNihonbashi
+         !byte <sVolOConnor
+         !byte <sVolVlad
+         !byte <sVolEmperor
+         !byte <sVolBrotherhood
+
+VolNamesHi
+         !byte >sVolProvingGrounds
+         !byte >sVolKnightOfDiamonds
+         !byte >sVolLegacyOfLlylgamyn
+         !byte >sVolNihonbashi
+         !byte >sVolOConnor
+         !byte >sVolVlad
+         !byte >sVolEmperor
+         !byte >sVolBrotherhood
+
+LoadersLo
+         !byte <sLoader1
+         !byte <sLoader2
+         !byte <sLoader3
+         !byte <sLoader1
+         !byte <sLoader1
+         !byte <sLoader1
+         !byte <sLoader1
+         !byte <sLoader1
+LoadersHi
+         !byte >sLoader1
+         !byte >sLoader2
+         !byte >sLoader3
+         !byte >sLoader1
+         !byte >sLoader1
+         !byte >sLoader1
+         !byte >sLoader1
+         !byte >sLoader1
+
+ScenariosLo
+         !byte <sScenario1
+         !byte <sScenario2
+         !byte <sScenario3
+         !byte <sScenario1
+         !byte <sScenario1
+         !byte <sScenario1
+         !byte <sScenario1
+         !byte <sScenario1
+ScenariosHi
+         !byte >sScenario1
+         !byte >sScenario2
+         !byte >sScenario3
+         !byte >sScenario1
+         !byte >sScenario1
+         !byte >sScenario1
+         !byte >sScenario1
+         !byte >sScenario1
+
+BackupsLo
+         !byte <sScenario1Backup
+         !byte <sScenario2Backup
+         !byte <sScenario3Backup
+         !byte <sScenario1Backup
+         !byte <sScenario1Backup
+         !byte <sScenario1Backup
+         !byte <sScenario1Backup
+         !byte <sScenario1Backup
+BackupsHi
+         !byte >sScenario1Backup
+         !byte >sScenario2Backup
+         !byte >sScenario3Backup
+         !byte >sScenario1Backup
+         !byte >sScenario1Backup
+         !byte >sScenario1Backup
+         !byte >sScenario1Backup
+         !byte >sScenario1Backup
