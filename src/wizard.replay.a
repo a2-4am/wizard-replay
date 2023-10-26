@@ -19,7 +19,6 @@ Start
          sta   Title+2
          ldx   #$FF
          txs
-         stx   MenuSelectedIndex
          +READ_ROM_NO_WRITE
          sta   PRIMARYCHARSET
          sta   CLR80VID
@@ -34,8 +33,6 @@ Start
 
          jsr   InitBye               ; saves current ProDOS prefix
          jsr   MainMenu
-         bcs   @quit
-         jsr   BackupScenario
          bcs   @quit
          jmp   Launch
 @quit    jmp   Quit
@@ -81,5 +78,6 @@ BrotherhoodGraphics
          !src  "src/ui.common.a"
          !src  "src/ui.menu.common.a"
          !src  "src/ui.main.menu.a"
+         !src  "src/ui.action.menu.a"
          !src  "src/ui.font.a"
          !src  "src/ui.font.data.a"

@@ -7,7 +7,7 @@ BackupScenario
 ; out:   C=0 if success
 ;        C=1 if failure, and A=MLI error code
          jsr   Home
-         lda   #$0A
+         lda   #(kScreenTopVTAB+2)
          sta   VTAB
          +LDADDR sBackup
          jsr   DrawCenteredString
@@ -31,6 +31,19 @@ BackupScenario
          bcc   BackupRestoreLoop     ; always branches
 
 RestoreScenario
+         jsr   Home
+         lda   #(kScreenTopVTAB+2)
+         sta   VTAB
+         +LDADDR sRestore
+         jsr   DrawCenteredString
+         inc   VTAB
+         inc   VTAB
+         +LDADDR sInitialProgressBar
+         ldx   #$02
+         jsr   DrawString
+         lda   #$03
+         sta   HTAB
+
          jsr   BuildPathToScenarioBackup
          jsr   OpenSourceFile
          bcs   ExitBackupRestore

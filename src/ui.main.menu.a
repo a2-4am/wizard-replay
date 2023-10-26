@@ -60,15 +60,19 @@ WizGraphicsHi2
          !byte >(BrotherhoodGraphics+$400)
 
 MainMenu
-         jsr   HandleMenu
+         jsr   Home
+
+         jsr   Menu
          !word MainMenuStringsLo
          !word MainMenuStringsHi
          !byte kScreenTopVTAB
          !word MainMenuSelectionChangeCallback
+
          bcs   +
          ldx   MenuSelectedIndex
          stx   GameSelectedIndex
-         ;TODO call action menu
+         jsr   ActionMenu
+         bcs   MainMenu
 +        rts
 
 MainMenuSelectionChangeCallback

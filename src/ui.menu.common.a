@@ -23,7 +23,7 @@ HighlightRightEdges
          !byte %10011111
          !byte %10001111
 
-HandleMenu
+Menu
          +PARAMS_ON_STACK 7
          +LDZPPARAM16 1, MenuStringsLoPtr
          +LDZPPARAM16 3, MenuStringsHiPtr
@@ -31,8 +31,10 @@ HandleMenu
          +LDPARAM16   6, MenuSelectionChangeCallback
          lda   MenuTopVTAB
          sta   VTAB
-         lda   #$00
-         sta   MenuMaxIndex
+         ldy   #$FF
+         sty   MenuSelectedIndex
+         iny
+         sty   MenuMaxIndex
 @printLoop
          ldy   MenuMaxIndex
          lda   (MenuStringsHiPtr), y

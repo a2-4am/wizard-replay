@@ -1,0 +1,132 @@
+;license:MIT
+;(c) 2023 by 4am
+;
+
+; menu item indexes
+kActionEdit    = 1
+kActionBackup  = 2
+kActionRestore = 3
+
+ActionMenuStringsLo
+         !byte <sMenuPlay
+         !byte <sMenuEdit
+         !byte <sMenuBackup
+         !byte <sMenuRestore
+         !byte <sMenuBack
+
+ActionMenuStringsHi
+         !byte >sMenuPlay
+         !byte >sMenuEdit
+         !byte >sMenuBackup
+         !byte >sMenuRestore
+         !byte >sMenuBack
+         !byte 0
+
+TitleStringsLo
+         !byte <sTitleWiz1
+         !byte <sTitleWiz2
+         !byte <sTitleWiz3
+         !byte <sTitleMore1
+         !byte <sTitleMore2
+         !byte <sTitleMore3
+         !byte <sTitleMore4
+         !byte <sTitleMore5
+
+TitleStringsHi
+         !byte >sTitleWiz1
+         !byte >sTitleWiz2
+         !byte >sTitleWiz3
+         !byte >sTitleMore1
+         !byte >sTitleMore2
+         !byte >sTitleMore3
+         !byte >sTitleMore4
+         !byte >sTitleMore5
+
+SubtitleStringsLo
+         !byte <sSubtitleWiz1
+         !byte <sSubtitleWiz2
+         !byte <sSubtitleWiz3
+         !byte <sSubtitleMore1
+         !byte <sSubtitleMore2
+         !byte <sSubtitleMore3
+         !byte <sSubtitleMore4
+         !byte <sSubtitleMore5
+
+SubtitleStringsHi
+         !byte >sSubtitleWiz1
+         !byte >sSubtitleWiz2
+         !byte >sSubtitleWiz3
+         !byte >sSubtitleMore1
+         !byte >sSubtitleMore2
+         !byte >sSubtitleMore3
+         !byte >sSubtitleMore4
+         !byte >sSubtitleMore5
+
+ActionMenu
+         jsr   Home
+         lda   #kScreenTopVTAB
+         sta   VTAB
+         ldx   GameSelectedIndex
+         lda   TitleStringsLo, x
+         ldy   TitleStringsHi, x
+         jsr   DrawCenteredString
+         inc   VTAB
+         ldx   GameSelectedIndex
+         lda   SubtitleStringsLo, x
+         ldy   SubtitleStringsHi, x
+         jsr   DrawCenteredString
+
+         jsr   Menu
+         !word ActionMenuStringsLo
+         !word ActionMenuStringsHi
+         !byte kScreenTopVTAB+3
+         !word NoCallback
+
+         bcs   @exit
+         ldx   MenuSelectedIndex
+         beq   @exitClear
+         cpx   #kActionEdit
+         beq   ActionEdit
+         cpx   #kActionBackup
+         beq   ActionBackup
+         cpx   #kActionRestore
+         beq   ActionRestore
+         sec
+@exit    rts
+@exitClear
+         clc
+         rts
+
+ActionEdit
+         ;TODO
+         brk
+
+ActionBackup
+         jsr   BackupScenario
+         jmp   ActionMenu
+
+ActionRestore
+         jsr   Home
+         lda   #kScreenTopVTAB
+         sta   VTAB
+         +LDADDR sRestoreWarning
+         jsr   DrawCenteredString
+         jsr   Menu
+         !word RestoreMenuStringsLo
+         !word RestoreMenuStringsHi
+         !byte kScreenTopVTAB+2
+         !word NoCallback
+         bcs   +
+         ldx   MenuSelectedIndex
+         bne   +
+         jsr   RestoreScenario
++        jmp   ActionMenu
+
+RestoreMenuStringsLo
+         !byte <sMenuRestore
+         !byte <sMenuCancel
+
+RestoreMenuStringsHi
+         !byte >sMenuRestore
+         !byte >sMenuCancel
+         !byte 0

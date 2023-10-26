@@ -41,13 +41,20 @@ sMenuEdit
          !raw  " Edit with WizPlus   "
 sMenuBackup
          !byte 21
-         !raw  " Backup scenario     "
+         !raw  " Back up scenario    "
 sMenuRestore
          !byte 21
          !raw  " Restore from backup "
 sMenuBack
          !byte 21
          !raw  " Back to main menu   "
+
+;
+; short padded titles for other menus
+;
+sMenuCancel
+         !byte 21
+         !raw  " Cancel              "
 
 ;
 ; full game titles and descriptions for action menu
@@ -80,27 +87,33 @@ sSubtitleWiz1
          !byte 33
          !raw  "1981 classic with modern upgrades"
 sSubtitleWiz2
-         !byte 38
-         !raw  "1982 classic without the disk swapping"
+         !byte 12
+         !raw  "1982 classic"
 sSubtitleWiz3
-         !byte 38
-         !raw  "1983 classic without the disk swapping"
+         !byte 12
+         !raw  "1983 classic"
 sSubtitleMore1
 sSubtitleMore3
 sSubtitleMore4
-         !byte 40
-         !raw  "1987 third-party scenario by Joel Fenton"
+         !byte 25
+         !raw  "1987 third-party scenario"
 sSubtitleMore2
 sSubtitleMore5
-         !byte 40
-         !raw  "1985 third-party scenario by Joel Fenton"
+         !byte 25
+         !raw  "1985 third-party scenario"
 
 ;
 ; messages and graphics for backup/restore
 ;
+sRestoreWarning
+         !byte 38
+         !raw  "This will overwrite your entire party!"
+sRestore
+         !byte 30
+         !raw  "Restoring scenario from backup"
 sBackup
-         !byte 21
-         !raw  "Backing up your party"
+         !byte 24
+         !raw  "Backing up your scenario"
 sInitialProgressBar
          !byte 37
          !byte $01,$06,$06,$06,$06,$06,$06,$06
