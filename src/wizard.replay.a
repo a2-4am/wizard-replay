@@ -19,7 +19,7 @@ Start
          sta   Title+2
          ldx   #$FF
          txs
-         stx   SelectedIndex         ; no current scenario selection
+         stx   MenuSelectedIndex
          +READ_ROM_NO_WRITE
          sta   PRIMARYCHARSET
          sta   CLR80VID
@@ -41,6 +41,7 @@ Start
 @quit    jmp   Quit
 
 ProvingGraphics
+LOLGraphics
          !bin  "res/wizgfx/PROVING04"
          !bin  "res/wizgfx/PROVING11"
          !bin  "res/wizgfx/PROVING07"
@@ -77,6 +78,8 @@ BrotherhoodGraphics
          !src  "src/glue.path.a"
          !src  "src/glue.launch.a"
          !src  "src/backup.restore.a"
+         !src  "src/ui.common.a"
+         !src  "src/ui.menu.common.a"
+         !src  "src/ui.main.menu.a"
          !src  "src/ui.font.a"
          !src  "src/ui.font.data.a"
-         !src  "src/ui.main.menu.a"

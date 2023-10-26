@@ -98,6 +98,36 @@ Wizimore: Scarlet Brotherhood of Hsi Ho
 
 
 
+ 0123456789012345678901234567890123456789
+0{{{{{{{{{{{{{{{{{{{{}}}}}}}}}}}}}}}}}}}}
+1{{{{{{{{{{{{{{{{{{{{}}}}}}}}}}}}}}}}}}}}
+2{{{{{{{{{{{{{{{{{{{{}}}}}}}}}}}}}}}}}}}}
+3{{{{{{{{{{{{{{{{{{{{}}}}}}}}}}}}}}}}}}}}
+4{{{{{{{{{{{{{{{{{{{{}}}}}}}}}}}}}}}}}}}}
+5{{{{{{{{{{{{{{{{{{{{}}}}}}}}}}}}}}}}}}}}
+6^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+7
+8[ Proving Grounds 3.0 ]------[ Play    ]
+9[ Knight of Diamonds  ]      [ Edit    ]
+0[ Legacy of Llylgamyn ]      [ Backup  ]
+1[ Nihonbashi          ]      [ Restore ]
+2[ O'Connor's Mine     ]      [ Close   ]
+3[ Catacombs of Vlad   ]
+4[ The Emperor's Seal  ]
+5[ Scarlet Brotherhood ]
+6
+7 __________    __________    __________
+8 XXXXXXXXXX    XXXXXXXXXX    XXXXXXXXXX
+9 XXXXXXXXXX    XXXXXXXXXX    XXXXXXXXXX
+0 XXXXXXXXXX    XXXXXXXXXX    XXXXXXXXXX
+1 XXXXXXXXXX    XXXXXXXXXX    XXXXXXXXXX
+2 XXXXXXXXXX    XXXXXXXXXX    XXXXXXXXXX
+3 XXXXXXXXXX    XXXXXXXXXX    XXXXXXXXXX
+
+
+
+
+
 
 
 
@@ -113,8 +143,8 @@ Wizimore: Scarlet Brotherhood of Hsi Ho
 8           Proving Grounds 3.0
 9
 0         [ Play                ]
-1         [ Edit characters     ]
-2         [ Backup characters   ]
+1         [ Edit with WizPlus   ]
+2         [ Backup scenario     ]
 3         [ Restore from backup ]
 4         [ Back to main menu   ]
 5
@@ -142,7 +172,7 @@ Wizimore: Scarlet Brotherhood of Hsi Ho
 6^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 7
 8
-9
+9  Restoring your party from last backup
 0          Backing up your party
 1
 2  [-----------------------------------]

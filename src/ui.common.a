@@ -1,0 +1,26 @@
+;license:MIT
+;(c) 2023 by 4am
+;
+
+; 'screen' is full-width but only partial height because
+; Replay logo (top) and game-specific graphics (bottom)
+; are never erased
+kScreenTopVTAB = $08
+kScreenTop     = kScreenTopVTAB*8
+kScreenHeight  = kScreenTop+64
+
+Home
+         ldx   #kScreenTop
+@rowloop lda   HGRLO, x
+         sta   @clear+1
+         lda   HGRHI, x
+         sta   @clear+2
+         ldy   #39
+         lda   #$80
+@clear   sta   SELF_MODIFIED_WORD, y
+         dey
+         bpl   @clear
+         inx
+         cpx   #kScreenHeight
+         bcc   @rowloop
+         rts

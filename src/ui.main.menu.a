@@ -2,35 +2,32 @@
 ;(c) 2023 by 4am
 ;
 
-kMainMenuVTAB = $08
-kMainMenuHTAB = $0A
-kMainMenuWidth = $15
 kMainMenuMaxIndex = 8
 
 MainMenuStringsLo
-         !byte <sWiz1
-         !byte <sWiz2
-         !byte <sWiz3
-         !byte <sMore1
-         !byte <sMore2
-         !byte <sMore3
-         !byte <sMore4
-         !byte <sMore5
+         !byte <sMenuWiz1
+         !byte <sMenuWiz2
+         !byte <sMenuWiz3
+         !byte <sMenuMore1
+         !byte <sMenuMore2
+         !byte <sMenuMore3
+         !byte <sMenuMore4
+         !byte <sMenuMore5
 MainMenuStringsHi
-         !byte >sWiz1
-         !byte >sWiz2
-         !byte >sWiz3
-         !byte >sMore1
-         !byte >sMore2
-         !byte >sMore3
-         !byte >sMore4
-         !byte >sMore5
+         !byte >sMenuWiz1
+         !byte >sMenuWiz2
+         !byte >sMenuWiz3
+         !byte >sMenuMore1
+         !byte >sMenuMore2
+         !byte >sMenuMore3
+         !byte >sMenuMore4
+         !byte >sMenuMore5
          !byte 0
 
 WizGraphicsLo
          !byte <ProvingGraphics
          !byte <KODGraphics
-         !byte <ProvingGraphics
+         !byte <LOLGraphics
          !byte <NihonbashiGraphics
          !byte <OConnorGraphics
          !byte <VladGraphics
@@ -39,7 +36,7 @@ WizGraphicsLo
 WizGraphicsHi0
          !byte >ProvingGraphics
          !byte >KODGraphics
-         !byte >ProvingGraphics
+         !byte >LOLGraphics
          !byte >NihonbashiGraphics
          !byte >OConnorGraphics
          !byte >VladGraphics
@@ -64,172 +61,36 @@ WizGraphicsHi2
          !byte >(EmperorGraphics+$400)
          !byte >(BrotherhoodGraphics+$400)
 
-LeftEdges
-         !byte %11111000
-         !byte %11111100
-         !byte %11111100
-         !byte %11111100
-         !byte %11111100
-         !byte %11111100
-         !byte %11111000
-
-RightEdges
-         !byte %10001111
-         !byte %10011111
-         !byte %10011111
-         !byte %10011111
-         !byte %10011111
-         !byte %10011111
-         !byte %10001111
-
 MainMenu
-         lda   #kMainMenuVTAB
-         sta   VTAB
-         lda   #$00
-         sta   PrintMenuIndex
-@printMenuLoop
-         ldx   PrintMenuIndex
-         lda   MainMenuStringsLo, x
-         ldy   MainMenuStringsHi, x
-         beq   +
-         ldx   #kMainMenuHTAB
-         jsr   DrawString
-         inc   VTAB
-         inc   PrintMenuIndex
-         bne   @printMenuLoop        ; always branches
-+        ldx   #$00
-         jsr   SetSelectedIndex
-         bit   PAGE1
-         bit   FULLGFX
-         bit   HIRES
-         bit   GFXMODE
-@eventLoop
--        lda   KBD
-         bpl   -
-         bit   CLEARKBD
-         cmp   #$88                  ; left arrow
-         beq   @selectPrevious
-         cmp   #$8B                  ; up arrow
-         beq   @selectPrevious
-         cmp   #$95                  ; right arrow
-         beq   @selectNext
-         cmp   #$8A                  ; down arrow
-         beq   @selectNext
-         cmp   #$8D                  ; RETURN
-         beq   @exitAndLaunch
-         cmp   #$9B                  ; Esc
-         bne   @eventLoop
-         sec
-         rts
-@exitAndLaunch
-         clc
-         rts
-@selectPrevious
-         ldx   SelectedIndex
-         dex
-         bpl   @selectAndContinue
-         ldx   #kMainMenuMaxIndex-1
-         bne   @selectAndContinue    ; always branches
-@selectNext
-         ldx   SelectedIndex
-         inx
-         cpx   #kMainMenuMaxIndex
-         bcc   @selectAndContinue
-         ldx   #$00
-@selectAndContinue
-         jsr   SetSelectedIndex
-         jmp   @eventLoop
+         jsr   HandleMenu
+         !word MainMenuStringsLo
+         !word MainMenuStringsHi
+         !byte kScreenTopVTAB
+         !word MainMenuSelectionChangeCallback
+         bcs   +
+         ldx   MenuSelectedIndex
+         stx   GameSelectedIndex
+         ;TODO call action menu
++        rts
 
-SetSelectedIndex
-; in:    X = new index
-; out:   clobbers A/X/Y
-         lda   SelectedIndex
-         stx   SelectedIndex
-         bmi   +                     ; N set by LDA
-         jsr   Unhighlight           ; unhighlight previous index (if any)
-+        jsr   Highlight             ; highlight new index
-         ldx   SelectedIndex         ; now draw index-specific graphics along bottom
+MainMenuSelectionChangeCallback
+; in:    MenuSelectedIndex populated with new index
+; out:   clobbers A/X/Y/flags
+         ; draw game-specific graphics along bottom of screen
+         ldx   MenuSelectedIndex
          lda   WizGraphicsLo, x
          ldy   WizGraphicsHi0, x
          ldx   #$02
          jsr   DrawWizGraphic
 
-         ldx   SelectedIndex
+         ldx   MenuSelectedIndex
          lda   WizGraphicsLo, x
          ldy   WizGraphicsHi1, x
          ldx   #$10
          jsr   DrawWizGraphic
 
-         ldx   SelectedIndex
+         ldx   MenuSelectedIndex
          lda   WizGraphicsLo, x
          ldy   WizGraphicsHi2, x
          ldx   #$1E
          jmp   DrawWizGraphic
-
-Unhighlight
-; in:    A contains index to unhighlight
-; out:   clobbers A/X/Y
-;         clc
-;         adc   #2
-         tax
-         clc
-         adc   #kMainMenuVTAB
-         sta   VTAB
-         lda   MainMenuStringsLo, x
-         ldy   MainMenuStringsHi, x
-         ldx   #kMainMenuHTAB
-         jmp   DrawString
-
-
-Highlight
-; in:    SelectedIndex contains index to highlight
-; out:   clobbers A/X/Y
-         lda   SelectedIndex
-         clc
-;         adc   #(kMainMenuVTAB+2)
-         adc   #kMainMenuVTAB
-         tax
-         lda   FontHGRTops, x
-         tax
-         lda   #6
-         sta   PrintMenuIndex
-@rowloop
-         inx
-         lda   HGRLO, x
-         sta   PTR
-         lda   HGRHI, x
-         sta   PTR+1
-         ldy   PrintMenuIndex
-         lda   LeftEdges, y
-         ldy   #kMainMenuHTAB
-         sta   (PTR), y
-@colloop
-         iny
-         lda   (PTR), y
-         eor   #$7F
-         sta   (PTR), y
-         cpy   #(kMainMenuHTAB+kMainMenuWidth-1)
-         bcc   @colloop
-         ldy   PrintMenuIndex
-         lda   RightEdges, y
-         ldy   #(kMainMenuHTAB+kMainMenuWidth-1)
-         sta   (PTR), y
-         dec   PrintMenuIndex
-         bpl   @rowloop
-         rts
-
-Home
-         ldx   #(kMainMenuVTAB*8)
-@rowloop lda   HGRLO, x
-         sta   @clear+1
-         lda   HGRHI, x
-         sta   @clear+2
-         ldy   #39
-         lda   #$80
-@clear   sta   SELF_MODIFIED_WORD, y
-         dey
-         bpl   @clear
-         inx
-         cpx   #((kMainMenuVTAB+kMainMenuMaxIndex)*8)
-         bcc   @rowloop
-         rts

@@ -2,30 +2,102 @@
 ;(c) 2023 by 4am
 ;
 
-sWiz1
+;
+; short padded titles for main menu
+;
+sMenuWiz1
          !byte 21
          !raw  " Proving Grounds 3.0 "
-sWiz2
+sMenuWiz2
          !byte 21
          !raw  " Knight of Diamonds  "
-sWiz3
+sMenuWiz3
          !byte 21
          !raw  " Legacy of Llylgamyn "
-sMore1
+sMenuMore1
          !byte 21
          !raw  " Nihonbashi          "
-sMore2
+sMenuMore2
          !byte 21
          !raw  " O'Connor's Mine     "
-sMore3
+sMenuMore3
          !byte 21
          !raw  " Catacombs of Vlad   "
-sMore4
+sMenuMore4
          !byte 21
          !raw  " The Emperor's Seal  "
-sMore5
+sMenuMore5
          !byte 21
          !raw  " Scarlet Brotherhood "
+
+;
+; short padded titles for action menu
+;
+sMenuPlay
+         !byte 21
+         !raw  " Play                "
+sMenuEdit
+         !byte 21
+         !raw  " Edit with WizPlus   "
+sMenuBackup
+         !byte 21
+         !raw  " Backup scenario     "
+sMenuRestore
+         !byte 21
+         !raw  " Restore from backup "
+sMenuBack
+         !byte 21
+         !raw  " Back to main menu   "
+
+;
+; full game titles and descriptions for action menu
+;
+sTitleWiz1
+         !byte 39
+         !raw  "Proving Grounds of the Mad Overlord 3.0"
+sTitleWiz2
+         !byte 35
+         !raw  "Wizardry II: The Knight of Diamonds"
+sTitleWiz3
+         !byte 37
+         !raw  "Wizardry III: The Legacy of Llylgamyn"
+sTitleMore1
+         !byte 10
+         !raw  "Nihonbashi"
+sTitleMore2
+         !byte 15
+         !raw  "O'Connor's Mine"
+sTitleMore3
+         !byte 21
+         !raw  "The Catacombs of Vlad"
+sTitleMore4
+         !byte 18
+         !raw  "The Emperor's Seal"
+sTitleMore5
+         !byte 33
+         !raw  "The Scarlet Brotherhood of Hsi Ho"
+sSubtitleWiz1
+         !byte 33
+         !raw  "1981 classic with modern upgrades"
+sSubtitleWiz2
+         !byte 38
+         !raw  "1982 classic without the disk swapping"
+sSubtitleWiz3
+         !byte 38
+         !raw  "1983 classic without the disk swapping"
+sSubtitleMore1
+sSubtitleMore3
+sSubtitleMore4
+         !byte 40
+         !raw  "1987 third-party scenario by Joel Fenton"
+sSubtitleMore2
+sSubtitleMore5
+         !byte 40
+         !raw  "1985 third-party scenario by Joel Fenton"
+
+;
+; messages and graphics for backup/restore
+;
 sBackup
          !byte 21
          !raw  "Backing up your party"

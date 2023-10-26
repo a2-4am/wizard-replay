@@ -10,14 +10,14 @@
 ;------------------------------------------------------------------------------
 ; Launch
 ; load game and jump to it
-; in:    SelectedIndex contains index of game to launch
+; in:    GameSelectedIndex contains index of game to launch
 ;          (used a index into VolNamesLo/Hi and other arrays)
 ;------------------------------------------------------------------------------
 Launch
          +LDADDR sGameDirectory
          jsr   SetPath
 
-         ldx   SelectedIndex
+         ldx   GameSelectedIndex
          lda   VolNamesLo, x
          ldy   VolNamesHi, x
          jsr   AddToPath
@@ -25,7 +25,7 @@ Launch
          jsr   SetPrefix
          !word gPathname
 
-         ldx   SelectedIndex
+         ldx   GameSelectedIndex
          lda   LoadersLo, x
          ldy   LoadersHi, x
          jsr   SetPath

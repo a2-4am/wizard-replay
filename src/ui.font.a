@@ -4,6 +4,7 @@
 ; hi-res font drawing routines
 ;
 ; Public functions
+; - DrawCenteredString
 ; - DrawString
 ;
 
@@ -13,6 +14,17 @@ FontHGRTops
          !byte $80,$88,$90,$98,$A0,$A8,$B0,$B8
 
 -        rts
+DrawCenteredString
+; A/Y contains address of length-prefixed string (length can be 0)
+         +ST16 PTR
+         ldy   #0
+         lda   #41
+         sec
+         sbc   (PTR), y
+         lsr
+         tax
+         +LD16 PTR
+         ; /!\ execution falls through to DrawString
 DrawString
 ; A/Y contains address of length-prefixed string (length can be 0)
 ; X contains starting column (0..39)

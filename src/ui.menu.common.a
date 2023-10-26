@@ -1,0 +1,153 @@
+;license:MIT
+;(c) 2023 by 4am
+;
+
+kMenuHTAB = $0A
+kMenuWidth = $15
+
+HighlightLeftEdges
+         !byte %11111000
+         !byte %11111100
+         !byte %11111100
+         !byte %11111100
+         !byte %11111100
+         !byte %11111100
+         !byte %11111000
+
+HighlightRightEdges
+         !byte %10001111
+         !byte %10011111
+         !byte %10011111
+         !byte %10011111
+         !byte %10011111
+         !byte %10011111
+         !byte %10001111
+
+HandleMenu
+         +PARAMS_ON_STACK 7
+         +LDZPPARAM16 1, MenuStringsLoPtr
+         +LDZPPARAM16 3, MenuStringsHiPtr
+         +LDZPPARAM8  5, MenuTopVTAB
+         +LDPARAM16   6, MenuSelectionChangeCallback
+         lda   MenuTopVTAB
+         sta   VTAB
+         lda   #$00
+         sta   MenuMaxIndex
+@printLoop
+         ldy   MenuMaxIndex
+         lda   (MenuStringsHiPtr), y
+         beq   +
+         sta   @y+1
+         lda   (MenuStringsLoPtr), y
+@y       ldy   #SELF_MODIFIED_BYTE
+         ldx   #kMenuHTAB
+         jsr   DrawString
+         inc   VTAB
+         inc   MenuMaxIndex
+         bne   @printLoop            ; always branches
++
+         ldx   #$00
+         jsr   SetMenuSelectedIndex
+         bit   PAGE1
+         bit   FULLGFX
+         bit   HIRES
+         bit   GFXMODE
+@eventLoop
+         lda   KBD
+         bpl   @eventLoop
+         bit   CLEARKBD
+         cmp   #$88                  ; left arrow
+         beq   @selectPrevious
+         cmp   #$8B                  ; up arrow
+         beq   @selectPrevious
+         cmp   #$95                  ; right arrow
+         beq   @selectNext
+         cmp   #$8A                  ; down arrow
+         beq   @selectNext
+         cmp   #$8D                  ; RETURN
+         beq   @exitClear
+         cmp   #$9B                  ; Esc
+         bne   @eventLoop
+         sec
+         rts
+@exitClear
+         clc
+         rts
+@selectPrevious
+         ldx   MenuSelectedIndex
+         dex
+         bpl   @selectAndContinue
+         ldx   MenuMaxIndex
+         dex
+         bpl   @selectAndContinue    ; always branches
+@selectNext
+         ldx   MenuSelectedIndex
+         inx
+         cpx   MenuMaxIndex
+         bcc   @selectAndContinue
+         ldx   #$00
+@selectAndContinue
+         jsr   SetMenuSelectedIndex
+         jmp   @eventLoop
+
+SetMenuSelectedIndex
+; in:    X = new index
+; out:   clobbers A/X/Y/flags
+         lda   MenuSelectedIndex
+         stx   MenuSelectedIndex
+         bmi   +                     ; N set by LDA
+         jsr   UnhighlightMenuItem   ; unhighlight previously highlighted menu item
++        lda   MenuSelectedIndex
+         jsr   HighlightMenuItem     ; highlight new menu item
+MenuSelectionChangeCallback=*+1
+         jmp   SELF_MODIFIED_WORD    ; call menu-specific callback
+
+UnhighlightMenuItem
+; in:    A contains index to unhighlight
+; out:   clobbers A/X/Y/flags
+         tay
+         clc
+         adc   MenuTopVTAB
+         sta   VTAB
+         lda   (MenuStringsLoPtr), y
+         tax
+         lda   (MenuStringsHiPtr), y
+         tay
+         txa
+         ldx   #kMenuHTAB
+         jmp   DrawString
+
+HighlightMenuItem
+; in:    A contains index to highlight
+; out:   clobbers A/X/Y/flags
+         clc
+         adc   MenuTopVTAB
+         tax
+         lda   FontHGRTops, x
+         tax
+         lda   #6
+         sta   highlightIndex
+@rowloop
+         inx
+         lda   HGRLO, x
+         sta   PTR
+         lda   HGRHI, x
+         sta   PTR+1
+         ldy   highlightIndex
+         lda   HighlightLeftEdges, y
+         ldy   #kMenuHTAB
+         sta   (PTR), y
+@colloop
+         iny
+         lda   (PTR), y
+         eor   #$7F
+         sta   (PTR), y
+         cpy   #(kMenuHTAB+kMenuWidth-1)
+         bcc   @colloop
+         ldy   highlightIndex
+         lda   HighlightRightEdges, y
+         ldy   #(kMenuHTAB+kMenuWidth-1)
+         sta   (PTR), y
+         dec   highlightIndex
+         bpl   @rowloop
+         rts

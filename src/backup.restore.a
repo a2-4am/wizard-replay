@@ -3,15 +3,14 @@
 ;
 
 BackupScenario
-; in:    SelectedIndex populated
+; in:    GameSelectedIndex populated
 ; out:   C=0 if success
 ;        C=1 if failure, and A=MLI error code
          jsr   Home
          lda   #$0A
          sta   VTAB
          +LDADDR sBackup
-         ldx   #$0A
-         jsr   DrawString
+         jsr   DrawCenteredString
          inc   VTAB
          inc   VTAB
          +LDADDR sInitialProgressBar
@@ -97,11 +96,11 @@ OpenDestFile
 +        rts
 
 BuildPathToScenario
-; in:    SelectedIndex populated
+; in:    GameSelectedIndex populated
          +LDADDR sGameDirectory
          jsr   SetPath
 
-         ldx   SelectedIndex
+         ldx   GameSelectedIndex
          lda   VolNamesLo, x
          ldy   VolNamesHi, x
          jsr   AddToPath
@@ -109,17 +108,17 @@ BuildPathToScenario
          +LDADDR sSlash
          jsr   AddToPath
 
-         ldx   SelectedIndex
+         ldx   GameSelectedIndex
          lda   ScenariosLo, x
          ldy   ScenariosHi, x
          jmp   AddToPath
 
 BuildPathToScenarioBackup
-; in:    SelectedIndex populated
+; in:    GameSelectedIndex populated
          +LDADDR sGameDirectory
          jsr   SetPath
 
-         ldx   SelectedIndex
+         ldx   GameSelectedIndex
          lda   VolNamesLo, x
          ldy   VolNamesHi, x
          jsr   AddToPath
@@ -127,7 +126,7 @@ BuildPathToScenarioBackup
          +LDADDR sSlash
          jsr   AddToPath
 
-         ldx   SelectedIndex
+         ldx   GameSelectedIndex
          lda   BackupsLo, x
          ldy   BackupsHi, x
          jmp   AddToPath

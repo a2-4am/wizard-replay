@@ -33,16 +33,23 @@ ROM_WAIT       = $FCA8
 ROM_NORMAL     = $FE84    ; NORMAL text (instead of INVERSE or FLASH)
 ROM_IN0        = $FE89    ; SETKBD
 ROM_PR0        = $FE93    ; SETVID
+NoCallback     = $FF58
 
 ; application-specific addresses
+MenuStringsLoPtr = $E0    ; word
+MenuStringsHiPtr = $E2    ; word
+MenuTopVTAB    = $E4      ; byte
+MenuMaxIndex   = $E5      ; byte
+MenuSelectedIndex = $E6   ; byte (used by menu routines)
 PARAM          = $F0      ; word (used by PARAMS_ON_STACK macro)
 PTR            = $F2      ; word (used by font drawing routine)
 startptr       = $F4      ; word (used by Wiz graphics drawing routine)
 inputptr       = $F6      ; word (used by Wiz graphics drawing routine)
 outputptr      = $F8      ; word (used by Wiz graphics drawing routine)
 gfxRowIndex    = $FA      ; byte (used by Wiz graphics drawing routine)
-PrintMenuIndex = $FB      ; byte (used by main menu)
-SelectedIndex  = $FC      ; byte (used by main menu)
+GameSelectedIndex = $FB   ; byte
+highlightIndex = $FC      ; byte
+;$FD
 
 HGRLO          = $0100    ; 0xC0 bytes, should not cross page boundary (lifetime)
 HGRHI          = $0300    ; 0xC0 bytes, should not cross page boundary (lifetime)

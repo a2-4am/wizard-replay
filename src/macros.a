@@ -79,6 +79,18 @@
 }
 
 ; for functions that take parameters on the stack
+; load an 8-bit value from the parameters on the stack
+; then store it in zero page
+; (assumes PARAMS_ON_STACK was used first)
+; clobbers A,Y
+; preserves X
+!macro   LDZPPARAM8 .offset,.dest {
+         ldy   #.offset
+         lda   (PARAM),y
+         sta   <.dest
+}
+
+; for functions that take parameters on the stack
 ; load a 16-bit value from the parameters on the stack
 ; then store it as new source
 ; (assumes PARAMS_ON_STACK was used first)
@@ -91,6 +103,21 @@
          iny
          lda   (PARAM),y
          sta   .dest+1
+}
+
+; for functions that take parameters on the stack
+; load a 16-bit value from the parameters on the stack
+; then store it in zero page
+; (assumes PARAMS_ON_STACK was used first)
+; clobbers A,Y
+; preserves X
+!macro   LDZPPARAM16 .offset,.dest {
+         ldy   #.offset
+         lda   (PARAM),y
+         sta   <.dest
+         iny
+         lda   (PARAM),y
+         sta   <.dest+1
 }
 
 ; for functions that take parameters on the stack
