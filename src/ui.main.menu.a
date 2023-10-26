@@ -2,8 +2,6 @@
 ;(c) 2023 by 4am
 ;
 
-kMainMenuMaxIndex = 8
-
 MainMenuStringsLo
          !byte <sMenuWiz1
          !byte <sMenuWiz2
