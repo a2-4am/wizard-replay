@@ -10,15 +10,25 @@ sSlash
          !byte 1
          !raw  "/"
 
-sLoader1
+sPlayLoader1
          !byte 9
          !raw  "WIZARDRY1"
-sLoader2
+sPlayLoader2
          !byte 9
          !raw  "WIZARDRY2"
-sLoader3
+sPlayLoader3
          !byte 9
          !raw  "WIZARDRY3"
+
+sEditLoader1
+         !byte 8
+         !raw  "WIZPLUS1"
+sEditLoader2
+         !byte 8
+         !raw  "WIZPLUS2"
+sEditLoader3
+         !byte 8
+         !raw  "WIZPLUS3"
 
 sScenario1
          !byte 11
@@ -60,6 +70,7 @@ sVolBrotherhood
          !byte 15
          !raw  "SCARLET.BROTHER"
 
+; directory name of the scenario
 VolNamesLo
          !byte <sVolProvingGrounds
          !byte <sVolKnightOfDiamonds
@@ -80,25 +91,47 @@ VolNamesHi
          !byte >sVolEmperor
          !byte >sVolBrotherhood
 
-LoadersLo
-         !byte <sLoader1
-         !byte <sLoader2
-         !byte <sLoader3
-         !byte <sLoader1
-         !byte <sLoader1
-         !byte <sLoader1
-         !byte <sLoader1
-         !byte <sLoader1
-LoadersHi
-         !byte >sLoader1
-         !byte >sLoader2
-         !byte >sLoader3
-         !byte >sLoader1
-         !byte >sLoader1
-         !byte >sLoader1
-         !byte >sLoader1
-         !byte >sLoader1
+; filename of the game loader
+PlayLoadersLo
+         !byte <sPlayLoader1
+         !byte <sPlayLoader2
+         !byte <sPlayLoader3
+         !byte <sPlayLoader1
+         !byte <sPlayLoader1
+         !byte <sPlayLoader1
+         !byte <sPlayLoader1
+         !byte <sPlayLoader1
+PlayLoadersHi
+         !byte >sPlayLoader1
+         !byte >sPlayLoader2
+         !byte >sPlayLoader3
+         !byte >sPlayLoader1
+         !byte >sPlayLoader1
+         !byte >sPlayLoader1
+         !byte >sPlayLoader1
+         !byte >sPlayLoader1
 
+; filename of the WizPlus loader
+EditLoadersLo
+         !byte <sEditLoader1
+         !byte <sEditLoader2
+         !byte <sEditLoader3
+         !byte <sEditLoader1
+         !byte <sEditLoader1
+         !byte <sEditLoader1
+         !byte <sEditLoader1
+         !byte <sEditLoader1
+EditLoadersHi
+         !byte >sEditLoader1
+         !byte >sEditLoader2
+         !byte >sEditLoader3
+         !byte >sEditLoader1
+         !byte >sEditLoader1
+         !byte >sEditLoader1
+         !byte >sEditLoader1
+         !byte >sEditLoader1
+
+; filename of the actual disk image for the scenario
 ScenariosLo
          !byte <sScenario1
          !byte <sScenario2
@@ -118,6 +151,7 @@ ScenariosHi
          !byte >sScenario1
          !byte >sScenario1
 
+; filename to use for the backup of the scenario
 BackupsLo
          !byte <sScenario1Backup
          !byte <sScenario2Backup

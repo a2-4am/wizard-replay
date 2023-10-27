@@ -3,6 +3,7 @@
 ;
 
 ; menu item indexes
+kActionPlay    = 0
 kActionEdit    = 1
 kActionBackup  = 2
 kActionRestore = 3
@@ -92,7 +93,7 @@ ActionMenuSelectedIndex
          stx   ActionMenuSelectedIndex
          beq   @exitClear
          cpx   #kActionEdit
-         beq   ActionEdit
+         beq   @exitClear
          cpx   #kActionBackup
          beq   ActionBackup
          cpx   #kActionRestore
@@ -102,10 +103,6 @@ ActionMenuSelectedIndex
 @exitClear
          clc
          rts
-
-ActionEdit
-         ;TODO
-         brk
 
 ActionBackup
          jsr   BackupScenario
