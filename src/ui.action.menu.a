@@ -63,6 +63,9 @@ SubtitleStringsHi
          !byte >sSubtitleMore5
 
 ActionMenu
+         lda   #0
+         sta   ActionMenuSelectedIndex
+ActionMenuRefresh
          jsr   Home
          lda   #kScreenTopVTAB
          sta   VTAB
@@ -80,10 +83,13 @@ ActionMenu
          !word ActionMenuStringsLo
          !word ActionMenuStringsHi
          !byte kScreenTopVTAB+3
+ActionMenuSelectedIndex
+         !byte 0
          !word NoCallback
 
          bcs   @exit
          ldx   MenuSelectedIndex
+         stx   ActionMenuSelectedIndex
          beq   @exitClear
          cpx   #kActionEdit
          beq   ActionEdit
@@ -103,7 +109,7 @@ ActionEdit
 
 ActionBackup
          jsr   BackupScenario
-         jmp   ActionMenu
+         jmp   ActionMenuRefresh
 
 ActionRestore
          jsr   Home
@@ -115,12 +121,13 @@ ActionRestore
          !word RestoreMenuStringsLo
          !word RestoreMenuStringsHi
          !byte kScreenTopVTAB+2
+         !byte 1
          !word NoCallback
          bcs   +
          ldx   MenuSelectedIndex
          bne   +
          jsr   RestoreScenario
-+        jmp   ActionMenu
++        jmp   ActionMenuRefresh
 
 RestoreMenuStringsLo
          !byte <sMenuRestore

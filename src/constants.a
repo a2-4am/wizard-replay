@@ -47,7 +47,7 @@ startptr       = $F4      ; word (used by Wiz graphics drawing routine)
 inputptr       = $F6      ; word (used by Wiz graphics drawing routine)
 outputptr      = $F8      ; word (used by Wiz graphics drawing routine)
 gfxRowIndex    = $FA      ; byte (used by Wiz graphics drawing routine)
-GameSelectedIndex = $FB   ; byte
+;GameSelectedIndex = $FB   ; byte
 highlightIndex = $FC      ; byte
 ;$FD
 

@@ -28,7 +28,8 @@ Menu
          +LDZPPARAM16 1, MenuStringsLoPtr
          +LDZPPARAM16 3, MenuStringsHiPtr
          +LDZPPARAM8  5, MenuTopVTAB
-         +LDPARAM16   6, MenuSelectionChangeCallback
+         +LDPARAM8    6, @initialMenuIndex
+         +LDPARAM16   7, MenuSelectionChangeCallback
          lda   MenuTopVTAB
          sta   VTAB
          ldy   #$FF
@@ -48,7 +49,8 @@ Menu
          inc   MenuMaxIndex
          bne   @printLoop            ; always branches
 +
-         ldx   #$00
+@initialMenuIndex=*+1
+         ldx   #SELF_MODIFIED_BYTE
          jsr   SetMenuSelectedIndex
          bit   PAGE1
          bit   FULLGFX
