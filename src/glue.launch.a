@@ -30,6 +30,7 @@ Launch
          !word gPathname
 
          ldx   GameSelectedIndex
+         stx   LastGameSelectedIndex
          plp
          beq   @edit
          lda   PlayLoadersLo, x

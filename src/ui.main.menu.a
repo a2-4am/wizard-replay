@@ -60,7 +60,7 @@ WizGraphicsHi2
          !byte >(BrotherhoodGraphics+$400)
 
 MainMenu
-         lda   #0
+         lda   #0                    ; self-modified by Bye routine
          sta   GameSelectedIndex
 
 MainMenuRefresh

@@ -76,6 +76,9 @@ reloc   cld
         jsr     $bf00
         !byte   $cc
         !word   cc_parms
+LastGameSelectedIndex=*+1-reloc+runme
+        lda     #SELF_MODIFIED_BYTE
+        sta     MainMenu+1
         jmp     $2000
 
 c7_parms
