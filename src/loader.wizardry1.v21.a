@@ -627,6 +627,8 @@ multicopy
                 sta     $b580, y
                 iny
                 bne     -
+                lda     #$60
+                sta     $b91d ;disable 80-columns
                 txs
                 jmp     $b69e
 
@@ -1188,7 +1190,7 @@ pblock          !byte   2, 0, 0
   }
 
 !set labels=0
-PatchCount      !byte   17
+PatchCount      !byte   23
 !do {
 PatchArray
 ; disable protection check
@@ -1222,28 +1224,41 @@ patch_wizardry_prot2_e
 ; disable protection check
 patch_wizardry_prot3
 !set labels=labels+1
-         !byte $00        ; disk
-         !byte $13        ; track
-         !byte $00        ; sector
-         !byte $02        ; byte offset
+         !byte $01        ; disk
+         !byte $22        ; track
+         !byte $04        ; sector
+         !byte $18        ; byte offset
          !byte patch_wizardry_prot3_e-patch_wizardry_prot3_b
                           ; length
 patch_wizardry_prot3_b
-         !byte $A9, $0A, $8D, $79, $04, $60
+         !byte $00
 patch_wizardry_prot3_e
 
 ; disable protection check
 patch_wizardry_prot4
 !set labels=labels+1
+         !byte $00        ; disk
+         !byte $13        ; track
+         !byte $00        ; sector
+         !byte $02        ; byte offset
+         !byte patch_wizardry_prot4_e-patch_wizardry_prot4_b
+                          ; length
+patch_wizardry_prot4_b
+         !byte $A9, $0A, $8D, $79, $04, $60
+patch_wizardry_prot4_e
+
+; disable protection check
+patch_wizardry_prot5
+!set labels=labels+1
          !byte $01        ; disk
          !byte $05        ; track
          !byte $0F        ; sector
          !byte $5A        ; byte offset
-         !byte patch_wizardry_prot4_e-patch_wizardry_prot4_b
+         !byte patch_wizardry_prot5_e-patch_wizardry_prot5_b
                           ; length
-patch_wizardry_prot4_b
+patch_wizardry_prot5_b
          !byte $01
-patch_wizardry_prot4_e
+patch_wizardry_prot5_e
 
 ; hook unused p-code token for disk-switching
 patch_wizardry_magic
@@ -1264,54 +1279,112 @@ patch_wizardry_insert1
          !byte $FF        ; disk
          !byte $05        ; track
          !byte $0F        ; sector
-         !byte $CC        ; byte offset
-         !byte patch_wizardry_insert1_e-patch_wizardry_insert1_b
-                          ; length
+         !byte $A6        ; byte offset
+         !byte 37+$80     ; length
 patch_wizardry_insert1_b
-         !byte $D7, $D7, $D7, $29, $00, $CD, $00, $1D, $D2, $00, $D7, $0D
+         !byte $20
 patch_wizardry_insert1_e
 
-; don't prompt to insert scenario disk
+; set volume, don't wait for keypress
 patch_wizardry_insert2
+!set labels=labels+1
+         !byte $FF        ; disk
+         !byte $05        ; track
+         !byte $0F        ; sector
+         !byte $D4        ; byte offset
+         !byte patch_wizardry_insert2_e-patch_wizardry_insert2_b
+patch_wizardry_insert2_b
+         !byte $D2, $00, $0D, $D7
+patch_wizardry_insert2_e
+
+; don't prompt to insert duplicate disk
+patch_wizardry_insert3
 !set labels=labels+1
          !byte $FF        ; disk
          !byte $06        ; track
          !byte $00        ; sector
-         !byte $45        ; byte offset
-         !byte patch_wizardry_insert2_e-patch_wizardry_insert2_b
-                          ; length
-patch_wizardry_insert2_b
-         !byte $D7, $D7, $D7, $29, $00, $CD, $00, $1D, $D7, $D7, $D7, $0D
-patch_wizardry_insert2_e
+         !byte $1E        ; byte offset
+         !byte 38+$80     ; length
+patch_wizardry_insert3_b
+         !byte $20
+patch_wizardry_insert3_e
+
+; set volume, don't wait for keypress
+patch_wizardry_insert4
+!set labels=labels+1
+         !byte $FF        ; disk
+         !byte $06        ; track
+         !byte $00        ; sector
+         !byte $4D        ; byte offset
+         !byte patch_wizardry_insert4_e-patch_wizardry_insert4_b
+patch_wizardry_insert4_b
+         !byte $D2, $00, $0D, $D7
+patch_wizardry_insert4_e
 
 ; don't prompt to insert master disk
 patch_wizardry_switch1
 !set labels=labels+1
-         !byte $FF        ; disk
+         !byte $01        ; disk
          !byte $20        ; track
          !byte $06        ; sector
-         !byte $52        ; byte offset
-         !byte patch_wizardry_switch1_e-patch_wizardry_switch1_b
-                          ; length
+         !byte $29        ; byte offset
+         !byte 40+$80     ; length
 patch_wizardry_switch1_b
-         !byte $D2, $01, $D7, $D7, $D7
+         !byte $20
 patch_wizardry_switch1_e
 
-; don't prompt to insert scenario disk
+; set volume, don't wait for keypress
 patch_wizardry_switch2
 !set labels=labels+1
          !byte $01        ; disk
          !byte $20        ; track
-         !byte $07        ; sector
-         !byte $0B        ; byte offset
+         !byte $06        ; sector
+         !byte $55        ; byte offset
          !byte patch_wizardry_switch2_e-patch_wizardry_switch2_b
                           ; length
 patch_wizardry_switch2_b
-         !byte $D2, $00, $D7, $01, $9E, $26, $D7, $D7
+         !byte $D2, $01
 patch_wizardry_switch2_e
 
+; don't prompt to insert scenario disk (1/2)
+patch_wizardry_switch3
+!set labels=labels+1
+         !byte $01        ; disk
+         !byte $20        ; track
+         !byte $06        ; sector
+         !byte $E3        ; byte offset
+         !byte 29+$80     ; length
+patch_wizardry_switch3_b
+         !byte $20
+patch_wizardry_switch3_e
+
+; don't prompt to insert scenario disk (2/2)
+patch_wizardry_switch4
+!set labels=labels+1
+         !byte $01        ; disk
+         !byte $20        ; track
+         !byte $07        ; sector
+         !byte $00        ; byte offset
+         !byte 10+$80     ; length
+patch_wizardry_switch4_b
+         !byte $20
+patch_wizardry_switch4_e
+
+; set volume, don't wait for keypress
+patch_wizardry_switch5
+!set labels=labels+1
+         !byte $01        ; disk
+         !byte $20        ; track
+         !byte $07        ; sector
+         !byte $11        ; byte offset
+         !byte patch_wizardry_switch5_e-patch_wizardry_switch5_b
+                          ; length
+patch_wizardry_switch5_b
+         !byte $D2, $00
+patch_wizardry_switch5_e
+
 ; erase the unsupported options
-;backup
+; backup
 patch_wizardry_utils3
 !set labels=labels+1
          !byte $01        ; disk
@@ -1353,35 +1426,35 @@ patch_wizardry_utils5
          !byte $01        ; disk
          !byte $21        ; track
          !byte $05        ; sector
-         !byte $58        ; byte offset
-         !byte 33+$80     ; length
+         !byte $59        ; byte offset
+         !byte 32+$80     ; length
 patch_wizardry_utils5_b
          !byte $20
 patch_wizardry_utils5_e
 
-patch_wizardry_utils6
+patch_wizardry_utils7
 !set labels=labels+1
          !byte $01        ; disk
          !byte $21        ; track
          !byte $05        ; sector
          !byte $79        ; byte offset
-         !byte patch_wizardry_utils6_e-patch_wizardry_utils6_b
+         !byte patch_wizardry_utils7_e-patch_wizardry_utils7_b
                           ; length
-patch_wizardry_utils6_b
+patch_wizardry_utils7_b
          !byte $D2, $02
-patch_wizardry_utils6_e
+patch_wizardry_utils7_e
 
 ;insert scenario with "out" chars
-patch_wizardry_utils7
+patch_wizardry_utils8
 !set labels=labels+1
          !byte $01        ; disk
          !byte $21        ; track
          !byte $00        ; sector
          !byte $89        ; byte offset
          !byte 32+$80     ; length
-patch_wizardry_utils7_b
+patch_wizardry_utils8_b
          !byte $20
-patch_wizardry_utils7_e
+patch_wizardry_utils8_e
 
 ; intercept quit
 patch_wizardry_quit
