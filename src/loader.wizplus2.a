@@ -237,10 +237,6 @@ init            jsr     SETKBD
                 sta     unrunit1 + 1
                 and     #$70
                 pha
-                ldx     #1
-                stx     namlo
-                inx
-                stx     namhi
 
                 ;fetch path, if any
 
@@ -249,101 +245,8 @@ init            jsr     SETKBD
                 !word   c7_parms
                 ldx     $200
                 dex
-                stx     sizelo
-                sec
                 bmi     +++
-
-                ;find current directory name in directory
-
-                php
-
-readblock       jsr     MLI
-                !byte   $80
-                !word   x80_parms
-
-                lda     #<(readbuff + NAME_LENGTH)
-                sta     scratchlo
-                lda     #>(readbuff + NAME_LENGTH)
-                sta     scratchhi
-inextent        ldy     #0
-                lda     (scratchlo), y
-                pha
-                and     #$0f
-                tax
---              iny
-                lda     (scratchlo), y
-                cmp     (namlo), y
-                beq     ifoundname
-
-                ;match failed, move to next directory in this block, if possible
-
--               pla
-
-skiphdr         clc
-                lda     scratchlo
-                adc     #ENTRY_SIZE
-                sta     scratchlo
-                bcc     +
-
-                ;there can be only one page crossed, so we can increment instead of adc
-
-                inc     scratchhi
-+               cmp     #<(readbuff + NAME_LENGTH + ($27 * $0d))
-                lda     scratchhi
-                sbc     #>(readbuff + NAME_LENGTH + ($27 * $0d))
-                bcc     inextent
-
-                ;read next directory block when we reach the end of this block
-
-                lda     readbuff + NEXT_BLOCK_LO
-                ldx     readbuff + NEXT_BLOCK_HI
-                bcs     +
-
-ifoundname      dex
-                bne     --
-
-                ;parse path until last directory is seen
-
-                iny
-                lda     (namlo), y
-                cmp     #'/'
-                bne     -
-                pla
-                and     #$20 ;Volume Directory Header XOR subdirectory
-                beq     adjpath
-                pla
-                clc
-                php
-                lsr
-                bcc     skiphdr
-                inx
-
-adjpath         tya
-                eor     #$ff
-                adc     sizelo
-                sta     sizelo
-                clc
-                tya
-                adc     namlo
-                sta     namlo
-                dex
-                beq     ++
-
-                ;cache block number of current directory
-                ;as starting position for subsequent searches
-
-                ldy     #(KEY_POINTER + 1)
-                lda     (scratchlo), y
-                tax
-                dey
-                lda     (scratchlo), y
-                sta     unrhddblocklo + 1
-                stx     unrhddblockhi + 1
-+               sta     x80_parms + 4
-                stx     x80_parms + 5
-++              lda     sizelo
-                bne     readblock
-                pla
+                jsr     finddir
 
                 ;unit to slot for ProDOS interface
                 ;accept if slot code matches unit number
@@ -579,21 +482,19 @@ multicopy
                 pha
                 lda     unrhddblocklo + 1
                 pha
-                lda     #2
-                sta     unrhddblocklo + 1
-                lda     #0
-                sta     unrhddblockhi + 1
+
+                ldx     $200
+-               dex
+                lda     $200, x
+                cmp     #'/'
+                bne     -
+                dex
+                jsr     finddir
                 lda     #<filename2
                 sta     patch_filename + 1
                 inc     vol_idx
                 jsr     hddopendir
-                lda     blokloarray + 1
-                sta     unrhddblocklo + 1
-                lda     blokhiarray + 1
-                sta     unrhddblockhi + 1
-                lda     #<filename3
-                sta     patch_filename + 1
-                jsr     hddopendir
+
                 pla
                 sta     unrhddblocklo + 1
                 pla
@@ -704,6 +605,109 @@ loadaddr        lda     #$B0
 startup         !byte   12
                 !text   "RTSTND.APPLE"
 
+finddir
+                ;find current directory name in directory
+
+                stx     sizelo
+                ldx     #0
+                stx     x80_parms + 5
+                inx
+                stx     namlo
+                inx
+                stx     namhi
+                stx     x80_parms + 4
+                sec
+                php
+
+readblock       jsr     MLI
+                !byte   $80
+                !word   x80_parms
+
+                lda     #<(readbuff + NAME_LENGTH)
+                sta     scratchlo
+                lda     #>(readbuff + NAME_LENGTH)
+                sta     scratchhi
+inextent        ldy     #0
+                lda     (scratchlo), y
+                pha
+                and     #$0f
+                tax
+--              iny
+                lda     (scratchlo), y
+                cmp     (namlo), y
+                beq     ifoundname
+
+                ;match failed, move to next directory in this block, if possible
+
+-               pla
+
+skiphdr         clc
+                lda     scratchlo
+                adc     #ENTRY_SIZE
+                sta     scratchlo
+                bcc     +
+
+                ;there can be only one page crossed, so we can increment instead of adc
+
+                inc     scratchhi
++               cmp     #<(readbuff + NAME_LENGTH + ($27 * $0d))
+                lda     scratchhi
+                sbc     #>(readbuff + NAME_LENGTH + ($27 * $0d))
+                bcc     inextent
+
+                ;read next directory block when we reach the end of this block
+
+                lda     readbuff + NEXT_BLOCK_LO
+                ldx     readbuff + NEXT_BLOCK_HI
+                bcs     +
+
+ifoundname      dex
+                bne     --
+
+                ;parse path until last directory is seen
+
+                iny
+                lda     (namlo), y
+                cmp     #'/'
+                bne     -
+                pla
+                and     #$20 ;Volume Directory Header XOR subdirectory
+                beq     adjpath
+                pla
+                clc
+                php
+                lsr
+                bcc     skiphdr
+                inx
+
+adjpath         tya
+                eor     #$ff
+                adc     sizelo
+                sta     sizelo
+                clc
+                tya
+                adc     namlo
+                sta     namlo
+                dex
+                beq     ++
+
+                ;cache block number of current directory
+                ;as starting position for subsequent searches
+
+                ldy     #(KEY_POINTER + 1)
+                lda     (scratchlo), y
+                tax
+                dey
+                lda     (scratchlo), y
+                sta     unrhddblocklo + 1
+                stx     unrhddblockhi + 1
++               sta     x80_parms + 4
+                stx     x80_parms + 5
+++              lda     sizelo
+                bne     readblock
+                pla
+                rts
+
                 ;read volume directory key block
                 ;self-modified by init code
 
@@ -810,16 +814,12 @@ vol_idx         !byte   0
 
 filename        !byte   filename_e-filename_b
 filename_b      !text   "WIZARDRY"
-filename_x      !text   "2.A"
+filename_x      !text   "3.A"
 filename_e
 
 filename2       !byte   filename2_e-filename2_b
-filename2_b     !text   "X"
+filename2_b     !text   "WIZPLUS"
 filename2_e
-
-filename3       !byte   filename3_e-filename3_b
-filename3_b     !text   "WIZPLUS"
-filename3_e
 } else { ;rwts_mode = 0
   !if load_aux = 1 {
                 sta     CLRAUXWR + (load_banked * 4) ;CLRAUXWR or CLRAUXZP
