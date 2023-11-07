@@ -238,6 +238,12 @@
          bit   $C082
 }
 
+; preserves A,X,Y
+!macro   READ_RAM2_WRITE_RAM2 {
+         bit   $C083
+         bit   $C083
+}
+
 ; use BIT to swallow the following 1-byte opcode
 ; preserves A,X,Y
 !macro   HIDE_NEXT_BYTE {

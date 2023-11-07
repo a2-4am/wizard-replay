@@ -47,9 +47,9 @@ startptr       = $F4      ; word (used by Wiz graphics drawing routine)
 inputptr       = $F6      ; word (used by Wiz graphics drawing routine)
 outputptr      = $F8      ; word (used by Wiz graphics drawing routine)
 gfxRowIndex    = $FA      ; byte (used by Wiz graphics drawing routine)
-;GameSelectedIndex = $FB   ; byte
-highlightIndex = $FC      ; byte
-;$FD
+highlightIndex = $FB      ; byte
+srcptr         = $FC      ; word (used by Bye routines)
+dstptr         = $FE      ; word (used by Bye routines)
 
 HGRLO          = $0100    ; 0xC0 bytes, should not cross page boundary (lifetime)
 HGRHI          = $0300    ; 0xC0 bytes, should not cross page boundary (lifetime)

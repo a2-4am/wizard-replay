@@ -31,7 +31,8 @@ Start
 
          +BUILD_HGR_LOOKUP_TABLES HGRLO, HGRHI
 
-         jsr   InitBye               ; saves current ProDOS prefix
+         jsr   InitBye               ; saves current ProDOS prefix and
+                                     ; reinstalls previous Bye program if any
          jsr   MainMenu
          bcs   @quit
          jmp   Launch

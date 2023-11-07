@@ -2,112 +2,166 @@
 ;(c) 2018 by qkumba
 
 InitBye
--       jsr     $bf00
+-        jsr   PRODOS_MLI
 op_c7
-        !byte   $c7
-        !word   runme+c7_parms-reloc
-        ldx     runme+prefix-reloc
-        bne     +
-        lda     $bf30
-        sta     c5_parms+1
-        jsr     $bf00
-        !byte   $c5
-        !word   c5_parms
-        ldx     runme+prefix+1-reloc
-        inx
-        txa
-        and     #$0f
-        sta     runme+prefix-reloc
-        lda     #$2f
-        sta     runme+prefix+1-reloc
-        dec     op_c7
-        bne     -
-+       lda     #<prefix
-        sta     runme+c6_parms+1-reloc
-        lda     #>prefix
-        sta     runme+c6_parms+2-reloc
-        rts
+         !byte $c7
+         !word runme+c7_parms-reloc
+         ldx   runme+prefix-reloc
+         bne   +
+         lda   $bf30
+         sta   c5_parms+1
+         jsr   PRODOS_MLI
+         !byte $c5
+         !word c5_parms
+         ldx   runme+prefix+1-reloc
+         inx
+         txa
+         and   #$0f
+         sta   runme+prefix-reloc
+         lda   #$2f
+         sta   runme+prefix+1-reloc
+         dec   op_c7
+         bne   -
++        lda   #<prefix
+         sta   runme+c6_parms+1-reloc
+         lda   #>prefix
+         sta   runme+c6_parms+2-reloc
+         +READ_RAM2_WRITE_RAM2
+         ldx   #$0b
+-        lda   $d100, x
+         cmp   runme, x
+         bne   +
+         dex
+         bpl   -
+         ; our Bye program is already installed, so uninstall it and
+         ; reinstall the previous Bye program, if any
+         lda   $d400
+         cmp   #$d8                  ; CLD opcode
+         bne   +                     ; no previous Bye program, leave ours installed
+         lda   #$d4                  ; restore previous Bye from $D400..$D6FF
+         sta   srcptr+1
+         lda   #$d1
+         sta   dstptr+1
+         ldy   #$00
+         sty   srcptr
+         sty   dstptr
+         ldx   #$03
+-        lda   (srcptr), y
+         sta   (dstptr), y
+         iny
+         bne   -
+         inc   srcptr+1
+         inc   dstptr+1
+         dex
+         bne   -
++
+         +READ_ROM_NO_WRITE
+         rts
 
 InstallBye
-        lda     $c083
-        lda     $c083
-        ldy     #0
--       lda     runme, y
-        sta     $d100, y
-        iny
-        bne     -
-        +READ_ROM_NO_WRITE
-        rts
+         +READ_RAM2_WRITE_RAM2
+         lda   $d100
+         cmp   #$D8                  ; CLD opcode
+         bne   +
+         lda   #$d1                  ; copy existing Bye to $D400..$D6FF
+         sta   srcptr+1
+         lda   #$d4
+         sta   dstptr+1
+         ldy   #$00
+         sty   srcptr
+         sty   dstptr
+         ldx   #$03
+-        lda   (srcptr), y
+         sta   (dstptr), y
+         iny
+         bne   -
+         inc   srcptr+1
+         inc   dstptr+1
+         dex
+         bne   -
++
+         ldy   #$00                  ; install our Bye program into $D100
+-        lda   runme, y
+         sta   $d100, y
+         iny
+         bne   -
+         +READ_ROM_NO_WRITE
+         rts
 
 c5_parms
-        !byte   2
-        !byte   0
-        !word   runme+prefix+1-reloc
+         !byte 2
+         !byte 0
+         !word runme+prefix+1-reloc
 
 runme !pseudopc $1000 {
-reloc   cld
-        lda     $c082
-        sta     $c00c
-        sta     $c000
-        jsr     $fe93
-        jsr     $fe89
-        sta     $4fb
-        jsr     $fb2f
-        jsr     $fc58
-        ldx     #$df
-        lda     #$cf
--       sta     $be79,x
-        lda     #0
-        txs
-        inx
-        bne     -
-        inc     $bf6f
-        jsr     $bf00
-        !byte   $c6
-        !word   c6_parms
-        jsr     $bf00
-        !byte   $c8
-        !word   c8_parms
-        lda     c8_parms+5
-        sta     ca_parms+1
-        jsr     $bf00
-        !byte   $ca
-        !word   ca_parms
-        jsr     $bf00
-        !byte   $cc
-        !word   cc_parms
+reloc    cld
+         clc
+         bcc   +
+         !byte $D3,$C1,$CE,$A0,$C9,$CE,$C3,$AE
++
+         +READ_ROM_NO_WRITE
+         sta   CLR80VID
+         sta   STOREOFF
+         jsr   ROM_PR0
+         jsr   ROM_IN0
+         sta   $4fb
+         jsr   ROM_TEXT
+         jsr   ROM_NORMAL
+         jsr   ROM_HOME
+         ldx   #$df
+         lda   #$cf
+-        sta   $be79,x
+         lda   #0
+         txs
+         inx
+         bne     -
+         inc   $bf6f
+         jsr   PRODOS_MLI
+         !byte $c6
+         !word c6_parms
+         jsr   PRODOS_MLI
+         !byte $c8
+         !word c8_parms
+         lda   c8_parms+5
+         sta   ca_parms+1
+         jsr   PRODOS_MLI
+         !byte $ca
+         !word ca_parms
+         jsr   PRODOS_MLI
+         !byte $cc
+         !word cc_parms
 LastGameSelectedIndex=*+1-reloc+runme
-        lda     #SELF_MODIFIED_BYTE
-        sta     MainMenu+1
-        jmp     $2000
+         lda   #SELF_MODIFIED_BYTE
+         sta   MainMenu+1
+         jmp   $2000
 
 c7_parms
 c6_parms
-        !byte   1
-        !word   runme+prefix-reloc
+         !byte 1
+         !word runme+prefix-reloc
 
 c8_parms
-        !byte   3
-        !word   filename
-        !word   $800
-        !byte   0
+         !byte 3
+         !word filename
+         !word $800
+         !byte 0
 
 ca_parms
-        !byte   4
-        !byte   $d1
-        !word   $2000
-        !word   $ffff
-        !word   $34d1
+         !byte 4
+         !byte $d1
+         !word $2000
+         !word $ffff
+         !word $34d1
 
 cc_parms
-        !byte   1
-        !byte   0
+         !byte 1
+         !byte 0
 
 filename
-        !byte   (filename_e-filename)-1
-        !text   "WZREPLAY.SYSTEM"
+         !byte (filename_e-filename)-1
+         !text "WZREPLAY.SYSTEM"
 filename_e
 
 prefix
-        !fill   64
+         !fill 64
 }
