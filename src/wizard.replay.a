@@ -33,6 +33,7 @@ Start
 
          jsr   InitBye               ; saves current ProDOS prefix and
                                      ; reinstalls previous Bye program if any
+         jsr   DisplayVersion
          jsr   MainMenu
          bcs   @quit
          jmp   Launch

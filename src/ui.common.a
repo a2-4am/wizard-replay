@@ -24,3 +24,10 @@ Home
          cpx   #kScreenHeight
          bcc   @rowloop
          rts
+
+DisplayVersion
+         lda   #$04
+         sta   VTAB
+         +LDADDR sVersion
+         ldx   #$1F
+         jmp   DrawString
