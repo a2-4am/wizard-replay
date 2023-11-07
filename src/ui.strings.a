@@ -127,3 +127,27 @@ sInitialProgressBar
 sProgressBlock
          !byte 1
          !byte $00
+
+;
+; credits
+;
+sCredits1
+         !byte 40
+         !raw  "design & interface "
+         !byte $10,$20,$10,$20,$10,$20,$10,$20,$10,$20,$10,$20,$10,$20,$10,$20,$10,$20
+         !raw  "4am"
+sCredits2
+         !byte 40
+         !raw  "ports & rwts "
+         !byte $10,$20,$10,$20,$10,$20,$10,$20,$10,$20,$10,$20,$10,$20,$10,$20,$10,$20,$10,$20,$10
+         !raw  "qkumba"
+sCredits3
+         !byte 40
+         !raw  "Proving Grounds 3.0"
+         !byte $10,$20,$10,$20,$10,$20
+         !raw  "Snafaru et. al."
+sCredits4
+         !byte 40
+         !raw  "Wizimore scenarios "
+         !byte $10,$20,$10,$20,$10,$20,$10,$20,$10,$20
+         !raw  "Joel Fenton"

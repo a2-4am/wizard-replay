@@ -1,0 +1,36 @@
+;license:MIT
+;(c) 2023 by 4am
+;
+
+CreditsLo
+         !byte <sCredits1
+         !byte <sCredits2
+         !byte <sCredits3
+         !byte <sCredits4
+CreditsHi
+         !byte >sCredits1
+         !byte >sCredits2
+         !byte >sCredits3
+         !byte >sCredits4
+         !byte 0
+
+Credits
+         jsr   Home
+         ldx   #0
+         stx   MenuMaxIndex
+@printLoop
+         ldx   MenuMaxIndex
+         ldy   CreditsHi, x
+         beq   +
+         lda   CreditsLo, x
+         ldx   #0
+         jsr   DrawString
+         inc   VTAB
+         inc   VTAB
+         inc   MenuMaxIndex
+         bne   @printLoop            ; always branches
++
+-        lda   KBD
+         bpl   -
+         bit   CLEARKBD
+         rts

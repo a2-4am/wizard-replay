@@ -7,8 +7,8 @@ BackupScenario
 ; out:   C=0 if success
 ;        C=1 if failure, and A=MLI error code
          jsr   Home
-         lda   #(kScreenTopVTAB+2)
-         sta   VTAB
+         inc   VTAB
+         inc   VTAB
          +LDADDR sBackup
          jsr   DrawCenteredString
          inc   VTAB
@@ -32,8 +32,8 @@ BackupScenario
 
 RestoreScenario
          jsr   Home
-         lda   #(kScreenTopVTAB+2)
-         sta   VTAB
+         inc   VTAB
+         inc   VTAB
          +LDADDR sRestore
          jsr   DrawCenteredString
          inc   VTAB

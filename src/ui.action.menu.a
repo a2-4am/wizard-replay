@@ -67,25 +67,13 @@ ActionMenu
          lda   #0
          sta   ActionMenuSelectedIndex
 ActionMenuRefresh
-         jsr   Home
-         lda   #kScreenTopVTAB
-         sta   VTAB
-         ldx   GameSelectedIndex
-         lda   TitleStringsLo, x
-         ldy   TitleStringsHi, x
-         jsr   DrawCenteredString
-         inc   VTAB
-         ldx   GameSelectedIndex
-         lda   SubtitleStringsLo, x
-         ldy   SubtitleStringsHi, x
-         jsr   DrawCenteredString
-
          jsr   Menu
          !word ActionMenuStringsLo
          !word ActionMenuStringsHi
          !byte kScreenTopVTAB+3
 ActionMenuSelectedIndex
          !byte 0
+         !word ActionMenuHeader
          !word NoCallback
 
          bcs   @exit
@@ -104,33 +92,21 @@ ActionMenuSelectedIndex
          clc
          rts
 
+ActionMenuHeader
+         ldx   GameSelectedIndex
+         lda   TitleStringsLo, x
+         ldy   TitleStringsHi, x
+         jsr   DrawCenteredString
+         inc   VTAB
+         ldx   GameSelectedIndex
+         lda   SubtitleStringsLo, x
+         ldy   SubtitleStringsHi, x
+         jmp   DrawCenteredString
+
 ActionBackup
          jsr   BackupScenario
          jmp   ActionMenuRefresh
 
 ActionRestore
-         jsr   Home
-         lda   #kScreenTopVTAB
-         sta   VTAB
-         +LDADDR sRestoreWarning
-         jsr   DrawCenteredString
-         jsr   Menu
-         !word RestoreMenuStringsLo
-         !word RestoreMenuStringsHi
-         !byte kScreenTopVTAB+2
-         !byte 1
-         !word NoCallback
-         bcs   +
-         ldx   MenuSelectedIndex
-         bne   +
-         jsr   RestoreScenario
-+        jmp   ActionMenuRefresh
-
-RestoreMenuStringsLo
-         !byte <sMenuRestore
-         !byte <sMenuCancel
-
-RestoreMenuStringsHi
-         !byte >sMenuRestore
-         !byte >sMenuCancel
-         !byte 0
+         jsr   RestoreMenu
+         jmp   ActionMenuRefresh

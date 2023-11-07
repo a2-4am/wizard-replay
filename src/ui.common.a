@@ -10,6 +10,8 @@ kScreenTop     = kScreenTopVTAB*8
 kScreenHeight  = kScreenTop+64
 
 Home
+         lda   #kScreenTopVTAB
+         sta   VTAB
          ldx   #kScreenTop
 @rowloop lda   HGRLO, x
          sta   @clear+1

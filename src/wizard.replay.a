@@ -81,5 +81,7 @@ BrotherhoodGraphics
          !src  "src/ui.menu.common.a"
          !src  "src/ui.main.menu.a"
          !src  "src/ui.action.menu.a"
+         !src  "src/ui.restore.menu.a"
+         !src  "src/ui.credits.a"
          !src  "src/ui.font.a"
          !src  "src/ui.font.data.a"

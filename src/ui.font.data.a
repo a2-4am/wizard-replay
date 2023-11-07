@@ -279,8 +279,8 @@ FontDataRow2
          !byte %10110110 ;  $0E  open apple
          !byte %10111110 ;  $0F  closed apple
          !byte %10000000 ;  $10  dot, small
-         !byte %10001000 ;  $11  dot, medium
-         !byte %10011100 ;  $12  dot, large
+         !byte %10000000 ;  $11  dot, medium
+         !byte %10000000 ;  $12  dot, large
          !byte %10111110 ;  $13  dot, extra large
          !byte %11111111 ;  $14  heart
          !byte %10110000 ;  $15  right arrow
@@ -407,9 +407,9 @@ FontDataRow3
          !byte %11100110 ;  $0D  carriage return symbol
          !byte %11000011 ;  $0E  open apple
          !byte %11111111 ;  $0F  closed apple
-         !byte %10001000 ;  $10  dot, small
-         !byte %10011100 ;  $11  dot, medium
-         !byte %10111110 ;  $12  dot, large
+         !byte %10000000 ;  $10  dot, small
+         !byte %10001000 ;  $11  dot, medium
+         !byte %10011100 ;  $12  dot, large
          !byte %10111110 ;  $13  dot, extra large
          !byte %11111111 ;  $14  heart
          !byte %11111111 ;  $15  right arrow
@@ -536,7 +536,7 @@ FontDataRow4
          !byte %11111111 ;  $0D  carriage return symbol
          !byte %10100011 ;  $0E  open apple
          !byte %10111111 ;  $0F  closed apple
-         !byte %10000000 ;  $10  dot, small
+         !byte %10001000 ;  $10  dot, small
          !byte %10011100 ;  $11  dot, medium
          !byte %10111110 ;  $12  dot, large
          !byte %10111110 ;  $13  dot, extra large
@@ -666,8 +666,8 @@ FontDataRow5
          !byte %10100011 ;  $0E  open apple
          !byte %10111111 ;  $0F  closed apple
          !byte %10000000 ;  $10  dot, small
-         !byte %10001000 ;  $11  dot, medium
-         !byte %10011100 ;  $12  dot, large
+         !byte %10011100 ;  $11  dot, medium
+         !byte %10111110 ;  $12  dot, large
          !byte %10111110 ;  $13  dot, extra large
          !byte %10011100 ;  $14  heart
          !byte %10110000 ;  $15  right arrow
@@ -795,8 +795,8 @@ FontDataRow6
          !byte %11001010 ;  $0E  open apple
          !byte %11111111 ;  $0F  closed apple
          !byte %10000000 ;  $10  dot, small
-         !byte %10000000 ;  $11  dot, medium
-         !byte %10000000 ;  $12  dot, large
+         !byte %10001000 ;  $11  dot, medium
+         !byte %10011100 ;  $12  dot, large
          !byte %10011100 ;  $13  dot, extra large
          !byte %10001000 ;  $14  heart
          !byte %10011000 ;  $15  right arrow

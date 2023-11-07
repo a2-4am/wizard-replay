@@ -1,0 +1,30 @@
+;license:MIT
+;(c) 2023 by 4am
+;
+
+RestoreMenuStringsLo
+         !byte <sMenuRestore
+         !byte <sMenuCancel
+
+RestoreMenuStringsHi
+         !byte >sMenuRestore
+         !byte >sMenuCancel
+         !byte 0
+
+RestoreMenu
+         jsr   Menu
+         !word RestoreMenuStringsLo
+         !word RestoreMenuStringsHi
+         !byte kScreenTopVTAB+2
+         !byte 1
+         !word RestoreMenuHeader
+         !word NoCallback
+         bcs   +
+         ldx   MenuSelectedIndex
+         bne   +
+         jsr   RestoreScenario
++        rts
+
+RestoreMenuHeader
+         +LDADDR sRestoreWarning
+         jmp   DrawCenteredString

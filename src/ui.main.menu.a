@@ -64,13 +64,13 @@ MainMenu
          sta   GameSelectedIndex
 
 MainMenuRefresh
-         jsr   Home
          jsr   Menu
          !word MainMenuStringsLo
          !word MainMenuStringsHi
          !byte kScreenTopVTAB
 GameSelectedIndex
          !byte 0
+         !word NoCallback
          !word MainMenuSelectionChangeCallback
          bcs   +
          ldx   MenuSelectedIndex
