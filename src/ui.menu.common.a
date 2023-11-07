@@ -24,7 +24,7 @@ HighlightRightEdges
          !byte %10001111
 
 Menu
-         +PARAMS_ON_STACK 7
+         +PARAMS_ON_STACK 8
          +LDZPPARAM16 1, MenuStringsLoPtr
          +LDZPPARAM16 3, MenuStringsHiPtr
          +LDZPPARAM8  5, MenuTopVTAB
