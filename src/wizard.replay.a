@@ -33,6 +33,7 @@ Start
 
          jsr   InitBye               ; saves current ProDOS prefix and
                                      ; reinstalls previous Bye program if any
+         jsr   SetGSColors
          jsr   DisplayVersion
          jsr   MainMenu
          bcs   @quit
@@ -72,6 +73,7 @@ BrotherhoodGraphics
          !src  "src/wizgfx.a"
          !src  "src/ui.strings.a"
          !src  "src/paths.a"
+         !src  "src/hw.iigs.a"
          !src  "src/glue.bye.a"
          !src  "src/glue.mli.a"
          !src  "src/glue.path.a"

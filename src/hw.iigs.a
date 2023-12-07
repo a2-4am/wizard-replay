@@ -1,0 +1,42 @@
+;license:MIT
+;(c) 2022 by 4am
+;
+; functions for checking Apple II models
+;
+; public functions:
+; - IsIIgs
+
+;------------------------------------------------------------------------------
+; IsIIgs
+; check machine type
+;
+; in:    ROM is swapped in
+; out:   C=0 if IIgs
+;        C=1 if other model
+;------------------------------------------------------------------------------
+IsIIgs
+         lda   ROM_MACHINEID
+         cmp   #$06
+         sec
+         bne   @exit
+         jsr   ROM_GSID
+@exit    rts
+
+;------------------------------------------------------------------------------
+; SetGSColors
+; set screen border to black and text color to white
+;
+; in:    ROM is swapped in
+; out:   C=0 if IIgs
+;        C=1 if other model
+;------------------------------------------------------------------------------
+SetGSColors
+         jsr   IsIIgs
+         bcs   @NotGS
+         lda   CLOCKCTL
+         and   #$F0
+         sta   CLOCKCTL
+         lda   #$F0
+         sta   TBCOLOR
+@NotGS
+         rts
