@@ -1241,6 +1241,8 @@ pblock          !byte   2, 0, 0
 callback
                 lda     #0
                 sta     $BF2C
+                lda     #2
+                sta     $BF2D
                 jmp     $892D
 
 PatchCount

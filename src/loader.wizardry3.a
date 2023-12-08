@@ -621,6 +621,10 @@ multicopy
                 sta     $b580, y
                 iny
                 bne     -
+                lda     #<callback
+                sta     $b75e
+                lda     #>callback
+                sta     $b75f
                 lda     #$60
                 sta     $b91d ;disable 80-columns
                 txs
@@ -1184,6 +1188,11 @@ pblock          !byte   2, 0, 0
   !if >pblock != >(pblock + 1) {
     !warn "uncomment ';;lda     #>(pblock + 1)'"
   }
+
+callback
+                lda     #2
+                sta     $BF2D
+                jmp     $922D
 
 !set labels=0
 PatchCount      !byte   18
