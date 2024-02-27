@@ -51,11 +51,11 @@ dsk: preconditions asm extract
 	$(CADIUS) ADDFILE "$(BUILDDISK)" "/$(VOLUME)/X/WIZ123/" "build/X/WIZARDRY3/WIZARDRY3.A.BAK#000000" -C >>build/log
 	$(CADIUS) ADDFILE "$(BUILDDISK)" "/$(VOLUME)/X/WIZ123/" "build/X/WIZARDRY3/WIZARDRY3.B#000000" -C >>build/log
 #
-# add loader and disk images for third-party Wizardry scenarios (all based on Proving Grounds v2.1, so same loader)
+# add loader and disk images for third-party Wizardry scenarios (all based on Proving Grounds v3.0, so same loader)
 #
 	for f in CAT.OF.VLAD EMPERORS.SEAL NIHONBASHI OCONNORS.MINE SCARLET.BROTHER; do \
 		$(CADIUS) ADDFOLDER "$(BUILDDISK)" "/$(VOLUME)/X/$$f" "build/X/$$f" -C >>build/log; \
-		$(CADIUS) ADDFILE "$(BUILDDISK)" "/$(VOLUME)/X/$$f" "build/LOADERS/WIZ1V21/WIZARDRY1#060800" -C >>build/log; \
+		$(CADIUS) ADDFILE "$(BUILDDISK)" "/$(VOLUME)/X/$$f" "build/LOADERS/WIZ1V30/WIZARDRY1#060800" -C >>build/log; \
 		$(CADIUS) ADDFILE "$(BUILDDISK)" "/$(VOLUME)/X/$$f/" "build/LOADERS/WIZPLUS/WIZPLUS1#060800" -C >>build/log; \
 	done
 #
