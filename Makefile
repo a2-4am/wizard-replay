@@ -69,14 +69,12 @@ dsk: preconditions asm extract
 dirs:
 	mkdir -p build/X
 	mkdir -p build/LOADERS/WIZ1V30
-	mkdir -p build/LOADERS/WIZ1V21
 	mkdir -p build/LOADERS/WIZ2
 	mkdir -p build/LOADERS/WIZ3
 	mkdir -p build/LOADERS/WIZPLUS
 	touch build/log
 
 asm: preconditions dirs
-	$(ACME) -r build/loader.wizardry1.v21.lst src/loader.wizardry1.v21.a 2>>build/log
 	$(ACME) -r build/loader.wizardry1.v30.lst src/loader.wizardry1.v30.a 2>>build/log
 	$(ACME) -r build/loader.wizardry2.lst src/loader.wizardry2.a 2>>build/log
 	$(ACME) -r build/loader.wizardry3.lst src/loader.wizardry3.a 2>>build/log

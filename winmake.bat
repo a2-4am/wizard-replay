@@ -21,7 +21,6 @@ if "%1" equ "asm" (
 :asm
 2>nul md build
 call :dirs
-%ACME% -r build\loader.wizardry1.v21.lst src\loader.wizardry1.v21.a 2>>build\log
 %ACME% -r build\loader.wizardry1.v30.lst src\loader.wizardry1.v30.a 2>>build\log
 %ACME% -r build\loader.wizardry2.lst src\loader.wizardry2.a 2>>build\log
 %ACME% -r build\loader.wizardry3.lst src\loader.wizardry3.a 2>>build\log
@@ -58,7 +57,7 @@ rem add loader and disk images for Wizardry III: Legacy of Llylgamyn
 rem add loader and disk images for third-party Wizardry scenarios (all based on Proving Grounds v2.1, so same loader)
 for %%q in (CAT.OF.VLAD EMPERORS.SEAL NIHONBASHI OCONNORS.MINE SCARLET.BROTHER DRAGON.QUEST) do (
 %CADIUS% ADDFOLDER "%BUILDDISK%" "/%VOLUME%/X/%%q/" "build\X\%%q" -C >>build\log
-%CADIUS% ADDFILE "%BUILDDISK%" "/%VOLUME%/X/%%q/" "build\LOADERS\WIZ1V21\WIZARDRY1#060800" -C >>build\log
+%CADIUS% ADDFILE "%BUILDDISK%" "/%VOLUME%/X/%%q/" "build\LOADERS\WIZ1V30\WIZARDRY1#060800" -C >>build\log
 %CADIUS% ADDFILE "%BUILDDISK%" "/%VOLUME%/X/%%q/" "build\LOADERS\WIZPLUS\WIZPLUS1#060800" -C >>build\log
 )
 rem add loaders and disk images for WizPlus
@@ -87,7 +86,6 @@ goto :EOF
 :dirs
 2>nul md build\X
 2>nul md build\LOADERS\WIZ1V30
-2>nul md build\LOADERS\WIZ1V21
 2>nul md build\LOADERS\WIZ2
 2>nul md build\LOADERS\WIZ3
 2>nul md build\LOADERS\WIZPLUS
