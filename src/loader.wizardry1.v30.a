@@ -1197,7 +1197,7 @@ callback
                 jmp     $922D
 
 !set labels=0
-PatchCount      !byte   24
+PatchCount      !byte   23
 !do {
 PatchArray
 ; disable protection check
@@ -1398,7 +1398,7 @@ patch_wizardry_utils3
          !byte $01        ; disk
          !byte $21        ; track
          !byte $0E        ; sector
-         !byte $1B        ; byte offset
+         !byte $3F        ; byte offset
          !byte 7+$80      ; length
 patch_wizardry_utils3_b
          !byte $20
@@ -1410,7 +1410,7 @@ patch_wizardry_utils2
          !byte $01        ; disk
          !byte $21        ; track
          !byte $0E        ; sector
-         !byte $37        ; byte offset
+         !byte $5B        ; byte offset
          !byte 27+$80     ; length
 patch_wizardry_utils2_b
          !byte $20
@@ -1422,42 +1422,30 @@ patch_wizardry_utils4
          !byte $01        ; disk
          !byte $21        ; track
          !byte $04        ; sector
-         !byte $5F        ; byte offset
+         !byte $97        ; byte offset
          !byte 40+$80     ; length
 patch_wizardry_utils4_b
          !byte $20
 patch_wizardry_utils4_e
 
-;move char(s) to (1/2)
+;move char(s) to
 patch_wizardry_utils5
 !set labels=labels+1
          !byte $01        ; disk
          !byte $21        ; track
-         !byte $04        ; sector
-         !byte $E2        ; byte offset
-         !byte 30+$80     ; length
+         !byte $05        ; sector
+         !byte $1A        ; byte offset
+         !byte 33+$80     ; length
 patch_wizardry_utils5_b
          !byte $20
 patch_wizardry_utils5_e
-
-;move char(s) to (2/2)
-patch_wizardry_utils6
-!set labels=labels+1
-         !byte $01        ; disk
-         !byte $21        ; track
-         !byte $05        ; sector
-         !byte $00        ; byte offset
-         !byte 3+$80      ; length
-patch_wizardry_utils6_b
-         !byte $20
-patch_wizardry_utils6_e
 
 patch_wizardry_utils7
 !set labels=labels+1
          !byte $01        ; disk
          !byte $21        ; track
          !byte $05        ; sector
-         !byte $03        ; byte offset
+         !byte $3B        ; byte offset
          !byte patch_wizardry_utils7_e-patch_wizardry_utils7_b
                           ; length
 patch_wizardry_utils7_b
@@ -1496,7 +1484,7 @@ patch_wizardry_utils1
          !byte $01        ; disk
          !byte $21        ; track
          !byte $0E        ; sector
-         !byte $11        ; byte offset
+         !byte $35        ; byte offset
          !byte 9+$80      ; length
 patch_wizardry_utils1_b
          !byte $20
