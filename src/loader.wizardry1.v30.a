@@ -621,11 +621,20 @@ multicopy
                 iny
                 lda     ($fe), y
                 jsr     loadpascal
+		lda	$c083
+		lda	$c083
                 ldy     #0
 -               lda     MLI, y
                 sta     $b380, y
                 sta     $b580, y
+                lda     state_b, y
+		sta	$d000, y
                 iny
+                bne     -
+                ldy     #linehook_e-linehook_b
+-               lda     linehook_b-1, y
+                sta     $be3f, y
+                dey
                 bne     -
                 lda     #<callback
                 sta     $b75e
@@ -676,6 +685,154 @@ loadaddr        lda     #$B0
 
 startup         !byte   12
                 !text   "RTSTRP.APPLE"
+
+linehook_b !pseudopc $be40 {
+                lda     ($52), y      ;4c38
+                sta     $65
+                dey
+                lda     ($52), y
+                sta     $64           ;4c60
+                ldy     #$1a
+                lda     ($64), y      ;4c7a->character index
+                tax
+                lda     charlo, x
+                sta     replay_buf1+1
+                sta     replay_buf2+1
+                sta     capture_buf+1
+                ;enable character capture
+                lda     #$20          ;jsr
+                sta     $B797
+                lda     #$D0
+                sta     $B799
+                lda     #$19
+                sta     $78
+                lda     #1
+                jmp     $A533
+
+tempbuf
+                !fill   10
+charlo          !byte   <charbuf1, <charbuf2, <charbuf3, <charbuf4, <charbuf5, <charbuf6
+
+charbuf1        !fill 10
+charbuf2        !fill 10
+charbuf3        !fill 10
+charbuf4        !fill 10
+charbuf5        !fill 10
+charbuf6        !fill 10
+}
+linehook_e
+
+state_b !pseudopc $d000 {
+hook
+                lda     $c000         ;save for later
+
+state
+                ldx     #0            ;$80 is backspace, 1 is retype, 0 is capture
+                bpl     check_char
+
+bkspc_replay
+                ldx     char_count+1
+                beq     restore_temp  ;buffer is empty (now)
+
+bkspc_cmp
+                cpx     tempbuf
+                bne     bkspc_dec     ;oversized typing, discard extras
+                dec     tempbuf
+
+bkspc_dec
+                dec     char_count+1
+
+bkspc_ret
+                lda     #$88          ;backspace
+                rts
+
+restore_temp
+replay_buf1
+                ldx     $bed1         ;SMC
+                beq     +             ;nothing to recall, change state anyway
+replay_buf2
+                lda     $bed1, x      ;SMC
+                sta     tempbuf, x
+                dex
+                bpl     replay_buf2
++               sec
+                rol     state+1
+
+check_char
+                bne     char_replay
+
+char_capture
+                tay
+                bpl     +
+                cmp     #$8d          ;return
+                bne     not_cr
+                ldx     tempbuf
+                beq     capture_ret
+
+copy_chars
+                lda     tempbuf, x
+
+capture_buf
+                sta     $bed1, x      ;SMC
+                dex
+                bpl     copy_chars
+                inx
+                stx     char_count+1
+                stx     tempbuf
+
+capture_ret
+                lda     #$AD          ;lda
+                sta     $B797
+                lda     #$C0
+                sta     $B799
+                tya
++               rts
+
+not_cr
+                cmp      #$8b         ;up arrow
+                bne      not_uparrow
+                sec
+                ror      state+1      ;enable backspace replay if needed
+                bne      bkspc_replay ;always
+
+char_replay
+replay_idx
+                lda      #0           ;SMC
+                tax
+                eor      tempbuf
+                beq      disable_replay
+                inc      replay_idx+1
+                lda      tempbuf+1, x
+                bne      +            ;always
+
+disable_replay
+                sta      replay_idx+1
+                sta      state+1
+                rts
+
+not_uparrow
+                cmp      #$88         ;backspace
+                beq      backspace
+                cmp      #$ff         ;delete
+                bne      not_bkspc
+
+backspace
+char_count
+                ldx      #0           ;SMC
+                bne      bkspc_cmp
+                rts
+
+not_bkspc
+                ldx      tempbuf
+                cpx      #9
+                beq      +
+                inc      tempbuf
+                sta      tempbuf+1, x
++               inc      char_count+1
+                tay                   ;set sign
+                rts
+}
+state_e
 
                 ;read volume directory key block
                 ;self-modified by init code
@@ -1038,11 +1195,16 @@ magic           lda     #1 ;SMC
                 cmp     #2
                 iny
                 lda     ($58), y      ;get volume number
-                bmi     doquit
+                bmi     chkquit
                 sta     magic + 1
                 bcs     +
                 sta     curvolidx + 1 ;set volume number
 +               jmp     $987B
+
+chkquit
+		asl
+		bne	doquit
+                jmp     $be40
 
 doquit
                 dey
@@ -1197,7 +1359,7 @@ callback
                 jmp     $922D
 
 !set labels=0
-PatchCount      !byte   23
+PatchCount      !byte   25
 !do {
 PatchArray
 ; disable protection check
@@ -1477,6 +1639,32 @@ patch_wizardry_quit_b
          !byte $D2, $FF
 patch_wizardry_quit_e
 
+; install line-recall hook
+patch_wizardry_spell
+!set labels=labels+1
+         !byte $FF        ; disk
+         !byte $06        ; track
+         !byte $0F        ; sector
+         !byte $A9        ; byte offset
+         !byte patch_wizardry_spell_e-patch_wizardry_spell_b
+                          ; length
+patch_wizardry_spell_b
+         !byte $D2, $80
+patch_wizardry_spell_e
+
+; patch banking
+patch_wizardry_bank
+!set labels=labels+1
+         !byte $FF        ; disk
+         !byte $12        ; track
+         !byte $05        ; sector
+         !byte $A1        ; byte offset
+         !byte patch_wizardry_bank_e-patch_wizardry_bank_b
+                          ; length
+patch_wizardry_bank_b
+         !byte $83
+patch_wizardry_bank_e
+
 ; erase the unsupported options
 ;transfer
 patch_wizardry_utils1
@@ -1493,6 +1681,10 @@ patch_wizardry_utils1_e
 } until 1=1
 !ifdef count {
   !error "patch count: ",labels
+}
+!warn "patch size: ",*-PatchCount
+!if *>$b37f {
+  !error "patch table too large"
 }
 
 hddcodeend

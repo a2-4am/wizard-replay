@@ -50,7 +50,7 @@ rem add loader and disk images for Wizardry II: Knight of Diamonds
 %CADIUS% ADDFILE "%BUILDDISK%" "/%VOLUME%/X/WIZ123/" "build\X\KOD\WIZARDRY2.A.BAK#000000" -C >>build\log
 %CADIUS% ADDFILE "%BUILDDISK%" "/%VOLUME%/X/WIZ123/" "build\X\KOD\WIZARDRY2.B#000000" -C >>build\log
 rem add loader and disk images for Wizardry III: Legacy of Llylgamyn
-%CADIUS% ADDFILE "%BUILDDISK%" "/%VOLUME%/X/WIZ123/" "build\LOADERS\WIZ3\WIZARDRY3#060800" -C >>buildlog
+%CADIUS% ADDFILE "%BUILDDISK%" "/%VOLUME%/X/WIZ123/" "build\LOADERS\WIZ3\WIZARDRY3#060800" -C >>build\log
 %CADIUS% ADDFILE "%BUILDDISK%" "/%VOLUME%/X/WIZ123/" "build\X\WIZARDRY3\WIZARDRY3.A#000000" -C >>build\log
 %CADIUS% ADDFILE "%BUILDDISK%" "/%VOLUME%/X/WIZ123/" "build\X\WIZARDRY3\WIZARDRY3.A.BAK#000000" -C >>build\log
 %CADIUS% ADDFILE "%BUILDDISK%" "/%VOLUME%/X/WIZ123/" "build\X\WIZARDRY3\WIZARDRY3.B#000000" -C >>build\log
