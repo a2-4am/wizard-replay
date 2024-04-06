@@ -10,7 +10,7 @@ sVersion
 ;
 sMenuWiz1
          !byte 21
-         !raw  " Proving Grounds 3.0 "
+         !raw  " Proving Grounds 3.1 "
 sMenuWiz2
          !byte 21
          !raw  " Knight of Diamonds  "
@@ -64,7 +64,7 @@ sMenuCancel
 ;
 sTitleWiz1
          !byte 39
-         !raw  "Proving Grounds of the Mad Overlord 3.0"
+         !raw  "Proving Grounds of the Mad Overlord 3.1"
 sTitleWiz2
          !byte 35
          !raw  "Wizardry II: The Knight of Diamonds"
@@ -143,7 +143,7 @@ sCredits2
          !raw  "qkumba"
 sCredits3
          !byte 40
-         !raw  "Proving Grounds 3.0"
+         !raw  "Proving Grounds 3.1"
          !byte $10,$20,$10,$20,$10,$20
          !raw  "Snafaru et. al."
 sCredits4
