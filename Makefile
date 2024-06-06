@@ -51,11 +51,11 @@ dsk: preconditions asm extract
 	$(CADIUS) ADDFILE "$(BUILDDISK)" "/$(VOLUME)/X/WIZ123/" "build/X/WIZARDRY3/WIZARDRY3.A.BAK#000000" -C >>build/log
 	$(CADIUS) ADDFILE "$(BUILDDISK)" "/$(VOLUME)/X/WIZ123/" "build/X/WIZARDRY3/WIZARDRY3.B#000000" -C >>build/log
 #
-# add loader and disk images for third-party Wizardry scenarios (all based on Proving Grounds v3.0, so same loader)
+# add loader and disk images for third-party Wizardry scenarios (all based on Proving Grounds v3.1, so same loader)
 #
 	for f in CAT.OF.VLAD EMPERORS.SEAL NIHONBASHI OCONNORS.MINE SCARLET.BROTHER; do \
 		$(CADIUS) ADDFOLDER "$(BUILDDISK)" "/$(VOLUME)/X/$$f" "build/X/$$f" -C >>build/log; \
-		$(CADIUS) ADDFILE "$(BUILDDISK)" "/$(VOLUME)/X/$$f" "build/LOADERS/WIZ1V30/WIZARDRY1#060800" -C >>build/log; \
+		$(CADIUS) ADDFILE "$(BUILDDISK)" "/$(VOLUME)/X/$$f" "build/LOADERS/WIZ1V31/WIZARDRY1#060800" -C >>build/log; \
 		$(CADIUS) ADDFILE "$(BUILDDISK)" "/$(VOLUME)/X/$$f/" "build/LOADERS/WIZPLUS/WIZPLUS1#060800" -C >>build/log; \
 	done
 #
@@ -68,7 +68,6 @@ dsk: preconditions asm extract
 
 dirs:
 	mkdir -p build/X
-	mkdir -p build/LOADERS/WIZ1V30
 	mkdir -p build/LOADERS/WIZ1V31
 	mkdir -p build/LOADERS/WIZ2
 	mkdir -p build/LOADERS/WIZ3
@@ -76,7 +75,6 @@ dirs:
 	touch build/log
 
 asm: preconditions dirs
-	$(ACME) -r build/loader.wizardry1.v30.lst src/loader.wizardry1.v30.a 2>>build/log
 	$(ACME) -r build/loader.wizardry1.v31.lst src/loader.wizardry1.v31.a 2>>build/log
 	$(ACME) -r build/loader.wizardry2.lst src/loader.wizardry2.a 2>>build/log
 	$(ACME) -r build/loader.wizardry3.lst src/loader.wizardry3.a 2>>build/log
