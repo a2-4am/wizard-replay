@@ -2,6 +2,8 @@
 ;(c) 2023-2024 by 4am
 ;
 
+kOtherMenuBack = 4
+
 OtherMenuStrings
          !word sMenuOther1
          !word sMenuOther2
@@ -59,8 +61,9 @@ OtherMenuSelectedIndex
          !byte 0
          !word NoCallback
          !word OtherMenuSelectionChangeCallback
-         bcs   +
          lda   MenuSelectedIndex
+         bcc   OtherMenuDispatch
+         lda   #kOtherMenuBack
 OtherMenuDispatch
          sta   OtherMenuSelectedIndex
          asl
@@ -70,7 +73,7 @@ OtherMenuDispatch
          +ST16 @j+1
 @j       jsr   SELF_MODIFIED_WORD
          bcs   OtherMenuRefresh
-+        rts
+         rts
 
 SelectOther1
 SelectOther2

@@ -2,6 +2,8 @@
 ;(c) 2023-2024 by 4am
 ;
 
+kWizimoreMenuBack = 5
+
 WizimoreMenuStrings
          !word sMenuWizimore1
          !word sMenuWizimore2
@@ -65,8 +67,9 @@ WizimoreMenuSelectedIndex
          !byte 0
          !word NoCallback
          !word WizimoreMenuSelectionChangeCallback
-         bcs   +
          lda   MenuSelectedIndex
+         bcc   WizimoreMenuDispatch
+         lda   #kWizimoreMenuBack
 WizimoreMenuDispatch
          sta   WizimoreMenuSelectedIndex
          asl
@@ -76,7 +79,7 @@ WizimoreMenuDispatch
          +ST16 @j+1
 @j       jsr   SELF_MODIFIED_WORD
          bcs   WizimoreMenuRefresh
-+        rts
+         rts
 
 SelectWizimore1
 SelectWizimore2

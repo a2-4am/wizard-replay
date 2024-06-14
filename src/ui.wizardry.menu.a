@@ -2,6 +2,8 @@
 ;(c) 2023-2024 by 4am
 ;
 
+kWizardryMenuBack = 3
+
 WizardryMenuStrings
          !word sMenuWizardry1
          !word sMenuWizardry2
@@ -50,8 +52,9 @@ WizardryMenuSelectedIndex
          !byte 0
          !word NoCallback
          !word WizardryMenuSelectionChangeCallback
-         bcs   +
          lda   MenuSelectedIndex
+         bcc   WizardryMenuDispatch
+         lda   #kWizardryMenuBack
 WizardryMenuDispatch
          sta   WizardryMenuSelectedIndex
          asl
@@ -61,7 +64,7 @@ WizardryMenuDispatch
          +ST16 @j+1
 @j       jsr   SELF_MODIFIED_WORD
          bcs   WizardryMenuRefresh
-+        rts
+         rts
 
 SelectWiz1
 SelectWiz2
