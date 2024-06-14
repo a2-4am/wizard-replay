@@ -1,122 +1,157 @@
 ;license:MIT
-;(c) 2023 by 4am
+;(c) 2023-2024 by 4am
 ;
 
 sVersion
-         !byte 4
-         !raw  "v1.0"
+         +PSTRING "v2.0"
 ;
 ; short padded titles for main menu
 ;
-sMenuWiz1
-         !byte 21
-         !raw  " Proving Grounds 3.1 "
-sMenuWiz2
-         !byte 21
-         !raw  " Knight of Diamonds  "
-sMenuWiz3
-         !byte 21
-         !raw  " Legacy of Llylgamyn "
-sMenuMore1
-         !byte 21
-         !raw  " Nihonbashi          "
-sMenuMore2
-         !byte 21
-         !raw  " O'Connor's Mine     "
-sMenuMore3
-         !byte 21
-         !raw  " Catacombs of Vlad   "
-sMenuMore4
-         !byte 21
-         !raw  " The Emperor's Seal  "
-sMenuMore5
-         !byte 21
-         !raw  " Scarlet Brotherhood "
-
+sMenuWizardry
+         +PSTRING " Wizardry 1-3        "
+sMenuWizimore
+         +PSTRING " Wizimore scenarios  "
+sMenuWizModern
+         +PSTRING " Other scenarios     "
+sMenuUltima
+         +PSTRING " Ultima 1-5          "
+sMenuUltimore
+         +PSTRING " Ultimore scenarios  "
+sMenuQuit
+         +PSTRING " Quit                "
+;
+; short padded titles for Wizardry menu
+;
+sMenuWizardry1
+         +PSTRING " Proving Grounds 3.1 "
+sMenuWizardry2
+         +PSTRING " Knight of Diamonds  "
+sMenuWizardry3
+         +PSTRING " Legacy of Llylgamyn "
+sMenuBackToMain
+         +PSTRING " Back to main menu   "
+;
+; short padded titles for Wizimore Scenarios menu
+;
+sMenuWizimore1
+         +PSTRING " Nihonbashi          "
+sMenuWizimore2
+         +PSTRING " O'Connor's Mine     "
+sMenuWizimore3
+         +PSTRING " Catacombs of Vlad   "
+sMenuWizimore4
+         +PSTRING " The Emperor's Seal  "
+sMenuWizimore5
+         +PSTRING " Scarlet Brotherhood "
+;
+; short padded titles for Other Wizardry scenarios menu
+;
+sMenuOther1
+         +PSTRING " DragonQuest         "
+sMenuOther2
+         +PSTRING " Atomic Wasteland    "
+sMenuOther3
+         +PSTRING " Black Stone         "
+sMenuOther4
+         +PSTRING " Knight of the Grave "
+;
+; short padded titles for Ultima menu
+;
+sMenuUltima1
+         +PSTRING " Ultima I            "
+sMenuUltima2
+         +PSTRING " Ultima II           "
+sMenuUltima3
+         +PSTRING " Ultima III          "
+sMenuUltima4
+         +PSTRING " Ultima IV           "
+sMenuUltima5
+         +PSTRING " Ultima V            "
+;
+; short padded titles for Ultimore menu
+;
+sMenuUltimore1
+         +PSTRING " Egypt               "
+sMenuUltimore2
+         +PSTRING " Slavelords          "
+sMenuUltimore3
+         +PSTRING " Spaceship Crash     "
 ;
 ; short padded titles for action menu
 ;
 sMenuPlay
-         !byte 21
-         !raw  " Play                "
-sMenuEdit
-         !byte 21
-         !raw  " Edit with WizPlus   "
-sMenuBackup
-         !byte 21
-         !raw  " Back up scenario    "
+         +PSTRING " Play                "
 sMenuRestore
-         !byte 21
-         !raw  " Restore from backup "
-sMenuBack
-         !byte 21
-         !raw  " Back to main menu   "
+         +PSTRING " Restore from backup "
+sMenuBackup
+         +PSTRING " Back up scenario    "
+sMenuEdit
+         +PSTRING " Edit with WizPlus   "
+sMenuBackToGame
+         +PSTRING " Back to game menu   "
 
 ;
 ; short padded titles for other menus
 ;
 sMenuCancel
-         !byte 21
-         !raw  " Cancel              "
+         +PSTRING " Cancel              "
 
 ;
 ; full game titles and descriptions for action menu
 ;
 sTitleWiz1
-         !byte 39
-         !raw  "Proving Grounds of the Mad Overlord 3.1"
+         +PSTRING "Proving Grounds of the Mad Overlord 3.1"
 sTitleWiz2
-         !byte 35
-         !raw  "Wizardry II: The Knight of Diamonds"
+         +PSTRING "Wizardry II: The Knight of Diamonds"
 sTitleWiz3
-         !byte 37
-         !raw  "Wizardry III: The Legacy of Llylgamyn"
+         +PSTRING "Wizardry III: The Legacy of Llylgamyn"
 sTitleMore1
-         !byte 10
-         !raw  "Nihonbashi"
+         +PSTRING "Nihonbashi"
 sTitleMore2
-         !byte 15
-         !raw  "O'Connor's Mine"
+         +PSTRING "O'Connor's Mine"
 sTitleMore3
-         !byte 21
-         !raw  "The Catacombs of Vlad"
+         +PSTRING "The Catacombs of Vlad"
 sTitleMore4
-         !byte 18
-         !raw  "The Emperor's Seal"
+         +PSTRING "The Emperor's Seal"
 sTitleMore5
-         !byte 33
-         !raw  "The Scarlet Brotherhood of Hsi Ho"
+         +PSTRING "The Scarlet Brotherhood of Hsi Ho"
+sTitleOther1
+         +PSTRING "DragonQuest"
+sTitleOther2
+         +PSTRING "Atomic Wasteland 2098"
+sTitleOther3
+         +PSTRING "Black Stone"
+sTitleOther4
+         +PSTRING "Knight of the Grave"
 sSubtitleWiz1
-         !byte 33
-         !raw  "1981 classic with modern upgrades"
+         +PSTRING "1981 classic with modern upgrades"
 sSubtitleWiz2
-         !byte 12
-         !raw  "1982 classic"
+         +PSTRING "1982 classic"
 sSubtitleWiz3
-         !byte 12
-         !raw  "1983 classic"
+         +PSTRING "1983 classic"
 sSubtitleMore1
 sSubtitleMore3
 sSubtitleMore4
-         !byte 25
-         !raw  "1987 third-party scenario"
+         +PSTRING "1987 third-party scenario"
 sSubtitleMore2
 sSubtitleMore5
-         !byte 25
-         !raw  "1985 third-party scenario"
+sSubtitleOther2
+sSubtitleOther3
+         +PSTRING "1985 third-party scenario"
+sSubtitleOther1
+         +PSTRING "modern scenario based on the dice FRPG"
+sSubtitleOther4
+         +PSTRING "1986 third-party scenario"
 
 ;
 ; messages and graphics for backup/restore
 ;
 sRestoreWarning
-         !byte 38
-         !raw  "This will overwrite your entire party!"
+         +PSTRING "This will overwrite your entire party!"
 sRestore
-         !byte 30
-         !raw  "Restoring scenario from backup"
+         +PSTRING "Restoring scenario from backup"
 sBackup
-         !byte 24
-         !raw  "Backing up your scenario"
+         +PSTRING "Backing up your scenario"
 sInitialProgressBar
          !byte 37
          !byte $01,$06,$06,$06,$06,$06,$06,$06

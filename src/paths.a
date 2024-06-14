@@ -1,172 +1,134 @@
 ;license:MIT
-;(c) 2023 by 4am
+;(c) 2023-2024 by 4am
 ;
 
 sGameDirectory
-         !byte 2
-         !raw  "X/"
+         +PSTRING "X/"
 
 sSlash
-         !byte 1
-         !raw  "/"
+         +PSTRING "/"
 
 sPlayLoader1
-         !byte 9
-         !raw  "WIZARDRY1"
+         +PSTRING "WIZARDRY1"
 sPlayLoader2
-         !byte 9
-         !raw  "WIZARDRY2"
+         +PSTRING "WIZARDRY2"
 sPlayLoader3
-         !byte 9
-         !raw  "WIZARDRY3"
+         +PSTRING "WIZARDRY3"
 
 sEditLoader1
-         !byte 8
-         !raw  "WIZPLUS1"
+         +PSTRING "WIZPLUS1"
 sEditLoader2
-         !byte 8
-         !raw  "WIZPLUS2"
+         +PSTRING "WIZPLUS2"
 sEditLoader3
-         !byte 8
-         !raw  "WIZPLUS3"
+         +PSTRING "WIZPLUS3"
 
 sScenario1
-         !byte 11
-         !raw  "WIZARDRY1.A"
+         +PSTRING "WIZARDRY1.A"
 sScenario1Backup
-         !byte 15
-         !raw  "WIZARDRY1.A.BAK"
+         +PSTRING "WIZARDRY1.A.BAK"
 sScenario2
-         !byte 11
-         !raw  "WIZARDRY2.A"
+         +PSTRING "WIZARDRY2.A"
 sScenario2Backup
-         !byte 15
-         !raw  "WIZARDRY2.A.BAK"
+         +PSTRING "WIZARDRY2.A.BAK"
 sScenario3
-         !byte 11
-         !raw  "WIZARDRY3.A"
+         +PSTRING "WIZARDRY3.A"
 sScenario3Backup
-         !byte 15
-         !raw  "WIZARDRY3.A.BAK"
+         +PSTRING "WIZARDRY3.A.BAK"
 
 sVolProvingGrounds
 sVolKnightOfDiamonds
 sVolLegacyOfLlylgamyn
-         !byte 6
-         !raw  "WIZ123"
+         +PSTRING "WIZ123"
 sVolNihonbashi
-         !byte 10
-         !raw  "NIHONBASHI"
+         +PSTRING "NIHONBASHI"
 sVolOConnor
-         !byte 13
-         !raw  "OCONNORS.MINE"
+         +PSTRING "OCONNORS.MINE"
 sVolVlad
-         !byte 11
-         !raw  "CAT.OF.VLAD"
+         +PSTRING "CAT.OF.VLAD"
 sVolEmperor
-         !byte 13
-         !raw  "EMPERORS.SEAL"
+         +PSTRING "EMPERORS.SEAL"
 sVolBrotherhood
-         !byte 15
-         !raw  "SCARLET.BROTHER"
+         +PSTRING "SCARLET.BROTHER"
+sVolDragonQuest
+         +PSTRING "DRAGON.QUEST"
+sVolAtomicWasteland
+         +PSTRING "ATOMICWASTELAND"
+sVolBlackStone
+         +PSTRING "BLACK.STONE"
+sVolKnightOfTheGrave
+         +PSTRING "KNIGHT.GRAVE"
 
 ; directory name of the scenario
-VolNamesLo
-         !byte <sVolProvingGrounds
-         !byte <sVolKnightOfDiamonds
-         !byte <sVolLegacyOfLlylgamyn
-         !byte <sVolNihonbashi
-         !byte <sVolOConnor
-         !byte <sVolVlad
-         !byte <sVolEmperor
-         !byte <sVolBrotherhood
-
-VolNamesHi
-         !byte >sVolProvingGrounds
-         !byte >sVolKnightOfDiamonds
-         !byte >sVolLegacyOfLlylgamyn
-         !byte >sVolNihonbashi
-         !byte >sVolOConnor
-         !byte >sVolVlad
-         !byte >sVolEmperor
-         !byte >sVolBrotherhood
+VolNames
+         !word sVolProvingGrounds
+         !word sVolKnightOfDiamonds
+         !word sVolLegacyOfLlylgamyn
+         !word sVolNihonbashi
+         !word sVolOConnor
+         !word sVolVlad
+         !word sVolEmperor
+         !word sVolBrotherhood
+         !word sVolDragonQuest
+         !word sVolAtomicWasteland
+         !word sVolBlackStone
+         !word sVolKnightOfTheGrave
 
 ; filename of the game loader
-PlayLoadersLo
-         !byte <sPlayLoader1
-         !byte <sPlayLoader2
-         !byte <sPlayLoader3
-         !byte <sPlayLoader1
-         !byte <sPlayLoader1
-         !byte <sPlayLoader1
-         !byte <sPlayLoader1
-         !byte <sPlayLoader1
-PlayLoadersHi
-         !byte >sPlayLoader1
-         !byte >sPlayLoader2
-         !byte >sPlayLoader3
-         !byte >sPlayLoader1
-         !byte >sPlayLoader1
-         !byte >sPlayLoader1
-         !byte >sPlayLoader1
-         !byte >sPlayLoader1
+PlayLoaders
+         !word sPlayLoader1
+         !word sPlayLoader2
+         !word sPlayLoader3
+         !word sPlayLoader1
+         !word sPlayLoader1
+         !word sPlayLoader1
+         !word sPlayLoader1
+         !word sPlayLoader1
+         !word sPlayLoader1
+         !word sPlayLoader1
+         !word sPlayLoader1
+         !word sPlayLoader1
 
 ; filename of the WizPlus loader
-EditLoadersLo
-         !byte <sEditLoader1
-         !byte <sEditLoader2
-         !byte <sEditLoader3
-         !byte <sEditLoader1
-         !byte <sEditLoader1
-         !byte <sEditLoader1
-         !byte <sEditLoader1
-         !byte <sEditLoader1
-EditLoadersHi
-         !byte >sEditLoader1
-         !byte >sEditLoader2
-         !byte >sEditLoader3
-         !byte >sEditLoader1
-         !byte >sEditLoader1
-         !byte >sEditLoader1
-         !byte >sEditLoader1
-         !byte >sEditLoader1
+EditLoaders
+         !word sEditLoader1
+         !word sEditLoader2
+         !word sEditLoader3
+         !word sEditLoader1
+         !word sEditLoader1
+         !word sEditLoader1
+         !word sEditLoader1
+         !word sEditLoader1
+         !word sEditLoader1
+         !word sEditLoader1
+         !word sEditLoader1
+         !word sEditLoader1
 
 ; filename of the actual disk image for the scenario
-ScenariosLo
-         !byte <sScenario1
-         !byte <sScenario2
-         !byte <sScenario3
-         !byte <sScenario1
-         !byte <sScenario1
-         !byte <sScenario1
-         !byte <sScenario1
-         !byte <sScenario1
-ScenariosHi
-         !byte >sScenario1
-         !byte >sScenario2
-         !byte >sScenario3
-         !byte >sScenario1
-         !byte >sScenario1
-         !byte >sScenario1
-         !byte >sScenario1
-         !byte >sScenario1
+Scenarios
+         !word sScenario1
+         !word sScenario2
+         !word sScenario3
+         !word sScenario1
+         !word sScenario1
+         !word sScenario1
+         !word sScenario1
+         !word sScenario1
+         !word sScenario1
+         !word sScenario1
+         !word sScenario1
+         !word sScenario1
 
 ; filename to use for the backup of the scenario
-BackupsLo
-         !byte <sScenario1Backup
-         !byte <sScenario2Backup
-         !byte <sScenario3Backup
-         !byte <sScenario1Backup
-         !byte <sScenario1Backup
-         !byte <sScenario1Backup
-         !byte <sScenario1Backup
-         !byte <sScenario1Backup
-BackupsHi
-         !byte >sScenario1Backup
-         !byte >sScenario2Backup
-         !byte >sScenario3Backup
-         !byte >sScenario1Backup
-         !byte >sScenario1Backup
-         !byte >sScenario1Backup
-         !byte >sScenario1Backup
-         !byte >sScenario1Backup
+Backups
+         !word sScenario1Backup
+         !word sScenario2Backup
+         !word sScenario3Backup
+         !word sScenario1Backup
+         !word sScenario1Backup
+         !word sScenario1Backup
+         !word sScenario1Backup
+         !word sScenario1Backup
+         !word sScenario1Backup
+         !word sScenario1Backup
+         !word sScenario1Backup
+         !word sScenario1Backup

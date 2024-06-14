@@ -1,0 +1,103 @@
+;license:MIT
+;(c) 2023-2024 by 4am
+;
+
+WizardryMenuStrings
+         !word sMenuWizardry1
+         !word sMenuWizardry2
+         !word sMenuWizardry3
+         !word sMenuBackToMain
+         !byte 0
+
+WizardryGraphicsLo
+         !byte <ProvingGraphics
+         !byte <KODGraphics
+         !byte <LOLGraphics
+         !byte <ProvingGraphics
+WizardryGraphicsHi0
+         !byte >ProvingGraphics
+         !byte >KODGraphics
+         !byte >LOLGraphics
+         !byte >ProvingGraphics
+WizardryGraphicsHi1
+         !byte >(ProvingGraphics+$200)
+         !byte >(KODGraphics+$200)
+         !byte >(LOLGraphics+$200)
+         !byte >(ProvingGraphics+$200)
+WizardryGraphicsHi2
+         !byte >(ProvingGraphics+$400)
+         !byte >(KODGraphics+$400)
+         !byte >(LOLGraphics+$400)
+         !byte >(ProvingGraphics+$400)
+
+WizardryMenuActions
+         !word SelectWiz1
+         !word SelectWiz2
+         !word SelectWiz3
+         !word SelectWizBack
+
+WizardryMenu
+         lda   GameSelectedIndex
+         ; if a game is already selected, figure out which game to show
+         ; and go directly there instead of showing game menu
+         bpl   WizardryMenuDispatch
+
+WizardryMenuRefresh
+         jsr   Menu
+         !word WizardryMenuStrings
+         !byte kScreenTopVTAB
+WizardryMenuSelectedIndex
+         !byte 0
+         !word NoCallback
+         !word WizardryMenuSelectionChangeCallback
+         bcs   +
+         lda   MenuSelectedIndex
+WizardryMenuDispatch
+         sta   WizardryMenuSelectedIndex
+         asl
+         tax
+         lda   WizardryMenuActions, x
+         ldy   WizardryMenuActions+1, x
+         +ST16 @j+1
+@j       jsr   SELF_MODIFIED_WORD
+         bcs   WizardryMenuRefresh
++        rts
+
+SelectWiz1
+SelectWiz2
+SelectWiz3
+         lda   WizardryMenuSelectedIndex
+         sta   GameSelectedIndex
+         jmp   ActionMenu
+
+SelectWizBack
+         ldx   #$FF
+         stx   GameSelectedIndex
+         inx
+         stx   WizardryMenuSelectedIndex
+         pla
+         pla
+         sec
+         rts
+
+WizardryMenuSelectionChangeCallback
+; in:    MenuSelectedIndex populated with new index
+; out:   clobbers A/X/Y/flags
+         ; draw game-specific graphics along bottom of screen
+         ldx   MenuSelectedIndex
+         lda   WizardryGraphicsLo, x
+         ldy   WizardryGraphicsHi0, x
+         ldx   #$02
+         jsr   DrawWizGraphic
+
+         ldx   MenuSelectedIndex
+         lda   WizardryGraphicsLo, x
+         ldy   WizardryGraphicsHi1, x
+         ldx   #$10
+         jsr   DrawWizGraphic
+
+         ldx   MenuSelectedIndex
+         lda   WizardryGraphicsLo, x
+         ldy   WizardryGraphicsHi2, x
+         ldx   #$1E
+         jmp   DrawWizGraphic

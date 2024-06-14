@@ -1,5 +1,5 @@
 ;license:MIT
-;(c) 2023 by 4am
+;(c) 2023-2024 by 4am
 ;
 
 SELF_MODIFIED_BYTE = $FD
@@ -38,8 +38,7 @@ ROM_PR0        = $FE93    ; SETVID
 NoCallback     = $FF58
 
 ; application-specific addresses
-MenuStringsLoPtr = $E0    ; word
-MenuStringsHiPtr = $E2    ; word
+MenuStringsPtr = $E2      ; word
 MenuTopVTAB    = $E4      ; byte
 MenuMaxIndex   = $E5      ; byte
 MenuSelectedIndex = $E6   ; byte (used by menu routines)
@@ -56,3 +55,10 @@ dstptr         = $FE      ; word (used by Bye routines)
 HGRLO          = $0100    ; 0xC0 bytes, should not cross page boundary (lifetime)
 HGRHI          = $0300    ; 0xC0 bytes, should not cross page boundary (lifetime)
 gPathname      = $02C0    ; 0x40 bytes
+Loader         = $0800
+ProDOSBuffer   = $1C00
+
+; application-specific constants
+kWizimoreGameOffset = 3
+kOtherGameOffset    = kWizimoreGameOffset + 5
+kUltimaGameOffset   = kOtherGameOffset + 4

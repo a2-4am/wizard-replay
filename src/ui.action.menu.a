@@ -1,75 +1,55 @@
 ;license:MIT
-;(c) 2023 by 4am
+;(c) 2023-2024 by 4am
 ;
 
 ; menu item indexes
 kActionPlay    = 0
-kActionEdit    = 1
+kActionRestore = 1
 kActionBackup  = 2
-kActionRestore = 3
+kActionEdit    = 3
 
-ActionMenuStringsLo
-         !byte <sMenuPlay
-         !byte <sMenuEdit
-         !byte <sMenuBackup
-         !byte <sMenuRestore
-         !byte <sMenuBack
-
-ActionMenuStringsHi
-         !byte >sMenuPlay
-         !byte >sMenuEdit
-         !byte >sMenuBackup
-         !byte >sMenuRestore
-         !byte >sMenuBack
+ActionMenuStrings
+         !word sMenuPlay
+         !word sMenuRestore
+         !word sMenuBackup
+         !word sMenuEdit
+         !word sMenuBackToGame
          !byte 0
 
-TitleStringsLo
-         !byte <sTitleWiz1
-         !byte <sTitleWiz2
-         !byte <sTitleWiz3
-         !byte <sTitleMore1
-         !byte <sTitleMore2
-         !byte <sTitleMore3
-         !byte <sTitleMore4
-         !byte <sTitleMore5
+TitleStrings
+         !word sTitleWiz1
+         !word sTitleWiz2
+         !word sTitleWiz3
+         !word sTitleMore1
+         !word sTitleMore2
+         !word sTitleMore3
+         !word sTitleMore4
+         !word sTitleMore5
+         !word sTitleOther1
+         !word sTitleOther2
+         !word sTitleOther3
+         !word sTitleOther4
 
-TitleStringsHi
-         !byte >sTitleWiz1
-         !byte >sTitleWiz2
-         !byte >sTitleWiz3
-         !byte >sTitleMore1
-         !byte >sTitleMore2
-         !byte >sTitleMore3
-         !byte >sTitleMore4
-         !byte >sTitleMore5
-
-SubtitleStringsLo
-         !byte <sSubtitleWiz1
-         !byte <sSubtitleWiz2
-         !byte <sSubtitleWiz3
-         !byte <sSubtitleMore1
-         !byte <sSubtitleMore2
-         !byte <sSubtitleMore3
-         !byte <sSubtitleMore4
-         !byte <sSubtitleMore5
-
-SubtitleStringsHi
-         !byte >sSubtitleWiz1
-         !byte >sSubtitleWiz2
-         !byte >sSubtitleWiz3
-         !byte >sSubtitleMore1
-         !byte >sSubtitleMore2
-         !byte >sSubtitleMore3
-         !byte >sSubtitleMore4
-         !byte >sSubtitleMore5
+SubtitleStrings
+         !word sSubtitleWiz1
+         !word sSubtitleWiz2
+         !word sSubtitleWiz3
+         !word sSubtitleMore1
+         !word sSubtitleMore2
+         !word sSubtitleMore3
+         !word sSubtitleMore4
+         !word sSubtitleMore5
+         !word sSubtitleOther1
+         !word sSubtitleOther2
+         !word sSubtitleOther3
+         !word sSubtitleOther4
 
 ActionMenu
          lda   #0
          sta   ActionMenuSelectedIndex
 ActionMenuRefresh
          jsr   Menu
-         !word ActionMenuStringsLo
-         !word ActionMenuStringsHi
+         !word ActionMenuStrings
          !byte kScreenTopVTAB+3
 ActionMenuSelectedIndex
          !byte 0
@@ -93,14 +73,10 @@ ActionMenuSelectedIndex
          rts
 
 ActionMenuHeader
-         ldx   GameSelectedIndex
-         lda   TitleStringsLo, x
-         ldy   TitleStringsHi, x
+         +LDADDR_SELECTED_GAME TitleStrings
          jsr   DrawCenteredString
          inc   VTAB
-         ldx   GameSelectedIndex
-         lda   SubtitleStringsLo, x
-         ldy   SubtitleStringsHi, x
+         +LDADDR_SELECTED_GAME SubtitleStrings
          jmp   DrawCenteredString
 
 ActionBackup
