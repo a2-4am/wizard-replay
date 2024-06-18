@@ -5,10 +5,10 @@
 kOtherMenuBack = 4
 
 OtherMenuStrings
-         !word sMenuOther1
-         !word sMenuOther2
-         !word sMenuOther3
-         !word sMenuOther4
+         !word sMenuOtherDragonQuest
+         !word sMenuOtherAtomicWasteland
+         !word sMenuOtherBlackStone
+         !word sMenuOtherKnightOfTheGrave
          !word sMenuBackToMain
          !byte 0
 
@@ -38,10 +38,10 @@ OtherGraphicsHi2
          !byte >BlankGraphics
 
 OtherMenuActions
-         !word SelectOther1
-         !word SelectOther2
-         !word SelectOther3
-         !word SelectOther4
+         !word SelectOther
+         !word SelectOther
+         !word SelectOther
+         !word SelectOther
          !word SelectOtherBack
 
 OtherMenu
@@ -75,10 +75,7 @@ OtherMenuDispatch
          bcs   OtherMenuRefresh
          rts
 
-SelectOther1
-SelectOther2
-SelectOther3
-SelectOther4
+SelectOther
          lda   OtherMenuSelectedIndex
          clc
          adc   #kOtherGameOffset

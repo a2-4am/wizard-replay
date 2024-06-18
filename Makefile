@@ -23,9 +23,10 @@ PARALLEL=parallel
 # VOLUME must match volume name in res/blank.hdv
 VOLUME=WIZARD.REPLAY
 BUILDDISK=build/wizard-replay.hdv
+PG.SCENARIOS=CAT.OF.VLAD EMPERORS.SEAL NIHONBASHI OCONNORS.MINE SCARLET.BROTHER DRAGON.QUEST ATOMICWASTELAND BLACK.STONE KNIGHT.GRAVE
 
 dsk: preconditions asm extract
-	cp res/blank.hdv "$(BUILDDISK)" >>build/log
+	cp res/blank.hdv "$(BUILDDISK)"
 	$(CADIUS) ADDFILE "${BUILDDISK}" "/$(VOLUME)/" "build/WZREPLAY.SYSTEM#FF2000" >>build/log
 	$(CADIUS) CREATEFOLDER "$(BUILDDISK)" "/$(VOLUME)/X/" -C >>build/log
 	$(CADIUS) CREATEFOLDER "$(BUILDDISK)" "/$(VOLUME)/X/WIZ123/" -C >>build/log
@@ -53,9 +54,9 @@ dsk: preconditions asm extract
 #
 # add loader and disk images for third-party Wizardry scenarios (all based on Proving Grounds v3.1, so same loader)
 #
-	for f in CAT.OF.VLAD EMPERORS.SEAL NIHONBASHI OCONNORS.MINE SCARLET.BROTHER DRAGON.QUEST ATOMICWASTELAND BLACK.STONE KNIGHT.GRAVE; do \
+	for f in $(PG.SCENARIOS); do \
 		$(CADIUS) ADDFOLDER "$(BUILDDISK)" "/$(VOLUME)/X/$$f" "build/X/$$f" -C >>build/log; \
-		$(CADIUS) ADDFILE "$(BUILDDISK)" "/$(VOLUME)/X/$$f" "build/LOADERS/WIZ1V31/WIZARDRY1#060800" -C >>build/log; \
+		$(CADIUS) ADDFILE "$(BUILDDISK)" "/$(VOLUME)/X/$$f/" "build/LOADERS/WIZ1V31/WIZARDRY1#060800" -C >>build/log; \
 		$(CADIUS) ADDFILE "$(BUILDDISK)" "/$(VOLUME)/X/$$f/" "build/LOADERS/WIZPLUS/WIZPLUS1#060800" -C >>build/log; \
 	done
 #
@@ -102,7 +103,7 @@ extract: preconditions dirs
 	rsync -a "build/X/WIZARDRY.PG/WIZARDRY1.A#000000" "build/X/WIZARDRY.PG/WIZARDRY1.A.BAK#000000"
 	rsync -a "build/X/KOD/WIZARDRY2.A#000000" "build/X/KOD/WIZARDRY2.A.BAK#000000"
 	rsync -a "build/X/WIZARDRY3/WIZARDRY3.A#000000" "build/X/WIZARDRY3/WIZARDRY3.A.BAK#000000"
-	for f in CAT.OF.VLAD EMPERORS.SEAL NIHONBASHI OCONNORS.MINE SCARLET.BROTHER DRAGON.QUEST ATOMICWASTELAND BLACK.STONE KNIGHT.GRAVE; do \
+	for f in $(PG.SCENARIOS); do \
 		rsync -a "build/X/$$f/WIZARDRY1.A#000000" "build/X/$$f/WIZARDRY1.A.BAK#000000"; \
 	done
 

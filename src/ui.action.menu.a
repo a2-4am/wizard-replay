@@ -17,32 +17,32 @@ ActionMenuStrings
          !byte 0
 
 TitleStrings
-         !word sTitleWiz1
-         !word sTitleWiz2
-         !word sTitleWiz3
-         !word sTitleMore1
-         !word sTitleMore2
-         !word sTitleMore3
-         !word sTitleMore4
-         !word sTitleMore5
-         !word sTitleOther1
-         !word sTitleOther2
-         !word sTitleOther3
-         !word sTitleOther4
+         !word sTitleWizProving
+         !word sTitleWizKOD
+         !word sTitleWizLOL
+         !word sTitleMoreOConnor
+         !word sTitleMoreBrotherhood
+         !word sTitleMoreVlad
+         !word sTitleMoreNihonbashi
+         !word sTitleMoreEmperor
+         !word sTitleOtherDragonQuest
+         !word sTitleOtherAtomicWasteland
+         !word sTitleOtherBlackStone
+         !word sTitleOtherKnightOfTheGrave
 
 SubtitleStrings
-         !word sSubtitleWiz1
-         !word sSubtitleWiz2
-         !word sSubtitleWiz3
-         !word sSubtitleMore1
-         !word sSubtitleMore2
-         !word sSubtitleMore3
-         !word sSubtitleMore4
-         !word sSubtitleMore5
-         !word sSubtitleOther1
-         !word sSubtitleOther2
-         !word sSubtitleOther3
-         !word sSubtitleOther4
+         !word sSubtitle1981
+         !word sSubtitle1982
+         !word sSubtitle1983
+         !word sSubtitle1985
+         !word sSubtitle1985
+         !word sSubtitle1987
+         !word sSubtitle1987
+         !word sSubtitle1987
+         !word sSubtitle2024
+         !word sSubtitle1987
+         !word sSubtitle1987
+         !word sSubtitle1987
 
 ActionMenu
          lda   #0

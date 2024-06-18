@@ -5,49 +5,49 @@
 kWizimoreMenuBack = 5
 
 WizimoreMenuStrings
-         !word sMenuWizimore1
-         !word sMenuWizimore2
-         !word sMenuWizimore3
-         !word sMenuWizimore4
-         !word sMenuWizimore5
+         !word sMenuWizimoreOConnor
+         !word sMenuWizimoreBrotherhood
+         !word sMenuWizimoreVlad
+         !word sMenuWizimoreNihonbashi
+         !word sMenuWizimoreEmperor
          !word sMenuBackToMain
          !byte 0
 
 WizimoreGraphicsLo
-         !byte <NihonbashiGraphics
          !byte <OConnorGraphics
-         !byte <VladGraphics
-         !byte <EmperorGraphics
          !byte <BrotherhoodGraphics
+         !byte <VladGraphics
          !byte <NihonbashiGraphics
+         !byte <EmperorGraphics
+         !byte <OConnorGraphics
 WizimoreGraphicsHi0
-         !byte >NihonbashiGraphics
          !byte >OConnorGraphics
-         !byte >VladGraphics
-         !byte >EmperorGraphics
          !byte >BrotherhoodGraphics
+         !byte >VladGraphics
          !byte >NihonbashiGraphics
+         !byte >EmperorGraphics
+         !byte >OConnorGraphics
 WizimoreGraphicsHi1
-         !byte >(NihonbashiGraphics+$200)
          !byte >(OConnorGraphics+$200)
-         !byte >(VladGraphics+$200)
-         !byte >(EmperorGraphics+$200)
          !byte >(BrotherhoodGraphics+$200)
+         !byte >(VladGraphics+$200)
          !byte >(NihonbashiGraphics+$200)
+         !byte >(EmperorGraphics+$200)
+         !byte >(OConnorGraphics+$200)
 WizimoreGraphicsHi2
-         !byte >(NihonbashiGraphics+$400)
          !byte >(OConnorGraphics+$400)
-         !byte >(VladGraphics+$400)
-         !byte >(EmperorGraphics+$400)
          !byte >(BrotherhoodGraphics+$400)
+         !byte >(VladGraphics+$400)
          !byte >(NihonbashiGraphics+$400)
+         !byte >(EmperorGraphics+$400)
+         !byte >(OConnorGraphics+$400)
 
 WizimoreMenuActions
-         !word SelectWizimore1
-         !word SelectWizimore2
-         !word SelectWizimore3
-         !word SelectWizimore4
-         !word SelectWizimore5
+         !word SelectWizimore
+         !word SelectWizimore
+         !word SelectWizimore
+         !word SelectWizimore
+         !word SelectWizimore
          !word SelectWizimoreBack
 
 WizimoreMenu
@@ -81,11 +81,7 @@ WizimoreMenuDispatch
          bcs   WizimoreMenuRefresh
          rts
 
-SelectWizimore1
-SelectWizimore2
-SelectWizimore3
-SelectWizimore4
-SelectWizimore5
+SelectWizimore
          lda   WizimoreMenuSelectedIndex
          clc
          adc   #kWizimoreGameOffset

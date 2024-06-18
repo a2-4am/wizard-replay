@@ -39,16 +39,16 @@ sVolProvingGrounds
 sVolKnightOfDiamonds
 sVolLegacyOfLlylgamyn
          +PSTRING "WIZ123"
-sVolNihonbashi
-         +PSTRING "NIHONBASHI"
 sVolOConnor
          +PSTRING "OCONNORS.MINE"
-sVolVlad
-         +PSTRING "CAT.OF.VLAD"
-sVolEmperor
-         +PSTRING "EMPERORS.SEAL"
 sVolBrotherhood
          +PSTRING "SCARLET.BROTHER"
+sVolVlad
+         +PSTRING "CAT.OF.VLAD"
+sVolNihonbashi
+         +PSTRING "NIHONBASHI"
+sVolEmperor
+         +PSTRING "EMPERORS.SEAL"
 sVolDragonQuest
          +PSTRING "DRAGON.QUEST"
 sVolAtomicWasteland
@@ -60,75 +60,79 @@ sVolKnightOfTheGrave
 
 ; directory name of the scenario
 VolNames
-         !word sVolProvingGrounds
-         !word sVolKnightOfDiamonds
-         !word sVolLegacyOfLlylgamyn
-         !word sVolNihonbashi
-         !word sVolOConnor
-         !word sVolVlad
-         !word sVolEmperor
-         !word sVolBrotherhood
-         !word sVolDragonQuest
-         !word sVolAtomicWasteland
-         !word sVolBlackStone
-         !word sVolKnightOfTheGrave
+         !word sVolProvingGrounds    ; Wizardry 1 PG
+         !word sVolKnightOfDiamonds  ; Wizardry 2 KoD
+         !word sVolLegacyOfLlylgamyn ; Wizardry 3 LoL
+         !word sVolOConnor           ; O'Connor's Mine
+         !word sVolBrotherhood       ; Scarlet Brotherhood
+         !word sVolVlad              ; Catacombs of Vlad
+         !word sVolNihonbashi        ; Nihonbashi
+         !word sVolEmperor           ; Emperor's Seal
+         !word sVolDragonQuest       ; DragonQuest
+         !word sVolAtomicWasteland   ; Atomic Wasteland
+         !word sVolBlackStone        ; Black Stone
+         !word sVolKnightOfTheGrave  ; Knight of the Grave
 
 ; filename of the game loader
+; must keep in sync with VolNames
 PlayLoaders
-         !word sPlayLoader1
-         !word sPlayLoader2
-         !word sPlayLoader3
-         !word sPlayLoader1
-         !word sPlayLoader1
-         !word sPlayLoader1
-         !word sPlayLoader1
-         !word sPlayLoader1
-         !word sPlayLoader1
-         !word sPlayLoader1
-         !word sPlayLoader1
-         !word sPlayLoader1
+         !word sPlayLoader1          ; Wizardry 1 PG
+         !word sPlayLoader2          ; Wizardry 2 KoD
+         !word sPlayLoader3          ; Wizardry 3 LoL
+         !word sPlayLoader1          ; O'Connor's Mine
+         !word sPlayLoader1          ; Scarlet Brotherhood
+         !word sPlayLoader1          ; Catacombs of Vlad
+         !word sPlayLoader1          ; Nihonbashi
+         !word sPlayLoader1          ; Emperor's Seal
+         !word sPlayLoader1          ; DraognQuest
+         !word sPlayLoader1          ; Atomic Wasteland
+         !word sPlayLoader1          ; Black Stone
+         !word sPlayLoader1          ; Knight of the Grave
 
 ; filename of the WizPlus loader
+; must keep in sync with VolNames
 EditLoaders
-         !word sEditLoader1
-         !word sEditLoader2
-         !word sEditLoader3
-         !word sEditLoader1
-         !word sEditLoader1
-         !word sEditLoader1
-         !word sEditLoader1
-         !word sEditLoader1
-         !word sEditLoader1
-         !word sEditLoader1
-         !word sEditLoader1
-         !word sEditLoader1
+         !word sEditLoader1          ; Wizardry 1 PG
+         !word sEditLoader2          ; Wizardry 2 KoD
+         !word sEditLoader3          ; Wizardry 3 LoL
+         !word sEditLoader1          ; O'Connor's Mine
+         !word sEditLoader1          ; Scarlet Brotherhood
+         !word sEditLoader1          ; Catacombs of Vlad
+         !word sEditLoader1          ; Nihonbashi
+         !word sEditLoader1          ; Emperor's Seal
+         !word sEditLoader1          ; DraognQuest
+         !word sEditLoader1          ; Atomic Wasteland
+         !word sEditLoader1          ; Black Stone
+         !word sEditLoader1          ; Knight of the Grave
 
 ; filename of the actual disk image for the scenario
+; must keep in sync with VolNames
 Scenarios
-         !word sScenario1
-         !word sScenario2
-         !word sScenario3
-         !word sScenario1
-         !word sScenario1
-         !word sScenario1
-         !word sScenario1
-         !word sScenario1
-         !word sScenario1
-         !word sScenario1
-         !word sScenario1
-         !word sScenario1
+         !word sScenario1            ; Wizardry 1 PG
+         !word sScenario2            ; Wizardry 2 KoD
+         !word sScenario3            ; Wizardry 3 LoL
+         !word sScenario1            ; O'Connor's Mine
+         !word sScenario1            ; Scarlet Brotherhood
+         !word sScenario1            ; Catacombs of Vlad
+         !word sScenario1            ; Nihonbashi
+         !word sScenario1            ; Emperor's Seal
+         !word sScenario1            ; DraognQuest
+         !word sScenario1            ; Atomic Wasteland
+         !word sScenario1            ; Black Stone
+         !word sScenario1            ; Knight of the Grave
 
 ; filename to use for the backup of the scenario
+; must keep in sync with VolNames
 Backups
-         !word sScenario1Backup
-         !word sScenario2Backup
-         !word sScenario3Backup
-         !word sScenario1Backup
-         !word sScenario1Backup
-         !word sScenario1Backup
-         !word sScenario1Backup
-         !word sScenario1Backup
-         !word sScenario1Backup
-         !word sScenario1Backup
-         !word sScenario1Backup
-         !word sScenario1Backup
+         !word sScenario1Backup      ; Wizardry 1 PG
+         !word sScenario2Backup      ; Wizardry 2 KoD
+         !word sScenario3Backup      ; Wizardry 3 LoL
+         !word sScenario1Backup      ; O'Connor's Mine
+         !word sScenario1Backup      ; Scarlet Brotherhood
+         !word sScenario1Backup      ; Catacombs of Vlad
+         !word sScenario1Backup      ; Nihonbashi
+         !word sScenario1Backup      ; Emperor's Seal
+         !word sScenario1Backup      ; DraognQuest
+         !word sScenario1Backup      ; Atomic Wasteland
+         !word sScenario1Backup      ; Black Stone
+         !word sScenario1Backup      ; Knight of the Grave

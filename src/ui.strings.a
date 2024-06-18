@@ -11,7 +11,7 @@ sMenuWizardry
          +PSTRING " Wizardry 1-3        "
 sMenuWizimore
          +PSTRING " Wizimore scenarios  "
-sMenuWizModern
+sMenuOther
          +PSTRING " Other scenarios     "
 sMenuUltima
          +PSTRING " Ultima 1-5          "
@@ -33,26 +33,26 @@ sMenuBackToMain
 ;
 ; short padded titles for Wizimore Scenarios menu
 ;
-sMenuWizimore1
-         +PSTRING " Nihonbashi          "
-sMenuWizimore2
+sMenuWizimoreOConnor
          +PSTRING " O'Connor's Mine     "
-sMenuWizimore3
-         +PSTRING " Catacombs of Vlad   "
-sMenuWizimore4
-         +PSTRING " The Emperor's Seal  "
-sMenuWizimore5
+sMenuWizimoreBrotherhood
          +PSTRING " Scarlet Brotherhood "
+sMenuWizimoreVlad
+         +PSTRING " Catacombs of Vlad   "
+sMenuWizimoreNihonbashi
+         +PSTRING " Nihonbashi          "
+sMenuWizimoreEmperor
+         +PSTRING " The Emperor's Seal  "
 ;
 ; short padded titles for Other Wizardry scenarios menu
 ;
-sMenuOther1
+sMenuOtherDragonQuest
          +PSTRING " DragonQuest         "
-sMenuOther2
+sMenuOtherAtomicWasteland
          +PSTRING " Atomic Wasteland    "
-sMenuOther3
+sMenuOtherBlackStone
          +PSTRING " Black Stone         "
-sMenuOther4
+sMenuOtherKnightOfTheGrave
          +PSTRING " Knight of the Grave "
 ;
 ; short padded titles for Ultima menu
@@ -70,11 +70,11 @@ sMenuUltima5
 ;
 ; short padded titles for Ultimore menu
 ;
-sMenuUltimore1
+sMenuUltimoreEgypt
          +PSTRING " Egypt               "
-sMenuUltimore2
+sMenuUltimoreSlavelords
          +PSTRING " Slavelords          "
-sMenuUltimore3
+sMenuUltimoreSpaceshipCrash
          +PSTRING " Spaceship Crash     "
 ;
 ; short padded titles for action menu
@@ -99,49 +99,42 @@ sMenuCancel
 ;
 ; full game titles and descriptions for action menu
 ;
-sTitleWiz1
+sTitleWizProving
          +PSTRING "Proving Grounds of the Mad Overlord 3.1"
-sTitleWiz2
+sTitleWizKOD
          +PSTRING "Wizardry II: The Knight of Diamonds"
-sTitleWiz3
+sTitleWizLOL
          +PSTRING "Wizardry III: The Legacy of Llylgamyn"
-sTitleMore1
-         +PSTRING "Nihonbashi"
-sTitleMore2
+sTitleMoreOConnor
          +PSTRING "O'Connor's Mine"
-sTitleMore3
-         +PSTRING "The Catacombs of Vlad"
-sTitleMore4
-         +PSTRING "The Emperor's Seal"
-sTitleMore5
+sTitleMoreBrotherhood
          +PSTRING "The Scarlet Brotherhood of Hsi Ho"
-sTitleOther1
+sTitleMoreVlad
+         +PSTRING "The Catacombs of Vlad"
+sTitleMoreNihonbashi
+         +PSTRING "Nihonbashi"
+sTitleMoreEmperor
+         +PSTRING "The Emperor's Seal"
+sTitleOtherDragonQuest
          +PSTRING "DragonQuest"
-sTitleOther2
+sTitleOtherAtomicWasteland
          +PSTRING "Atomic Wasteland 2098"
-sTitleOther3
+sTitleOtherBlackStone
          +PSTRING "Black Stone"
-sTitleOther4
+sTitleOtherKnightOfTheGrave
          +PSTRING "Knight of the Grave"
-sSubtitleWiz1
+sSubtitle1981
          +PSTRING "1981 classic with modern upgrades"
-sSubtitleWiz2
+sSubtitle1982
          +PSTRING "1982 classic"
-sSubtitleWiz3
+sSubtitle1983
          +PSTRING "1983 classic"
-sSubtitleMore1
-sSubtitleMore3
-sSubtitleMore4
-         +PSTRING "1987 third-party scenario"
-sSubtitleMore2
-sSubtitleMore5
-sSubtitleOther2
-sSubtitleOther3
+sSubtitle1985
          +PSTRING "1985 third-party scenario"
-sSubtitleOther1
-         +PSTRING "modern scenario based on the dice FRPG"
-sSubtitleOther4
-         +PSTRING "1986 third-party scenario"
+sSubtitle1987
+         +PSTRING "1987 third-party scenario"
+sSubtitle2024
+         +PSTRING "2024 scenario based on the dice FRPG"
 
 ;
 ; messages and graphics for backup/restore

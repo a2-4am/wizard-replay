@@ -33,9 +33,9 @@ WizardryGraphicsHi2
          !byte >(ProvingGraphics+$400)
 
 WizardryMenuActions
-         !word SelectWiz1
-         !word SelectWiz2
-         !word SelectWiz3
+         !word SelectWiz
+         !word SelectWiz
+         !word SelectWiz
          !word SelectWizBack
 
 WizardryMenu
@@ -66,9 +66,7 @@ WizardryMenuDispatch
          bcs   WizardryMenuRefresh
          rts
 
-SelectWiz1
-SelectWiz2
-SelectWiz3
+SelectWiz
          lda   WizardryMenuSelectedIndex
          sta   GameSelectedIndex
          jmp   ActionMenu
