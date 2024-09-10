@@ -69,7 +69,7 @@ WizardryMenuDispatch
 SelectWiz
          lda   WizardryMenuSelectedIndex
          sta   GameSelectedIndex
-         jmp   ActionMenu
+         jmp   WizActionMenu
 
 SelectWizBack
          ldx   #$FF

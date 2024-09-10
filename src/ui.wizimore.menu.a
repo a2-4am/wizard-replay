@@ -86,7 +86,7 @@ SelectWizimore
          clc
          adc   #kWizimoreGameOffset
          sta   GameSelectedIndex
-         jmp   ActionMenu
+         jmp   WizActionMenu
 
 SelectWizimoreBack
          ldx   #$FF

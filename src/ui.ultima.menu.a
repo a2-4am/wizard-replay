@@ -2,114 +2,108 @@
 ;(c) 2023-2024 by 4am
 ;
 
-kOtherMenuBack = 4
+kUltimaMenuBack = 3
 
-OtherMenuStrings
-         !word sMenuOtherDragonQuest
-         !word sMenuOtherAtomicWasteland
-         !word sMenuOtherBlackStone
-         !word sMenuOtherKnightOfTheGrave
+UltimaMenuStrings
+         !word sMenuUltima3
+         !word sMenuUltima4
+         !word sMenuUltima5
          !word sMenuBackToMain
          !byte 0
 
-OtherGraphicsLo
+UltimaGraphicsLo
          !byte <BlankGraphics
          !byte <BlankGraphics
          !byte <BlankGraphics
          !byte <BlankGraphics
-         !byte <BlankGraphics
-OtherGraphicsHi0
+UltimaGraphicsHi0
          !byte >BlankGraphics
          !byte >BlankGraphics
          !byte >BlankGraphics
          !byte >BlankGraphics
-         !byte >BlankGraphics
-OtherGraphicsHi1
-         !byte >BlankGraphics
+UltimaGraphicsHi1
          !byte >BlankGraphics
          !byte >BlankGraphics
          !byte >BlankGraphics
          !byte >BlankGraphics
-OtherGraphicsHi2
-         !byte >BlankGraphics
+UltimaGraphicsHi2
          !byte >BlankGraphics
          !byte >BlankGraphics
          !byte >BlankGraphics
          !byte >BlankGraphics
 
-OtherMenuActions
-         !word SelectOther
-         !word SelectOther
-         !word SelectOther
-         !word SelectOther
-         !word SelectOtherBack
+UltimaMenuActions
+         !word SelectUltima
+         !word SelectUltima
+         !word SelectUltima
+         !word SelectUltimaBack
 
-OtherMenu
+UltimaMenu
          lda   GameSelectedIndex
-         bmi   OtherMenuRefresh
+         bmi   UltimaMenuRefresh
          ; if a game is already selected, figure out which game to show
          ; and go directly there instead of showing game menu
          sec
-         sbc   #kOtherGameOffset
-         jmp   OtherMenuDispatch
+         sbc   #kUltimaGameOffset
+         jmp   UltimaMenuDispatch
 
-OtherMenuRefresh
+UltimaMenuRefresh
          jsr   Menu
-         !word OtherMenuStrings
+         !word UltimaMenuStrings
          !byte kScreenTopVTAB
-OtherMenuSelectedIndex
+UltimaMenuSelectedIndex
          !byte 0
          !word NoCallback
-         !word OtherMenuSelectionChangeCallback
+         !word UltimaMenuSelectionChangeCallback
          lda   MenuSelectedIndex
-         bcc   OtherMenuDispatch
-         lda   #kOtherMenuBack
-OtherMenuDispatch
-         sta   OtherMenuSelectedIndex
+         bcc   UltimaMenuDispatch
+         lda   #kUltimaMenuBack
+UltimaMenuDispatch
+         sta   UltimaMenuSelectedIndex
          asl
          tax
-         lda   OtherMenuActions, x
-         ldy   OtherMenuActions+1, x
+         lda   UltimaMenuActions, x
+         ldy   UltimaMenuActions+1, x
          +ST16 @j+1
 @j       jsr   SELF_MODIFIED_WORD
-         bcs   OtherMenuRefresh
+         bcs   UltimaMenuRefresh
          rts
 
-SelectOther
-         lda   OtherMenuSelectedIndex
+SelectUltima
+         lda   UltimaMenuSelectedIndex
          clc
-         adc   #kOtherGameOffset
+         adc   #kUltimaGameOffset
          sta   GameSelectedIndex
-         jmp   WizActionMenu
+         jmp   UltActionMenu
 
-SelectOtherBack
+SelectUltimaBack
          ldx   #$FF
          stx   GameSelectedIndex
          inx
-         stx   OtherMenuSelectedIndex
+         stx   UltimaMenuSelectedIndex
          pla
          pla
          sec
          rts
 
-OtherMenuSelectionChangeCallback
+UltimaMenuSelectionChangeCallback
 ; in:    MenuSelectedIndex populated with new index
 ; out:   clobbers A/X/Y/flags
          ; draw game-specific graphics along bottom of screen
          ldx   MenuSelectedIndex
-         lda   OtherGraphicsLo, x
-         ldy   OtherGraphicsHi0, x
+         lda   UltimaGraphicsLo, x
+         ldy   UltimaGraphicsHi0, x
          ldx   #$02
          jsr   DrawWizGraphic
 
          ldx   MenuSelectedIndex
-         lda   OtherGraphicsLo, x
-         ldy   OtherGraphicsHi1, x
+         lda   UltimaGraphicsLo, x
+         ldy   UltimaGraphicsHi1, x
          ldx   #$10
          jsr   DrawWizGraphic
 
          ldx   MenuSelectedIndex
-         lda   OtherGraphicsLo, x
-         ldy   OtherGraphicsHi2, x
+         lda   UltimaGraphicsLo, x
+         ldy   UltimaGraphicsHi2, x
          ldx   #$1E
          jmp   DrawWizGraphic

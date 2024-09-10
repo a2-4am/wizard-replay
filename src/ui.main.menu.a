@@ -63,6 +63,8 @@ GameSelectedIndex=*+1
          bcc   @wizimore
          cmp   #kUltimaGameOffset
          bcc   @other
+         cmp   #kUltimoreGameOffset
+         bcc   @ultima
          ;TODO rest of menus
          jmp   $FF59
 @wizardry
@@ -73,6 +75,9 @@ GameSelectedIndex=*+1
          +HIDE_NEXT_2_BYTES
 @other
          lda   #2
+         +HIDE_NEXT_2_BYTES
+@ultima
+         lda   #3
          ;TODO reset of menus
          jmp   MainMenuDispatch
 
@@ -97,7 +102,6 @@ MainMenuDispatch
          bcs   MainMenuRefresh
 +        rts
 
-UltimaMenu
 UltimoreMenu
 QuitMenu
 SelectBack

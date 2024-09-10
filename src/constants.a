@@ -62,3 +62,4 @@ ProDOSBuffer   = $1C00
 kWizimoreGameOffset = 3
 kOtherGameOffset    = kWizimoreGameOffset + 5
 kUltimaGameOffset   = kOtherGameOffset + 4
+kUltimoreGameOffset = kUltimaGameOffset + 3

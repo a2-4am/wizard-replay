@@ -14,7 +14,7 @@ sMenuWizimore
 sMenuOther
          +PSTRING " Other scenarios     "
 sMenuUltima
-         +PSTRING " Ultima 1-5          "
+         +PSTRING " Ultima 3-5          "
 sMenuUltimore
          +PSTRING " Ultimore scenarios  "
 sMenuQuit
@@ -44,7 +44,7 @@ sMenuWizimoreNihonbashi
 sMenuWizimoreEmperor
          +PSTRING " The Emperor's Seal  "
 ;
-; short padded titles for Other Wizardry scenarios menu
+; short padded titles for Other Scenarios menu
 ;
 sMenuOtherDragonQuest
          +PSTRING " DragonQuest         "
@@ -57,10 +57,10 @@ sMenuOtherKnightOfTheGrave
 ;
 ; short padded titles for Ultima menu
 ;
-sMenuUltima1
-         +PSTRING " Ultima I            "
-sMenuUltima2
-         +PSTRING " Ultima II           "
+; sMenuUltima1
+;          +PSTRING " Ultima I            "
+; sMenuUltima2
+;          +PSTRING " Ultima II           "
 sMenuUltima3
          +PSTRING " Ultima III          "
 sMenuUltima4
@@ -77,7 +77,7 @@ sMenuUltimoreSlavelords
 sMenuUltimoreSpaceshipCrash
          +PSTRING " Spaceship Crash     "
 ;
-; short padded titles for action menu
+; short padded titles for action menus
 ;
 sMenuPlay
          +PSTRING " Play                "
@@ -97,7 +97,7 @@ sMenuCancel
          +PSTRING " Cancel              "
 
 ;
-; full game titles and descriptions for action menu
+; full game titles and descriptions for action menus
 ;
 sTitleWizProving
          +PSTRING "Proving Grounds of the Mad Overlord 3.1"
@@ -123,6 +123,12 @@ sTitleOtherBlackStone
          +PSTRING "Black Stone"
 sTitleOtherKnightOfTheGrave
          +PSTRING "Knight of the Grave"
+sTitleUltima3
+         +PSTRING "Ultima III: Exodus"
+sTitleUltima4
+         +PSTRING "Ultima IV: Quest of the Avatar"
+sTitleUltima5
+         +PSTRING "Ultima V: Warriors of Destiny"
 sSubtitle1981
          +PSTRING "1981 classic with modern upgrades"
 sSubtitle1982
@@ -135,7 +141,10 @@ sSubtitle1987
          +PSTRING "1987 third-party scenario"
 sSubtitle2024
          +PSTRING "2024 scenario based on the dice FRPG"
-
+sSubtitle1985Classic
+         +PSTRING "1985 classic"
+sSubtitle1988Classic
+         +PSTRING "1988 classic"
 ;
 ; messages and graphics for backup/restore
 ;
@@ -179,3 +188,39 @@ sCredits4
          !raw  "Wizimore scenarios "
          !byte $10,$20,$10,$20,$10,$20,$10,$20,$10,$20
          !raw  "Joel Fenton"
+
+; full game titles and descriptions for action menus
+; must keep in sync with VolNames
+TitleStrings
+         !word sTitleWizProving
+         !word sTitleWizKOD
+         !word sTitleWizLOL
+         !word sTitleMoreOConnor
+         !word sTitleMoreBrotherhood
+         !word sTitleMoreVlad
+         !word sTitleMoreNihonbashi
+         !word sTitleMoreEmperor
+         !word sTitleOtherDragonQuest
+         !word sTitleOtherAtomicWasteland
+         !word sTitleOtherBlackStone
+         !word sTitleOtherKnightOfTheGrave
+         !word sTitleUltima3
+         !word sTitleUltima4
+         !word sTitleUltima5
+
+SubtitleStrings
+         !word sSubtitle1981         ; Wizardry 1 PG
+         !word sSubtitle1982         ; Wizardry 2 KoD
+         !word sSubtitle1983         ; Wizardry 3 LoL
+         !word sSubtitle1985         ; O'Connor's Mine
+         !word sSubtitle1985         ; Scarlet Brotherhood
+         !word sSubtitle1987         ; Catacombs of Vlad
+         !word sSubtitle1987         ; Nihonbashi
+         !word sSubtitle1987         ; Emperor's Seal
+         !word sSubtitle2024         ; DraognQuest
+         !word sSubtitle1987         ; Atomic Wasteland
+         !word sSubtitle1987         ; Black Stone
+         !word sSubtitle1987         ; Knight of the Grave
+         !word sSubtitle1983         ; Ultima III
+         !word sSubtitle1985Classic  ; Ultima IV
+         !word sSubtitle1988Classic  ; Ultima V
