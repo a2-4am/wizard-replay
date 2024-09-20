@@ -71,7 +71,10 @@ rem add loaders and disk images for third-party Ultima III scenarios using Ultim
 for %%q in (ISLANDSOFDEATH LAVALITE.WORLD SWORD.LORDS EGYPT SLAVELORDS SPACESHIP.CRASH A.WORLD.DIVIDED PIRATE.WORLD) do (
 %CADIUS% CREATEFOLDER "%BUILDDISK%" "/%VOLUME%/X/%%q/" -C >>build\log
 %CADIUS% ADDFOLDER "%BUILDDISK%" "/%VOLUME%/X/%%q/GAME" "build\X\ULTIMA3\GAME" -C >>build\log
-%CADIUS% ADDFOLDER "%BUILDDISK%" "/%VOLUME%/X/%%q/" "build\X\%%q" -C >>build\log
+for %%s in (build\X\%%q\GAME\*) do (
+1>nul %CADIUS% DELETEFILE "%BUILDDISK%" "/%VOLUME%/X/%%q/GAME/%%~nxs"
+1>nul %CADIUS% ADDFILE "%BUILDDISK%" "/%VOLUME%/X/%%q/GAME/" "%%s"
+)
 %CADIUS% ADDFILE "%BUILDDISK%" "/%VOLUME%/X/%%q/" "build\X\ULTIMA3\U3#060800" -C >>build\log
 )
 goto :EOF
