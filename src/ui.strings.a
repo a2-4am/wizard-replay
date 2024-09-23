@@ -1,10 +1,10 @@
 ;license:MIT
-;(c) 2023 by 4am
+;(c) 2023-4 by 4am
 ;
 
 sVersion
          !byte 4
-         !raw  "v1.0"
+         !raw  "v1.1"
 ;
 ; short padded titles for main menu
 ;
