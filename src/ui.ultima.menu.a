@@ -1,0 +1,109 @@
+;license:MIT
+;(c) 2023-2024 by 4am
+;
+
+kUltimaMenuBack = 3
+
+UltimaMenuStrings
+         !word sMenuUltima3
+         !word sMenuUltima4
+         !word sMenuUltima5
+         !word sMenuBackToMain
+         !byte 0
+
+UltimaGraphicsLo
+         !byte <BlankGraphics
+         !byte <BlankGraphics
+         !byte <BlankGraphics
+         !byte <BlankGraphics
+UltimaGraphicsHi0
+         !byte >BlankGraphics
+         !byte >BlankGraphics
+         !byte >BlankGraphics
+         !byte >BlankGraphics
+UltimaGraphicsHi1
+         !byte >BlankGraphics
+         !byte >BlankGraphics
+         !byte >BlankGraphics
+         !byte >BlankGraphics
+UltimaGraphicsHi2
+         !byte >BlankGraphics
+         !byte >BlankGraphics
+         !byte >BlankGraphics
+         !byte >BlankGraphics
+
+UltimaMenuActions
+         !word SelectUltima
+         !word SelectUltima
+         !word SelectUltima
+         !word SelectUltimaBack
+
+UltimaMenu
+         lda   GameSelectedIndex
+         bmi   UltimaMenuRefresh
+         ; if a game is already selected, figure out which game to show
+         ; and go directly there instead of showing game menu
+         sec
+         sbc   #kUltimaGameOffset
+         jmp   UltimaMenuDispatch
+
+UltimaMenuRefresh
+         jsr   Menu
+         !word UltimaMenuStrings
+         !byte kScreenTopVTAB
+UltimaMenuSelectedIndex
+         !byte 0
+         !word NoCallback
+         !word UltimaMenuSelectionChangeCallback
+         lda   MenuSelectedIndex
+         bcc   UltimaMenuDispatch
+         lda   #kUltimaMenuBack
+UltimaMenuDispatch
+         sta   UltimaMenuSelectedIndex
+         asl
+         tax
+         lda   UltimaMenuActions, x
+         ldy   UltimaMenuActions+1, x
+         +ST16 @j+1
+@j       jsr   SELF_MODIFIED_WORD
+         bcs   UltimaMenuRefresh
+         rts
+
+SelectUltima
+         lda   UltimaMenuSelectedIndex
+         clc
+         adc   #kUltimaGameOffset
+         sta   GameSelectedIndex
+         jmp   UltActionMenu
+
+SelectUltimaBack
+         ldx   #$FF
+         stx   GameSelectedIndex
+         inx
+         stx   UltimaMenuSelectedIndex
+         pla
+         pla
+         sec
+         rts
+
+UltimaMenuSelectionChangeCallback
+; in:    MenuSelectedIndex populated with new index
+; out:   clobbers A/X/Y/flags
+         ; draw game-specific graphics along bottom of screen
+         ldx   MenuSelectedIndex
+         lda   UltimaGraphicsLo, x
+         ldy   UltimaGraphicsHi0, x
+         ldx   #$02
+         jsr   DrawWizGraphic
+
+         ldx   MenuSelectedIndex
+         lda   UltimaGraphicsLo, x
+         ldy   UltimaGraphicsHi1, x
+         ldx   #$10
+         jsr   DrawWizGraphic
+
+         ldx   MenuSelectedIndex
+         lda   UltimaGraphicsLo, x
+         ldy   UltimaGraphicsHi2, x
+         ldx   #$1E
+         jmp   DrawWizGraphic

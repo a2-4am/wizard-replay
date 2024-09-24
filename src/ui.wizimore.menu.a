@@ -1,0 +1,121 @@
+;license:MIT
+;(c) 2023-2024 by 4am
+;
+
+kWizimoreMenuBack = 5
+
+WizimoreMenuStrings
+         !word sMenuWizimoreOConnor
+         !word sMenuWizimoreBrotherhood
+         !word sMenuWizimoreVlad
+         !word sMenuWizimoreNihonbashi
+         !word sMenuWizimoreEmperor
+         !word sMenuBackToMain
+         !byte 0
+
+WizimoreGraphicsLo
+         !byte <OConnorGraphics
+         !byte <BrotherhoodGraphics
+         !byte <VladGraphics
+         !byte <NihonbashiGraphics
+         !byte <EmperorGraphics
+         !byte <OConnorGraphics
+WizimoreGraphicsHi0
+         !byte >OConnorGraphics
+         !byte >BrotherhoodGraphics
+         !byte >VladGraphics
+         !byte >NihonbashiGraphics
+         !byte >EmperorGraphics
+         !byte >OConnorGraphics
+WizimoreGraphicsHi1
+         !byte >(OConnorGraphics+$200)
+         !byte >(BrotherhoodGraphics+$200)
+         !byte >(VladGraphics+$200)
+         !byte >(NihonbashiGraphics+$200)
+         !byte >(EmperorGraphics+$200)
+         !byte >(OConnorGraphics+$200)
+WizimoreGraphicsHi2
+         !byte >(OConnorGraphics+$400)
+         !byte >(BrotherhoodGraphics+$400)
+         !byte >(VladGraphics+$400)
+         !byte >(NihonbashiGraphics+$400)
+         !byte >(EmperorGraphics+$400)
+         !byte >(OConnorGraphics+$400)
+
+WizimoreMenuActions
+         !word SelectWizimore
+         !word SelectWizimore
+         !word SelectWizimore
+         !word SelectWizimore
+         !word SelectWizimore
+         !word SelectWizimoreBack
+
+WizimoreMenu
+         lda   GameSelectedIndex
+         bmi   WizimoreMenuRefresh
+         ; if a game is already selected, figure out which game to show
+         ; and go directly there instead of showing game menu
+         sec
+         sbc   #kWizimoreGameOffset
+         jmp   WizimoreMenuDispatch
+
+WizimoreMenuRefresh
+         jsr   Menu
+         !word WizimoreMenuStrings
+         !byte kScreenTopVTAB
+WizimoreMenuSelectedIndex
+         !byte 0
+         !word NoCallback
+         !word WizimoreMenuSelectionChangeCallback
+         lda   MenuSelectedIndex
+         bcc   WizimoreMenuDispatch
+         lda   #kWizimoreMenuBack
+WizimoreMenuDispatch
+         sta   WizimoreMenuSelectedIndex
+         asl
+         tax
+         lda   WizimoreMenuActions, x
+         ldy   WizimoreMenuActions+1, x
+         +ST16 @j+1
+@j       jsr   SELF_MODIFIED_WORD
+         bcs   WizimoreMenuRefresh
+         rts
+
+SelectWizimore
+         lda   WizimoreMenuSelectedIndex
+         clc
+         adc   #kWizimoreGameOffset
+         sta   GameSelectedIndex
+         jmp   WizActionMenu
+
+SelectWizimoreBack
+         ldx   #$FF
+         stx   GameSelectedIndex
+         inx
+         stx   WizimoreMenuSelectedIndex
+         pla
+         pla
+         sec
+         rts
+
+WizimoreMenuSelectionChangeCallback
+; in:    MenuSelectedIndex populated with new index
+; out:   clobbers A/X/Y/flags
+         ; draw game-specific graphics along bottom of screen
+         ldx   MenuSelectedIndex
+         lda   WizimoreGraphicsLo, x
+         ldy   WizimoreGraphicsHi0, x
+         ldx   #$02
+         jsr   DrawWizGraphic
+
+         ldx   MenuSelectedIndex
+         lda   WizimoreGraphicsLo, x
+         ldy   WizimoreGraphicsHi1, x
+         ldx   #$10
+         jsr   DrawWizGraphic
+
+         ldx   MenuSelectedIndex
+         lda   WizimoreGraphicsLo, x
+         ldy   WizimoreGraphicsHi2, x
+         ldx   #$1E
+         jmp   DrawWizGraphic

@@ -1,0 +1,115 @@
+;license:MIT
+;(c) 2023-2024 by 4am
+;
+
+kOtherMenuBack = 4
+
+OtherMenuStrings
+         !word sMenuOtherDragonQuest
+         !word sMenuOtherAtomicWasteland
+         !word sMenuOtherBlackStone
+         !word sMenuOtherKnightOfTheGrave
+         !word sMenuBackToMain
+         !byte 0
+
+OtherGraphicsLo
+         !byte <BlankGraphics
+         !byte <BlankGraphics
+         !byte <BlankGraphics
+         !byte <BlankGraphics
+         !byte <BlankGraphics
+OtherGraphicsHi0
+         !byte >BlankGraphics
+         !byte >BlankGraphics
+         !byte >BlankGraphics
+         !byte >BlankGraphics
+         !byte >BlankGraphics
+OtherGraphicsHi1
+         !byte >BlankGraphics
+         !byte >BlankGraphics
+         !byte >BlankGraphics
+         !byte >BlankGraphics
+         !byte >BlankGraphics
+OtherGraphicsHi2
+         !byte >BlankGraphics
+         !byte >BlankGraphics
+         !byte >BlankGraphics
+         !byte >BlankGraphics
+         !byte >BlankGraphics
+
+OtherMenuActions
+         !word SelectOther
+         !word SelectOther
+         !word SelectOther
+         !word SelectOther
+         !word SelectOtherBack
+
+OtherMenu
+         lda   GameSelectedIndex
+         bmi   OtherMenuRefresh
+         ; if a game is already selected, figure out which game to show
+         ; and go directly there instead of showing game menu
+         sec
+         sbc   #kOtherGameOffset
+         jmp   OtherMenuDispatch
+
+OtherMenuRefresh
+         jsr   Menu
+         !word OtherMenuStrings
+         !byte kScreenTopVTAB
+OtherMenuSelectedIndex
+         !byte 0
+         !word NoCallback
+         !word OtherMenuSelectionChangeCallback
+         lda   MenuSelectedIndex
+         bcc   OtherMenuDispatch
+         lda   #kOtherMenuBack
+OtherMenuDispatch
+         sta   OtherMenuSelectedIndex
+         asl
+         tax
+         lda   OtherMenuActions, x
+         ldy   OtherMenuActions+1, x
+         +ST16 @j+1
+@j       jsr   SELF_MODIFIED_WORD
+         bcs   OtherMenuRefresh
+         rts
+
+SelectOther
+         lda   OtherMenuSelectedIndex
+         clc
+         adc   #kOtherGameOffset
+         sta   GameSelectedIndex
+         jmp   WizActionMenu
+
+SelectOtherBack
+         ldx   #$FF
+         stx   GameSelectedIndex
+         inx
+         stx   OtherMenuSelectedIndex
+         pla
+         pla
+         sec
+         rts
+
+OtherMenuSelectionChangeCallback
+; in:    MenuSelectedIndex populated with new index
+; out:   clobbers A/X/Y/flags
+         ; draw game-specific graphics along bottom of screen
+         ldx   MenuSelectedIndex
+         lda   OtherGraphicsLo, x
+         ldy   OtherGraphicsHi0, x
+         ldx   #$02
+         jsr   DrawWizGraphic
+
+         ldx   MenuSelectedIndex
+         lda   OtherGraphicsLo, x
+         ldy   OtherGraphicsHi1, x
+         ldx   #$10
+         jsr   DrawWizGraphic
+
+         ldx   MenuSelectedIndex
+         lda   OtherGraphicsLo, x
+         ldy   OtherGraphicsHi2, x
+         ldx   #$1E
+         jmp   DrawWizGraphic

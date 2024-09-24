@@ -1,172 +1,165 @@
 ;license:MIT
-;(c) 2023 by 4am
+;(c) 2023-2024 by 4am
 ;
 
 sGameDirectory
-         !byte 2
-         !raw  "X/"
+         +PSTRING "X/"
 
 sSlash
-         !byte 1
-         !raw  "/"
+         +PSTRING "/"
 
 sPlayLoader1
-         !byte 9
-         !raw  "WIZARDRY1"
+         +PSTRING "WIZARDRY1"
 sPlayLoader2
-         !byte 9
-         !raw  "WIZARDRY2"
+         +PSTRING "WIZARDRY2"
 sPlayLoader3
-         !byte 9
-         !raw  "WIZARDRY3"
+         +PSTRING "WIZARDRY3"
+sPlayLoaderUltima3
+         +PSTRING "U3"
+sPlayLoaderUltima4
+         +PSTRING "U4"
+sPlayLoaderUltima5
+         +PSTRING "U5"
 
 sEditLoader1
-         !byte 8
-         !raw  "WIZPLUS1"
+         +PSTRING "WIZPLUS1"
 sEditLoader2
-         !byte 8
-         !raw  "WIZPLUS2"
+         +PSTRING "WIZPLUS2"
 sEditLoader3
-         !byte 8
-         !raw  "WIZPLUS3"
+         +PSTRING "WIZPLUS3"
 
 sScenario1
-         !byte 11
-         !raw  "WIZARDRY1.A"
+         +PSTRING "WIZARDRY1.A"
 sScenario1Backup
-         !byte 15
-         !raw  "WIZARDRY1.A.BAK"
+         +PSTRING "WIZARDRY1.A.BAK"
 sScenario2
-         !byte 11
-         !raw  "WIZARDRY2.A"
+         +PSTRING "WIZARDRY2.A"
 sScenario2Backup
-         !byte 15
-         !raw  "WIZARDRY2.A.BAK"
+         +PSTRING "WIZARDRY2.A.BAK"
 sScenario3
-         !byte 11
-         !raw  "WIZARDRY3.A"
+         +PSTRING "WIZARDRY3.A"
 sScenario3Backup
-         !byte 15
-         !raw  "WIZARDRY3.A.BAK"
+         +PSTRING "WIZARDRY3.A.BAK"
 
 sVolProvingGrounds
 sVolKnightOfDiamonds
 sVolLegacyOfLlylgamyn
-         !byte 6
-         !raw  "WIZ123"
-sVolNihonbashi
-         !byte 10
-         !raw  "NIHONBASHI"
+         +PSTRING "WIZ123"
 sVolOConnor
-         !byte 13
-         !raw  "OCONNORS.MINE"
-sVolVlad
-         !byte 11
-         !raw  "CAT.OF.VLAD"
-sVolEmperor
-         !byte 13
-         !raw  "EMPERORS.SEAL"
+         +PSTRING "OCONNORS.MINE"
 sVolBrotherhood
-         !byte 15
-         !raw  "SCARLET.BROTHER"
+         +PSTRING "SCARLET.BROTHER"
+sVolVlad
+         +PSTRING "CAT.OF.VLAD"
+sVolNihonbashi
+         +PSTRING "NIHONBASHI"
+sVolEmperor
+         +PSTRING "EMPERORS.SEAL"
+sVolDragonQuest
+         +PSTRING "DRAGON.QUEST"
+sVolAtomicWasteland
+         +PSTRING "ATOMICWASTELAND"
+sVolBlackStone
+         +PSTRING "BLACK.STONE"
+sVolKnightOfTheGrave
+         +PSTRING "KNIGHT.GRAVE"
+sVolUltima3
+         +PSTRING "ULTIMA3"
+sVolUltima4
+         +PSTRING "ULTIMA4"
+sVolUltima5
+         +PSTRING "ULTIMA5"
 
 ; directory name of the scenario
-VolNamesLo
-         !byte <sVolProvingGrounds
-         !byte <sVolKnightOfDiamonds
-         !byte <sVolLegacyOfLlylgamyn
-         !byte <sVolNihonbashi
-         !byte <sVolOConnor
-         !byte <sVolVlad
-         !byte <sVolEmperor
-         !byte <sVolBrotherhood
-
-VolNamesHi
-         !byte >sVolProvingGrounds
-         !byte >sVolKnightOfDiamonds
-         !byte >sVolLegacyOfLlylgamyn
-         !byte >sVolNihonbashi
-         !byte >sVolOConnor
-         !byte >sVolVlad
-         !byte >sVolEmperor
-         !byte >sVolBrotherhood
+VolNames
+         !word sVolProvingGrounds    ; Wizardry 1 PG
+         !word sVolKnightOfDiamonds  ; Wizardry 2 KoD
+         !word sVolLegacyOfLlylgamyn ; Wizardry 3 LoL
+         !word sVolOConnor           ; O'Connor's Mine
+         !word sVolBrotherhood       ; Scarlet Brotherhood
+         !word sVolVlad              ; Catacombs of Vlad
+         !word sVolNihonbashi        ; Nihonbashi
+         !word sVolEmperor           ; Emperor's Seal
+         !word sVolDragonQuest       ; DragonQuest
+         !word sVolAtomicWasteland   ; Atomic Wasteland
+         !word sVolBlackStone        ; Black Stone
+         !word sVolKnightOfTheGrave  ; Knight of the Grave
+         !word sVolUltima3           ; Ultima III
+         !word sVolUltima4           ; Ultima IV
+         !word sVolUltima5           ; Ultima V
 
 ; filename of the game loader
-PlayLoadersLo
-         !byte <sPlayLoader1
-         !byte <sPlayLoader2
-         !byte <sPlayLoader3
-         !byte <sPlayLoader1
-         !byte <sPlayLoader1
-         !byte <sPlayLoader1
-         !byte <sPlayLoader1
-         !byte <sPlayLoader1
-PlayLoadersHi
-         !byte >sPlayLoader1
-         !byte >sPlayLoader2
-         !byte >sPlayLoader3
-         !byte >sPlayLoader1
-         !byte >sPlayLoader1
-         !byte >sPlayLoader1
-         !byte >sPlayLoader1
-         !byte >sPlayLoader1
+; must keep in sync with VolNames
+PlayLoaders
+         !word sPlayLoader1          ; Wizardry 1 PG
+         !word sPlayLoader2          ; Wizardry 2 KoD
+         !word sPlayLoader3          ; Wizardry 3 LoL
+         !word sPlayLoader1          ; O'Connor's Mine
+         !word sPlayLoader1          ; Scarlet Brotherhood
+         !word sPlayLoader1          ; Catacombs of Vlad
+         !word sPlayLoader1          ; Nihonbashi
+         !word sPlayLoader1          ; Emperor's Seal
+         !word sPlayLoader1          ; DraognQuest
+         !word sPlayLoader1          ; Atomic Wasteland
+         !word sPlayLoader1          ; Black Stone
+         !word sPlayLoader1          ; Knight of the Grave
+         !word sPlayLoaderUltima3    ; Ultima III
+         !word sPlayLoaderUltima4    ; Ultima IV
+         !word sPlayLoaderUltima5    ; Ultima V
 
 ; filename of the WizPlus loader
-EditLoadersLo
-         !byte <sEditLoader1
-         !byte <sEditLoader2
-         !byte <sEditLoader3
-         !byte <sEditLoader1
-         !byte <sEditLoader1
-         !byte <sEditLoader1
-         !byte <sEditLoader1
-         !byte <sEditLoader1
-EditLoadersHi
-         !byte >sEditLoader1
-         !byte >sEditLoader2
-         !byte >sEditLoader3
-         !byte >sEditLoader1
-         !byte >sEditLoader1
-         !byte >sEditLoader1
-         !byte >sEditLoader1
-         !byte >sEditLoader1
+; must keep in sync with VolNames
+EditLoaders
+         !word sEditLoader1          ; Wizardry 1 PG
+         !word sEditLoader2          ; Wizardry 2 KoD
+         !word sEditLoader3          ; Wizardry 3 LoL
+         !word sEditLoader1          ; O'Connor's Mine
+         !word sEditLoader1          ; Scarlet Brotherhood
+         !word sEditLoader1          ; Catacombs of Vlad
+         !word sEditLoader1          ; Nihonbashi
+         !word sEditLoader1          ; Emperor's Seal
+         !word sEditLoader1          ; DraognQuest
+         !word sEditLoader1          ; Atomic Wasteland
+         !word sEditLoader1          ; Black Stone
+         !word sEditLoader1          ; Knight of the Grave
+         !word 0                     ; Ultima III
+         !word 0                     ; Ultima IV
+         !word 0                     ; Ultima V
 
 ; filename of the actual disk image for the scenario
-ScenariosLo
-         !byte <sScenario1
-         !byte <sScenario2
-         !byte <sScenario3
-         !byte <sScenario1
-         !byte <sScenario1
-         !byte <sScenario1
-         !byte <sScenario1
-         !byte <sScenario1
-ScenariosHi
-         !byte >sScenario1
-         !byte >sScenario2
-         !byte >sScenario3
-         !byte >sScenario1
-         !byte >sScenario1
-         !byte >sScenario1
-         !byte >sScenario1
-         !byte >sScenario1
+; must keep in sync with VolNames
+Scenarios
+         !word sScenario1            ; Wizardry 1 PG
+         !word sScenario2            ; Wizardry 2 KoD
+         !word sScenario3            ; Wizardry 3 LoL
+         !word sScenario1            ; O'Connor's Mine
+         !word sScenario1            ; Scarlet Brotherhood
+         !word sScenario1            ; Catacombs of Vlad
+         !word sScenario1            ; Nihonbashi
+         !word sScenario1            ; Emperor's Seal
+         !word sScenario1            ; DraognQuest
+         !word sScenario1            ; Atomic Wasteland
+         !word sScenario1            ; Black Stone
+         !word sScenario1            ; Knight of the Grave
+         !word 0                     ; Ultima III
+         !word 0                     ; Ultima IV
+         !word 0                     ; Ultima V
 
 ; filename to use for the backup of the scenario
-BackupsLo
-         !byte <sScenario1Backup
-         !byte <sScenario2Backup
-         !byte <sScenario3Backup
-         !byte <sScenario1Backup
-         !byte <sScenario1Backup
-         !byte <sScenario1Backup
-         !byte <sScenario1Backup
-         !byte <sScenario1Backup
-BackupsHi
-         !byte >sScenario1Backup
-         !byte >sScenario2Backup
-         !byte >sScenario3Backup
-         !byte >sScenario1Backup
-         !byte >sScenario1Backup
-         !byte >sScenario1Backup
-         !byte >sScenario1Backup
-         !byte >sScenario1Backup
+; must keep in sync with VolNames
+Backups
+         !word sScenario1Backup      ; Wizardry 1 PG
+         !word sScenario2Backup      ; Wizardry 2 KoD
+         !word sScenario3Backup      ; Wizardry 3 LoL
+         !word sScenario1Backup      ; O'Connor's Mine
+         !word sScenario1Backup      ; Scarlet Brotherhood
+         !word sScenario1Backup      ; Catacombs of Vlad
+         !word sScenario1Backup      ; Nihonbashi
+         !word sScenario1Backup      ; Emperor's Seal
+         !word sScenario1Backup      ; DraognQuest
+         !word sScenario1Backup      ; Atomic Wasteland
+         !word sScenario1Backup      ; Black Stone
+         !word sScenario1Backup      ; Knight of the Grave
+         !word 0                     ; Ultima III
+         !word 0                     ; Ultima IV
+         !word 0                     ; Ultima V

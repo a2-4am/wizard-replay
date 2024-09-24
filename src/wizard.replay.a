@@ -69,6 +69,8 @@ BrotherhoodGraphics
          !bin  "res/wizgfx/SCARLET00"
          !bin  "res/wizgfx/SCARLET01"
          !bin  "res/wizgfx/SCARLET06"
+BlankGraphics
+         !fill 512,$80
 
          !src  "src/wizgfx.a"
          !src  "src/ui.strings.a"
@@ -82,7 +84,12 @@ BrotherhoodGraphics
          !src  "src/ui.common.a"
          !src  "src/ui.menu.common.a"
          !src  "src/ui.main.menu.a"
-         !src  "src/ui.action.menu.a"
+         !src  "src/ui.wizardry.menu.a"
+         !src  "src/ui.wizimore.menu.a"
+         !src  "src/ui.other.menu.a"
+         !src  "src/ui.wizardry.action.menu.a"
+         !src  "src/ui.ultima.menu.a"
+         !src  "src/ui.ultima.action.menu.a"
          !src  "src/ui.restore.menu.a"
          !src  "src/ui.credits.a"
          !src  "src/ui.font.a"

@@ -2,19 +2,14 @@
 ;(c) 2023 by 4am
 ;
 
-RestoreMenuStringsLo
-         !byte <sMenuRestore
-         !byte <sMenuCancel
-
-RestoreMenuStringsHi
-         !byte >sMenuRestore
-         !byte >sMenuCancel
+RestoreMenuStrings
+         !word sMenuRestore
+         !word sMenuCancel
          !byte 0
 
 RestoreMenu
          jsr   Menu
-         !word RestoreMenuStringsLo
-         !word RestoreMenuStringsHi
+         !word RestoreMenuStrings
          !byte kScreenTopVTAB+2
          !byte 1
          !word RestoreMenuHeader

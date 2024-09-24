@@ -1,0 +1,54 @@
+;license:MIT
+;(c) 2023-2024 by 4am
+;
+
+WizActionMenuStrings
+         !word sMenuPlay
+         !word sMenuRestore
+         !word sMenuBackup
+         !word sMenuEdit
+         !word sMenuBackToGame
+         !byte 0
+
+WizActionMenu
+         lda   #0
+         sta   WizActionMenuSelectedIndex
+WizActionMenuRefresh
+         jsr   Menu
+         !word WizActionMenuStrings
+         !byte kScreenTopVTAB+3
+WizActionMenuSelectedIndex
+         !byte 0
+         !word WizActionMenuHeader
+         !word NoCallback
+
+         bcs   @exit
+         ldx   MenuSelectedIndex
+         stx   WizActionMenuSelectedIndex
+         beq   @exitClear
+         cpx   #kActionEdit
+         beq   @exitClear
+         cpx   #kActionBackup
+         beq   WizActionBackup
+         cpx   #kActionRestore
+         beq   WizActionRestore
+         sec
+@exit    rts
+@exitClear
+         clc
+         rts
+
+WizActionMenuHeader
+         +LDADDR_SELECTED_GAME TitleStrings
+         jsr   DrawCenteredString
+         inc   VTAB
+         +LDADDR_SELECTED_GAME SubtitleStrings
+         jmp   DrawCenteredString
+
+WizActionBackup
+         jsr   BackupScenario
+         jmp   WizActionMenuRefresh
+
+WizActionRestore
+         jsr   RestoreMenu
+         jmp   WizActionMenuRefresh

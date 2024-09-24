@@ -1,8 +1,22 @@
 ;license:MIT
-;(c) 2020-2023 by 4am
+;(c) 2020-2024 by 4am
 ;
 ; common assembler macros (6502 compatible)
 ;
+
+!macro   PSTRING .string {
+         !byte +-*-1
+         !text .string
++
+}
+
+!macro LDADDR_SELECTED_GAME .array {
+         lda   GameSelectedIndex
+         asl
+         tax
+         lda   .array, x
+         ldy   .array+1, x
+}
 
 ; .hgrlo, .hgr1hi will each be filled with $C0 bytes
 ; based on routine by John Brooks

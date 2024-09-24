@@ -1,5 +1,5 @@
 ;license:MIT
-;(c) 2023 by 4am
+;(c) 2023-2024 by 4am
 ;
 
 BackupScenario
@@ -113,17 +113,13 @@ BuildPathToScenario
          +LDADDR sGameDirectory
          jsr   SetPath
 
-         ldx   GameSelectedIndex
-         lda   VolNamesLo, x
-         ldy   VolNamesHi, x
+         +LDADDR_SELECTED_GAME VolNames
          jsr   AddToPath
 
          +LDADDR sSlash
          jsr   AddToPath
 
-         ldx   GameSelectedIndex
-         lda   ScenariosLo, x
-         ldy   ScenariosHi, x
+         +LDADDR_SELECTED_GAME Scenarios
          jmp   AddToPath
 
 BuildPathToScenarioBackup
@@ -131,15 +127,11 @@ BuildPathToScenarioBackup
          +LDADDR sGameDirectory
          jsr   SetPath
 
-         ldx   GameSelectedIndex
-         lda   VolNamesLo, x
-         ldy   VolNamesHi, x
+         +LDADDR_SELECTED_GAME VolNames
          jsr   AddToPath
 
          +LDADDR sSlash
          jsr   AddToPath
 
-         ldx   GameSelectedIndex
-         lda   BackupsLo, x
-         ldy   BackupsHi, x
+         +LDADDR_SELECTED_GAME Backups
          jmp   AddToPath

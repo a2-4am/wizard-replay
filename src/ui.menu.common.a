@@ -23,14 +23,19 @@ HighlightRightEdges
          !byte %10011111
          !byte %10001111
 
+; action menu item indexes
+kActionPlay    = 0
+kActionRestore = 1
+kActionBackup  = 2
+kActionEdit    = 3
+
 Menu
-         +PARAMS_ON_STACK 10
-         +LDZPPARAM16 1, MenuStringsLoPtr
-         +LDZPPARAM16 3, MenuStringsHiPtr
-         +LDZPPARAM8  5, MenuTopVTAB
-         +LDPARAM8    6, _initialMenuIndex
-         +LDPARAM16   7, MenuHeaderCallback
-         +LDPARAM16   9, MenuSelectionChangeCallback
+         +PARAMS_ON_STACK 8
+         +LDZPPARAM16 1, MenuStringsPtr
+         +LDZPPARAM8  3, MenuTopVTAB
+         +LDPARAM8    4, _initialMenuIndex
+         +LDPARAM16   5, MenuHeaderCallback
+         +LDPARAM16   7, MenuSelectionChangeCallback
 
 MenuRefresh
          jsr   Home
@@ -44,13 +49,18 @@ MenuHeaderCallback=*+1
          iny
          sty   MenuMaxIndex
 @printLoop
-         ldy   MenuMaxIndex
-         lda   (MenuStringsHiPtr), y
+         lda   MenuMaxIndex
+         asl
+         tay
+         lda   (MenuStringsPtr), y
          beq   +
-         sta   @y+1
-         lda   (MenuStringsLoPtr), y
-@y       ldy   #SELF_MODIFIED_BYTE
+         tax
+         iny
+         lda   (MenuStringsPtr), y
+         tay
+         txa
          ldx   #kMenuHTAB
+;         jsr   $ff58
          jsr   DrawString
          inc   VTAB
          inc   MenuMaxIndex
@@ -129,9 +139,13 @@ UnhighlightMenuItem
          clc
          adc   MenuTopVTAB
          sta   VTAB
-         lda   (MenuStringsLoPtr), y
+         tya
+         asl
+         tay
+         lda   (MenuStringsPtr), y
          tax
-         lda   (MenuStringsHiPtr), y
+         iny
+         lda   (MenuStringsPtr), y
          tay
          txa
          ldx   #kMenuHTAB

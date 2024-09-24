@@ -132,7 +132,7 @@ reloc    cld
          !word cc_parms
 LastGameSelectedIndex=*+1-reloc+runme
          lda   #SELF_MODIFIED_BYTE
-         sta   MainMenu+1
+         sta   GameSelectedIndex
          jmp   $2000
 
 c7_parms

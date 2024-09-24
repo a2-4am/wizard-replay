@@ -1,5 +1,5 @@
 ;license:MIT
-;(c) 2023 by 4am
+;(c) 2023-2024 by 4am
 ;
 ; glue code to launch games
 ;
@@ -11,7 +11,7 @@
 ; Launch
 ; load game and jump to it
 ; in:    GameSelectedIndex contains index of game to launch
-;          (used a index into VolNamesLo/Hi and other arrays)
+;          (used a index into VolNames and other arrays)
 ;        X = kActionPlay or kActionEdit to indicate which loader to use
 ;------------------------------------------------------------------------------
 Launch
@@ -21,34 +21,31 @@ Launch
          +LDADDR sGameDirectory
          jsr   SetPath
 
-         ldx   GameSelectedIndex
-         lda   VolNamesLo, x
-         ldy   VolNamesHi, x
+         +LDADDR_SELECTED_GAME VolNames
          jsr   AddToPath
 
          jsr   SetPrefix
          !word gPathname
 
-         ldx   GameSelectedIndex
-         stx   LastGameSelectedIndex
          plp
          beq   @edit
-         lda   PlayLoadersLo, x
-         ldy   PlayLoadersHi, x
-         bne   +                     ; always branches
+@play
+         +LDADDR_SELECTED_GAME PlayLoaders
+         bne   @load                 ; always branches
 @edit
-         lda   EditLoadersLo, x
-         ldy   EditLoadersHi, x
-+
+         +LDADDR_SELECTED_GAME EditLoaders
+@load
          jsr   SetPath
          jsr   LoadFile1Shot
          !word gPathname             ; filename
-         !word $0800                 ; load address
-         !word $1400                 ; max size
-         !word $1C00                 ; ProDOS file buffer address ($400 bytes)
+         !word Loader                ; load address
+         !word $FFFF                 ; max size
+         !word ProDOSBuffer          ; ProDOS file buffer address ($400 bytes)
 
          jsr   ROM_TEXT
          jsr   ROM_HOME
          jsr   ROM_NORMAL
+         lda   GameSelectedIndex
+         sta   LastGameSelectedIndex
          jsr   InstallBye
-         jmp   $0800
+         jmp   Loader

@@ -1,102 +1,133 @@
 ;license:MIT
-;(c) 2023 by 4am
+;(c) 2023-2024 by 4am
 ;
 
-MainMenuStringsLo
-         !byte <sMenuWiz1
-         !byte <sMenuWiz2
-         !byte <sMenuWiz3
-         !byte <sMenuMore1
-         !byte <sMenuMore2
-         !byte <sMenuMore3
-         !byte <sMenuMore4
-         !byte <sMenuMore5
-MainMenuStringsHi
-         !byte >sMenuWiz1
-         !byte >sMenuWiz2
-         !byte >sMenuWiz3
-         !byte >sMenuMore1
-         !byte >sMenuMore2
-         !byte >sMenuMore3
-         !byte >sMenuMore4
-         !byte >sMenuMore5
+MainMenuStrings
+         !word sMenuWizardry
+         !word sMenuWizimore
+         !word sMenuOther
+         !word sMenuUltima
+         !word sMenuUltimore
+         !word sMenuQuit
          !byte 0
 
-WizGraphicsLo
+MainMenuGraphicsLo
          !byte <ProvingGraphics
-         !byte <KODGraphics
-         !byte <LOLGraphics
-         !byte <NihonbashiGraphics
          !byte <OConnorGraphics
-         !byte <VladGraphics
-         !byte <EmperorGraphics
-         !byte <BrotherhoodGraphics
-WizGraphicsHi0
+         !byte <BlankGraphics
+         !byte <BlankGraphics
+         !byte <BlankGraphics
+         !byte <BlankGraphics
+MainMenuGraphicsHi0
          !byte >ProvingGraphics
-         !byte >KODGraphics
-         !byte >LOLGraphics
-         !byte >NihonbashiGraphics
          !byte >OConnorGraphics
-         !byte >VladGraphics
-         !byte >EmperorGraphics
-         !byte >BrotherhoodGraphics
-WizGraphicsHi1
+         !byte >BlankGraphics
+         !byte >BlankGraphics
+         !byte >BlankGraphics
+         !byte >BlankGraphics
+MainMenuGraphicsHi1
          !byte >(ProvingGraphics+$200)
-         !byte >(KODGraphics+$200)
-         !byte >(ProvingGraphics+$200)
-         !byte >(NihonbashiGraphics+$200)
          !byte >(OConnorGraphics+$200)
-         !byte >(VladGraphics+$200)
-         !byte >(EmperorGraphics+$200)
-         !byte >(BrotherhoodGraphics+$200)
-WizGraphicsHi2
+         !byte >BlankGraphics
+         !byte >BlankGraphics
+         !byte >BlankGraphics
+         !byte >BlankGraphics
+MainMenuGraphicsHi2
          !byte >(ProvingGraphics+$400)
-         !byte >(KODGraphics+$400)
-         !byte >(ProvingGraphics+$400)
-         !byte >(NihonbashiGraphics+$400)
          !byte >(OConnorGraphics+$400)
-         !byte >(VladGraphics+$400)
-         !byte >(EmperorGraphics+$400)
-         !byte >(BrotherhoodGraphics+$400)
+         !byte >BlankGraphics
+         !byte >BlankGraphics
+         !byte >BlankGraphics
+         !byte >BlankGraphics
+
+MainMenuActions
+         !word WizardryMenu
+         !word WizimoreMenu
+         !word OtherMenu
+         !word UltimaMenu
+         !word UltimoreMenu
+         !word QuitMenu
 
 MainMenu
-         lda   #0                    ; self-modified by Bye routine
-         sta   GameSelectedIndex
+GameSelectedIndex=*+1
+         lda   #$FF                  ; $FF = no game selected
+                                     ; but byte is self-modified by Bye routine
+                                     ; to positive integer after game quit
+         bmi   MainMenuRefresh
+
+         ; if a game is already selected, figure out which submenu to show
+         ; and go directly there instead of showing main menu
+         cmp   #kWizimoreGameOffset
+         bcc   @wizardry
+         cmp   #kOtherGameOffset
+         bcc   @wizimore
+         cmp   #kUltimaGameOffset
+         bcc   @other
+         cmp   #kUltimoreGameOffset
+         bcc   @ultima
+         ;TODO rest of menus
+         jmp   $FF59
+@wizardry
+         lda   #0
+         +HIDE_NEXT_2_BYTES
+@wizimore
+         lda   #1
+         +HIDE_NEXT_2_BYTES
+@other
+         lda   #2
+         +HIDE_NEXT_2_BYTES
+@ultima
+         lda   #3
+         ;TODO reset of menus
+         jmp   MainMenuDispatch
 
 MainMenuRefresh
          jsr   Menu
-         !word MainMenuStringsLo
-         !word MainMenuStringsHi
+         !word MainMenuStrings
          !byte kScreenTopVTAB
-GameSelectedIndex
+MainMenuSelectedIndex
          !byte 0
          !word NoCallback
          !word MainMenuSelectionChangeCallback
          bcs   +
-         ldx   MenuSelectedIndex
-         stx   GameSelectedIndex
-         jsr   ActionMenu
+         lda   MenuSelectedIndex
+MainMenuDispatch
+         sta   MainMenuSelectedIndex
+         asl
+         tax
+         lda   MainMenuActions, x
+         ldy   MainMenuActions+1, x
+         +ST16 @j+1
+@j       jsr   SELF_MODIFIED_WORD
          bcs   MainMenuRefresh
 +        rts
+
+UltimoreMenu
+QuitMenu
+SelectBack
+         pla
+         pla
+         sec
+         rts
 
 MainMenuSelectionChangeCallback
 ; in:    MenuSelectedIndex populated with new index
 ; out:   clobbers A/X/Y/flags
          ; draw game-specific graphics along bottom of screen
          ldx   MenuSelectedIndex
-         lda   WizGraphicsLo, x
-         ldy   WizGraphicsHi0, x
+         lda   MainMenuGraphicsLo, x
+         ldy   MainMenuGraphicsHi0, x
          ldx   #$02
          jsr   DrawWizGraphic
 
          ldx   MenuSelectedIndex
-         lda   WizGraphicsLo, x
-         ldy   WizGraphicsHi1, x
+         lda   MainMenuGraphicsLo, x
+         ldy   MainMenuGraphicsHi1, x
          ldx   #$10
          jsr   DrawWizGraphic
 
          ldx   MenuSelectedIndex
-         lda   WizGraphicsLo, x
-         ldy   WizGraphicsHi2, x
+         lda   MainMenuGraphicsLo, x
+         ldy   MainMenuGraphicsHi2, x
          ldx   #$1E
          jmp   DrawWizGraphic

@@ -1,0 +1,51 @@
+;license:MIT
+;(c) 2023-2024 by 4am
+;
+
+UltActionMenuStrings
+         !word sMenuPlay
+;          !word sMenuRestore
+;          !word sMenuBackup
+         !word sMenuBackToGame
+         !byte 0
+
+UltActionMenu
+         lda   #0
+         sta   UltActionMenuSelectedIndex
+UltActionMenuRefresh
+         jsr   Menu
+         !word UltActionMenuStrings
+         !byte kScreenTopVTAB+3
+UltActionMenuSelectedIndex
+         !byte 0
+         !word UltActionMenuHeader
+         !word NoCallback
+
+         bcs   @exit
+         ldx   MenuSelectedIndex
+         stx   UltActionMenuSelectedIndex
+         beq   @exitClear
+;          cpx   #kActionBackup
+;          beq   UltActionBackup
+;          cpx   #kActionRestore
+;          beq   UltActionRestore
+         sec
+@exit    rts
+@exitClear
+         clc
+         rts
+
+UltActionMenuHeader
+         +LDADDR_SELECTED_GAME TitleStrings
+         jsr   DrawCenteredString
+         inc   VTAB
+         +LDADDR_SELECTED_GAME SubtitleStrings
+         jmp   DrawCenteredString
+
+UltActionBackup
+         jsr   BackupScenario
+         jmp   UltActionMenuRefresh
+
+UltActionRestore
+         jsr   RestoreMenu
+         jmp   UltActionMenuRefresh

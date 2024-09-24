@@ -1,122 +1,159 @@
 ;license:MIT
-;(c) 2023-4 by 4am
+;(c) 2023-2024 by 4am
 ;
 
 sVersion
-         !byte 4
-         !raw  "v1.1"
+         +PSTRING "v2.0"
 ;
 ; short padded titles for main menu
 ;
-sMenuWiz1
-         !byte 21
-         !raw  " Proving Grounds 3.1 "
-sMenuWiz2
-         !byte 21
-         !raw  " Knight of Diamonds  "
-sMenuWiz3
-         !byte 21
-         !raw  " Legacy of Llylgamyn "
-sMenuMore1
-         !byte 21
-         !raw  " Nihonbashi          "
-sMenuMore2
-         !byte 21
-         !raw  " O'Connor's Mine     "
-sMenuMore3
-         !byte 21
-         !raw  " Catacombs of Vlad   "
-sMenuMore4
-         !byte 21
-         !raw  " The Emperor's Seal  "
-sMenuMore5
-         !byte 21
-         !raw  " Scarlet Brotherhood "
-
+sMenuWizardry
+         +PSTRING " Wizardry 1-3        "
+sMenuWizimore
+         +PSTRING " Wizimore scenarios  "
+sMenuOther
+         +PSTRING " Other scenarios     "
+sMenuUltima
+         +PSTRING " Ultima 3-5          "
+sMenuUltimore
+         +PSTRING " Ultimore scenarios  "
+sMenuQuit
+         +PSTRING " Quit                "
 ;
-; short padded titles for action menu
+; short padded titles for Wizardry menu
+;
+sMenuWizardry1
+         +PSTRING " Proving Grounds 3.1 "
+sMenuWizardry2
+         +PSTRING " Knight of Diamonds  "
+sMenuWizardry3
+         +PSTRING " Legacy of Llylgamyn "
+sMenuBackToMain
+         +PSTRING " Back to main menu   "
+;
+; short padded titles for Wizimore Scenarios menu
+;
+sMenuWizimoreOConnor
+         +PSTRING " O'Connor's Mine     "
+sMenuWizimoreBrotherhood
+         +PSTRING " Scarlet Brotherhood "
+sMenuWizimoreVlad
+         +PSTRING " Catacombs of Vlad   "
+sMenuWizimoreNihonbashi
+         +PSTRING " Nihonbashi          "
+sMenuWizimoreEmperor
+         +PSTRING " The Emperor's Seal  "
+;
+; short padded titles for Other Scenarios menu
+;
+sMenuOtherDragonQuest
+         +PSTRING " DragonQuest         "
+sMenuOtherAtomicWasteland
+         +PSTRING " Atomic Wasteland    "
+sMenuOtherBlackStone
+         +PSTRING " Black Stone         "
+sMenuOtherKnightOfTheGrave
+         +PSTRING " Knight of the Grave "
+;
+; short padded titles for Ultima menu
+;
+; sMenuUltima1
+;          +PSTRING " Ultima I            "
+; sMenuUltima2
+;          +PSTRING " Ultima II           "
+sMenuUltima3
+         +PSTRING " Ultima III          "
+sMenuUltima4
+         +PSTRING " Ultima IV           "
+sMenuUltima5
+         +PSTRING " Ultima V            "
+;
+; short padded titles for Ultimore menu
+;
+sMenuUltimoreEgypt
+         +PSTRING " Egypt               "
+sMenuUltimoreSlavelords
+         +PSTRING " Slavelords          "
+sMenuUltimoreSpaceshipCrash
+         +PSTRING " Spaceship Crash     "
+;
+; short padded titles for action menus
 ;
 sMenuPlay
-         !byte 21
-         !raw  " Play                "
-sMenuEdit
-         !byte 21
-         !raw  " Edit with WizPlus   "
-sMenuBackup
-         !byte 21
-         !raw  " Back up scenario    "
+         +PSTRING " Play                "
 sMenuRestore
-         !byte 21
-         !raw  " Restore from backup "
-sMenuBack
-         !byte 21
-         !raw  " Back to main menu   "
+         +PSTRING " Restore from backup "
+sMenuBackup
+         +PSTRING " Back up scenario    "
+sMenuEdit
+         +PSTRING " Edit with WizPlus   "
+sMenuBackToGame
+         +PSTRING " Back to game menu   "
 
 ;
 ; short padded titles for other menus
 ;
 sMenuCancel
-         !byte 21
-         !raw  " Cancel              "
+         +PSTRING " Cancel              "
 
 ;
-; full game titles and descriptions for action menu
+; full game titles and descriptions for action menus
 ;
-sTitleWiz1
-         !byte 39
-         !raw  "Proving Grounds of the Mad Overlord 3.1"
-sTitleWiz2
-         !byte 35
-         !raw  "Wizardry II: The Knight of Diamonds"
-sTitleWiz3
-         !byte 37
-         !raw  "Wizardry III: The Legacy of Llylgamyn"
-sTitleMore1
-         !byte 10
-         !raw  "Nihonbashi"
-sTitleMore2
-         !byte 15
-         !raw  "O'Connor's Mine"
-sTitleMore3
-         !byte 21
-         !raw  "The Catacombs of Vlad"
-sTitleMore4
-         !byte 18
-         !raw  "The Emperor's Seal"
-sTitleMore5
-         !byte 33
-         !raw  "The Scarlet Brotherhood of Hsi Ho"
-sSubtitleWiz1
-         !byte 33
-         !raw  "1981 classic with modern upgrades"
-sSubtitleWiz2
-         !byte 12
-         !raw  "1982 classic"
-sSubtitleWiz3
-         !byte 12
-         !raw  "1983 classic"
-sSubtitleMore1
-sSubtitleMore3
-sSubtitleMore4
-         !byte 25
-         !raw  "1987 third-party scenario"
-sSubtitleMore2
-sSubtitleMore5
-         !byte 25
-         !raw  "1985 third-party scenario"
-
+sTitleWizProving
+         +PSTRING "Proving Grounds of the Mad Overlord 3.1"
+sTitleWizKOD
+         +PSTRING "Wizardry II: The Knight of Diamonds"
+sTitleWizLOL
+         +PSTRING "Wizardry III: The Legacy of Llylgamyn"
+sTitleMoreOConnor
+         +PSTRING "O'Connor's Mine"
+sTitleMoreBrotherhood
+         +PSTRING "The Scarlet Brotherhood of Hsi Ho"
+sTitleMoreVlad
+         +PSTRING "The Catacombs of Vlad"
+sTitleMoreNihonbashi
+         +PSTRING "Nihonbashi"
+sTitleMoreEmperor
+         +PSTRING "The Emperor's Seal"
+sTitleOtherDragonQuest
+         +PSTRING "DragonQuest"
+sTitleOtherAtomicWasteland
+         +PSTRING "Atomic Wasteland 2098"
+sTitleOtherBlackStone
+         +PSTRING "Black Stone"
+sTitleOtherKnightOfTheGrave
+         +PSTRING "Knight of the Grave"
+sTitleUltima3
+         +PSTRING "Ultima III: Exodus"
+sTitleUltima4
+         +PSTRING "Ultima IV: Quest of the Avatar"
+sTitleUltima5
+         +PSTRING "Ultima V: Warriors of Destiny"
+sSubtitle1981
+         +PSTRING "1981 classic with modern upgrades"
+sSubtitle1982
+         +PSTRING "1982 classic"
+sSubtitle1983
+         +PSTRING "1983 classic"
+sSubtitle1985
+         +PSTRING "1985 third-party scenario"
+sSubtitle1987
+         +PSTRING "1987 third-party scenario"
+sSubtitle2024
+         +PSTRING "2024 scenario based on the dice FRPG"
+sSubtitle1985Classic
+         +PSTRING "1985 classic"
+sSubtitle1988Classic
+         +PSTRING "1988 classic"
 ;
 ; messages and graphics for backup/restore
 ;
 sRestoreWarning
-         !byte 38
-         !raw  "This will overwrite your entire party!"
+         +PSTRING "This will overwrite your entire party!"
 sRestore
-         !byte 30
-         !raw  "Restoring scenario from backup"
+         +PSTRING "Restoring scenario from backup"
 sBackup
-         !byte 24
-         !raw  "Backing up your scenario"
+         +PSTRING "Backing up your scenario"
 sInitialProgressBar
          !byte 37
          !byte $01,$06,$06,$06,$06,$06,$06,$06
@@ -151,3 +188,39 @@ sCredits4
          !raw  "Wizimore scenarios "
          !byte $10,$20,$10,$20,$10,$20,$10,$20,$10,$20
          !raw  "Joel Fenton"
+
+; full game titles and descriptions for action menus
+; must keep in sync with VolNames
+TitleStrings
+         !word sTitleWizProving
+         !word sTitleWizKOD
+         !word sTitleWizLOL
+         !word sTitleMoreOConnor
+         !word sTitleMoreBrotherhood
+         !word sTitleMoreVlad
+         !word sTitleMoreNihonbashi
+         !word sTitleMoreEmperor
+         !word sTitleOtherDragonQuest
+         !word sTitleOtherAtomicWasteland
+         !word sTitleOtherBlackStone
+         !word sTitleOtherKnightOfTheGrave
+         !word sTitleUltima3
+         !word sTitleUltima4
+         !word sTitleUltima5
+
+SubtitleStrings
+         !word sSubtitle1981         ; Wizardry 1 PG
+         !word sSubtitle1982         ; Wizardry 2 KoD
+         !word sSubtitle1983         ; Wizardry 3 LoL
+         !word sSubtitle1985         ; O'Connor's Mine
+         !word sSubtitle1985         ; Scarlet Brotherhood
+         !word sSubtitle1987         ; Catacombs of Vlad
+         !word sSubtitle1987         ; Nihonbashi
+         !word sSubtitle1987         ; Emperor's Seal
+         !word sSubtitle2024         ; DraognQuest
+         !word sSubtitle1987         ; Atomic Wasteland
+         !word sSubtitle1987         ; Black Stone
+         !word sSubtitle1987         ; Knight of the Grave
+         !word sSubtitle1983         ; Ultima III
+         !word sSubtitle1985Classic  ; Ultima IV
+         !word sSubtitle1988Classic  ; Ultima V
