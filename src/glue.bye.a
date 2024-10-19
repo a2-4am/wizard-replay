@@ -36,8 +36,13 @@ op_c7
          ; our Bye program is already installed, so uninstall it and
          ; reinstall the previous Bye program, if any
          lda   $d400
-         cmp   #$d8                  ; CLD opcode
+         cmp   #$D8                  ; CLD opcode (ProDOS 8)
+         beq   @prodos8_bye
+         lda   $d404
+         cmp   #$FB                  ; XCE opcode (GS/OS)
          bne   +                     ; no previous Bye program, leave ours installed
+
+@prodos8_bye
          lda   #$d4                  ; restore previous Bye from $D400..$D6FF
          sta   srcptr+1
          lda   #$d1
@@ -61,8 +66,13 @@ op_c7
 InstallBye
          +READ_RAM2_WRITE_RAM2
          lda   $d100
-         cmp   #$D8                  ; CLD opcode
+         cmp   #$D8                  ; CLD opcode (ProDOS 8)
+         beq   @prodos8_bye
+         lda   $d104
+         cmp   #$FB                  ; XCE opcode (GS/OS)
          bne   +
+
+@prodos8_bye
          lda   #$d1                  ; copy existing Bye to $D400..$D6FF
          sta   srcptr+1
          lda   #$d4
