@@ -65,8 +65,10 @@ rem add loaders and disk images for WizPlus
 %CADIUS% ADDFILE "%BUILDDISK%" "/%VOLUME%/X/WIZ123/" "build\LOADERS\WIZPLUS\WIZPLUS1#060800" -C >>build\log
 %CADIUS% ADDFILE "%BUILDDISK%" "/%VOLUME%/X/WIZ123/" "build\LOADERS\WIZPLUS\WIZPLUS2#060800" -C >>build\log
 %CADIUS% ADDFILE "%BUILDDISK%" "/%VOLUME%/X/WIZ123/" "build\LOADERS\WIZPLUS\WIZPLUS3#060800" -C >>build\log
-rem add disk images for Ultima III
-%CADIUS% ADDFOLDER "%BUILDDISK%" "/%VOLUME%/X/ULTIMA3/" "build\X\ULTIMA3" -C >>build\log
+rem add disk images for Ultimas
+for %%q in (ULTIMA3 ULTIMA4 ULTIMA5) do (
+%CADIUS% ADDFOLDER "%BUILDDISK%" "/%VOLUME%/X/%%q/" "build\X\%%q" -C >>build\log
+)
 rem add loaders and disk images for third-party Ultima III scenarios using Ultima III boot and custom scenario
 for %%q in (ISLANDSOFDEATH LAVALITE.WORLD SWORD.LORDS EGYPT SLAVELORDS SPACESHIP.CRASH A.WORLD.DIVIDED PIRATE.WORLD) do (
 %CADIUS% CREATEFOLDER "%BUILDDISK%" "/%VOLUME%/X/%%q/" -C >>build\log
