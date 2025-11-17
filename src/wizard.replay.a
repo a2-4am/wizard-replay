@@ -94,3 +94,5 @@ BlankGraphics
          !src  "src/ui.credits.a"
          !src  "src/ui.font.a"
          !src  "src/ui.font.data.a"
+
+!if (* > BackupRestoreData) { !serious "code is too big" }

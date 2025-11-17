@@ -10,14 +10,7 @@ BackupScenario
          inc   VTAB
          inc   VTAB
          +LDADDR sBackup
-         jsr   DrawCenteredString
-         inc   VTAB
-         inc   VTAB
-         +LDADDR sInitialProgressBar
-         ldx   #$02
-         jsr   DrawString
-         lda   #$03
-         sta   HTAB
+         jsr   DrawInitialProgressBar
 
          jsr   BuildPathToScenario
          jsr   OpenSourceFile
@@ -35,14 +28,7 @@ RestoreScenario
          inc   VTAB
          inc   VTAB
          +LDADDR sRestore
-         jsr   DrawCenteredString
-         inc   VTAB
-         inc   VTAB
-         +LDADDR sInitialProgressBar
-         ldx   #$02
-         jsr   DrawString
-         lda   #$03
-         sta   HTAB
+         jsr   DrawInitialProgressBar
 
          jsr   BuildPathToScenarioBackup
          jsr   OpenSourceFile
@@ -59,8 +45,8 @@ BackupRestoreLoop
          jsr   ReadFile
 BackupRestoreSourceRefNum
          !byte SELF_MODIFIED_BYTE
-         !word $0800
-         !word $1000
+         !word BackupRestoreData
+         !word BackupRestoreLen
          bcc   +
          cmp   #$4C                  ; EOF = done
          beq   ExitBackupRestoreWithNoError
@@ -75,8 +61,8 @@ BackupRestoreSourceRefNum
          jsr   WriteFile
 BackupRestoreDestRefNum
          !byte SELF_MODIFIED_BYTE
-         !word $0800
-         !word $1000
+         !word BackupRestoreData
+         !word BackupRestoreLen
          bcc   BackupRestoreLoop
 
 ExitBackupRestoreWithError
@@ -135,3 +121,14 @@ BuildPathToScenarioBackup
 
          +LDADDR_SELECTED_GAME Backups
          jmp   AddToPath
+
+DrawInitialProgressBar
+         jsr   DrawCenteredString
+         inc   VTAB
+         inc   VTAB
+         +LDADDR sInitialProgressBar
+         ldx   #11
+         jsr   DrawString
+         lda   #12
+         sta   HTAB
+         rts

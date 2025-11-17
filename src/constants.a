@@ -55,8 +55,10 @@ dstptr         = $FE      ; word (used by Bye routines)
 HGRLO          = $0100    ; 0xC0 bytes, should not cross page boundary (lifetime)
 HGRHI          = $0300    ; 0xC0 bytes, should not cross page boundary (lifetime)
 gPathname      = $02C0    ; 0x40 bytes
-Loader         = $0800
-ProDOSBuffer   = $1C00
+Loader         = $0800    ; largest one is 0x770 bytes
+ProDOSBuffer   = $1C00    ; 0x0400 bytes
+BackupRestoreData = $9000 ; 0x2300 bytes
+BackupRestoreLen  = $2300
 
 ; application-specific constants
 kWizimoreGameOffset = 3
