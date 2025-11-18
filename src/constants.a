@@ -63,5 +63,5 @@ BackupRestoreLen  = $2300
 ; application-specific constants
 kWizimoreGameOffset = 3
 kOtherGameOffset    = kWizimoreGameOffset + 5
-kUltimaGameOffset   = kOtherGameOffset + 4
-kUltimoreGameOffset = kUltimaGameOffset + 3
+; kUltimaGameOffset   = kOtherGameOffset + 4
+; kUltimoreGameOffset = kUltimaGameOffset + 3

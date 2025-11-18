@@ -14,12 +14,12 @@ sPlayLoader2
          +PSTRING "WIZARDRY2"
 sPlayLoader3
          +PSTRING "WIZARDRY3"
-sPlayLoaderUltima3
-         +PSTRING "U3"
-sPlayLoaderUltima4
-         +PSTRING "U4"
-sPlayLoaderUltima5
-         +PSTRING "U5"
+; sPlayLoaderUltima3
+;          +PSTRING "U3"
+; sPlayLoaderUltima4
+;          +PSTRING "U4"
+; sPlayLoaderUltima5
+;          +PSTRING "U5"
 
 sEditLoader1
          +PSTRING "WIZPLUS1"
@@ -63,12 +63,12 @@ sVolBlackStone
          +PSTRING "BLACK.STONE"
 sVolKnightOfTheGrave
          +PSTRING "KNIGHT.GRAVE"
-sVolUltima3
-         +PSTRING "ULTIMA3"
-sVolUltima4
-         +PSTRING "ULTIMA4"
-sVolUltima5
-         +PSTRING "ULTIMA5"
+; sVolUltima3
+;          +PSTRING "ULTIMA3"
+; sVolUltima4
+;          +PSTRING "ULTIMA4"
+; sVolUltima5
+;          +PSTRING "ULTIMA5"
 
 ; directory name of the scenario
 VolNames
@@ -84,9 +84,9 @@ VolNames
          !word sVolAtomicWasteland   ; Atomic Wasteland
          !word sVolBlackStone        ; Black Stone
          !word sVolKnightOfTheGrave  ; Knight of the Grave
-         !word sVolUltima3           ; Ultima III
-         !word sVolUltima4           ; Ultima IV
-         !word sVolUltima5           ; Ultima V
+         ; !word sVolUltima3           ; Ultima III
+         ; !word sVolUltima4           ; Ultima IV
+         ; !word sVolUltima5           ; Ultima V
 
 ; filename of the game loader
 ; must keep in sync with VolNames
@@ -103,9 +103,9 @@ PlayLoaders
          !word sPlayLoader1          ; Atomic Wasteland
          !word sPlayLoader1          ; Black Stone
          !word sPlayLoader1          ; Knight of the Grave
-         !word sPlayLoaderUltima3    ; Ultima III
-         !word sPlayLoaderUltima4    ; Ultima IV
-         !word sPlayLoaderUltima5    ; Ultima V
+         ; !word sPlayLoaderUltima3    ; Ultima III
+         ; !word sPlayLoaderUltima4    ; Ultima IV
+         ; !word sPlayLoaderUltima5    ; Ultima V
 
 ; filename of the WizPlus loader
 ; must keep in sync with VolNames
@@ -122,9 +122,9 @@ EditLoaders
          !word sEditLoader1          ; Atomic Wasteland
          !word sEditLoader1          ; Black Stone
          !word sEditLoader1          ; Knight of the Grave
-         !word 0                     ; Ultima III
-         !word 0                     ; Ultima IV
-         !word 0                     ; Ultima V
+         ; !word 0                     ; Ultima III
+         ; !word 0                     ; Ultima IV
+         ; !word 0                     ; Ultima V
 
 ; filename of the actual disk image for the scenario
 ; must keep in sync with VolNames
@@ -141,9 +141,9 @@ Scenarios
          !word sScenario1            ; Atomic Wasteland
          !word sScenario1            ; Black Stone
          !word sScenario1            ; Knight of the Grave
-         !word 0                     ; Ultima III
-         !word 0                     ; Ultima IV
-         !word 0                     ; Ultima V
+         ; !word 0                     ; Ultima III
+         ; !word 0                     ; Ultima IV
+         ; !word 0                     ; Ultima V
 
 ; filename to use for the backup of the scenario
 ; must keep in sync with VolNames
@@ -160,6 +160,6 @@ Backups
          !word sScenario1Backup      ; Atomic Wasteland
          !word sScenario1Backup      ; Black Stone
          !word sScenario1Backup      ; Knight of the Grave
-         !word 0                     ; Ultima III
-         !word 0                     ; Ultima IV
-         !word 0                     ; Ultima V
+         ; !word 0                     ; Ultima III
+         ; !word 0                     ; Ultima IV
+         ; !word 0                     ; Ultima V

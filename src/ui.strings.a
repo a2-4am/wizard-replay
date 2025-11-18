@@ -13,10 +13,10 @@ sMenuWizimore
          +PSTRING " Wizimore scenarios  "
 sMenuOther
          +PSTRING " Other scenarios     "
-sMenuUltima
-         +PSTRING " Ultima 3-5          "
-sMenuUltimore
-         +PSTRING " Ultimore scenarios  "
+; sMenuUltima
+;          +PSTRING " Ultima 3-5          "
+; sMenuUltimore
+;          +PSTRING " Ultimore scenarios  "
 sMenuQuit
          +PSTRING " Quit                "
 ;
@@ -61,21 +61,21 @@ sMenuOtherKnightOfTheGrave
 ;          +PSTRING " Ultima I            "
 ; sMenuUltima2
 ;          +PSTRING " Ultima II           "
-sMenuUltima3
-         +PSTRING " Ultima III          "
-sMenuUltima4
-         +PSTRING " Ultima IV           "
-sMenuUltima5
-         +PSTRING " Ultima V            "
+; sMenuUltima3
+;          +PSTRING " Ultima III          "
+; sMenuUltima4
+;          +PSTRING " Ultima IV           "
+; sMenuUltima5
+;          +PSTRING " Ultima V            "
 ;
 ; short padded titles for Ultimore menu
 ;
-sMenuUltimoreEgypt
-         +PSTRING " Egypt               "
-sMenuUltimoreSlavelords
-         +PSTRING " Slavelords          "
-sMenuUltimoreSpaceshipCrash
-         +PSTRING " Spaceship Crash     "
+; sMenuUltimoreEgypt
+;          +PSTRING " Egypt               "
+; sMenuUltimoreSlavelords
+;          +PSTRING " Slavelords          "
+; sMenuUltimoreSpaceshipCrash
+;          +PSTRING " Spaceship Crash     "
 ;
 ; short padded titles for action menus
 ;
@@ -123,12 +123,12 @@ sTitleOtherBlackStone
          +PSTRING "Black Stone"
 sTitleOtherKnightOfTheGrave
          +PSTRING "Knight of the Grave"
-sTitleUltima3
-         +PSTRING "Ultima III: Exodus"
-sTitleUltima4
-         +PSTRING "Ultima IV: Quest of the Avatar"
-sTitleUltima5
-         +PSTRING "Ultima V: Warriors of Destiny"
+; sTitleUltima3
+;          +PSTRING "Ultima III: Exodus"
+; sTitleUltima4
+;          +PSTRING "Ultima IV: Quest of the Avatar"
+; sTitleUltima5
+;          +PSTRING "Ultima V: Warriors of Destiny"
 sSubtitle1981
          +PSTRING "1981 classic with modern upgrades"
 sSubtitle1982
@@ -141,10 +141,10 @@ sSubtitle1987
          +PSTRING "1987 third-party scenario"
 sSubtitle2024
          +PSTRING "2024 scenario based on the dice FRPG"
-sSubtitle1985Classic
-         +PSTRING "1985 classic"
-sSubtitle1988Classic
-         +PSTRING "1988 classic"
+; sSubtitle1985Classic
+;          +PSTRING "1985 classic"
+; sSubtitle1988Classic
+;          +PSTRING "1988 classic"
 ;
 ; messages and graphics for backup/restore
 ;
@@ -203,9 +203,9 @@ TitleStrings
          !word sTitleOtherAtomicWasteland
          !word sTitleOtherBlackStone
          !word sTitleOtherKnightOfTheGrave
-         !word sTitleUltima3
-         !word sTitleUltima4
-         !word sTitleUltima5
+         ; !word sTitleUltima3
+         ; !word sTitleUltima4
+         ; !word sTitleUltima5
 
 SubtitleStrings
          !word sSubtitle1981         ; Wizardry 1 PG
@@ -220,6 +220,6 @@ SubtitleStrings
          !word sSubtitle1987         ; Atomic Wasteland
          !word sSubtitle1987         ; Black Stone
          !word sSubtitle1987         ; Knight of the Grave
-         !word sSubtitle1983         ; Ultima III
-         !word sSubtitle1985Classic  ; Ultima IV
-         !word sSubtitle1988Classic  ; Ultima V
+         ; !word sSubtitle1983         ; Ultima III
+         ; !word sSubtitle1985Classic  ; Ultima IV
+         ; !word sSubtitle1988Classic  ; Ultima V
