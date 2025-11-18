@@ -21,7 +21,7 @@ CADIUS=cadius
 VOLUME=WIZARD.REPLAY
 BUILDDISK=build/wizard-replay.hdv
 PG.SCENARIOS=CAT.OF.VLAD EMPERORS.SEAL NIHONBASHI OCONNORS.MINE SCARLET.BROTHER DRAGON.QUEST ATOMICWASTELAND BLACK.STONE KNIGHT.GRAVE
-ULTIMAS=ULTIMA3 ULTIMA4 ULTIMA5
+# ULTIMAS=ULTIMA3 ULTIMA4 ULTIMA5
 
 UNAME_S := $(shell uname -s)
 ifeq ($(UNAME_S),Linux)
@@ -67,9 +67,9 @@ dsk: preconditions asm extract
 #
 # add loaders and disk images for Ultimas
 #
-	for f in $(ULTIMAS); do \
-		$(CADIUS) ADDFOLDER "$(BUILDDISK)" "/$(VOLUME)/X/$$f" "build/X/$$f" -C >>build/log; \
-	done
+# 	for f in $(ULTIMAS); do \
+# 		$(CADIUS) ADDFOLDER "$(BUILDDISK)" "/$(VOLUME)/X/$$f" "build/X/$$f" -C >>build/log; \
+# 	done
 #
 # add loaders and disk images for WizPlus
 #
