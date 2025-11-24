@@ -17,7 +17,13 @@ Start
          sta   Title
          sta   Title+1
          sta   Title+2
-         ldx   #$FF
+         ldx   #$00
+-        sta   BlankGraphics, x
+         sta   BlankGraphics+$100, x
+         inx
+         bne   -
+         dex
+         ;X=#$FF
          txs
          +READ_ROM_NO_WRITE
          sta   PRIMARYCHARSET
@@ -69,8 +75,18 @@ BrotherhoodGraphics
          !bin  "res/wizgfx/SCARLET00"
          !bin  "res/wizgfx/SCARLET01"
          !bin  "res/wizgfx/SCARLET06"
-BlankGraphics
-         !fill 512,$80
+AtomicWastelandGraphics
+         !bin  "res/wizgfx/ATOMICWASTELAND02"
+         !bin  "res/wizgfx/ATOMICWASTELAND11"
+         !bin  "res/wizgfx/ATOMICWASTELAND04"
+BlackStoneGraphics
+         !bin  "res/wizgfx/BLACKSTONE00"
+         !bin  "res/wizgfx/BLACKSTONE06"
+         !bin  "res/wizgfx/BLACKSTONE0F"
+KnightOfTheGraveGraphics
+         !bin  "res/wizgfx/KNIGHTGRAVE0D"
+         !bin  "res/wizgfx/KNIGHTGRAVE05"
+         !bin  "res/wizgfx/KNIGHTGRAVE13"
 
          !src  "src/wizgfx.a"
          !src  "src/ui.strings.a"

@@ -13,28 +13,28 @@ OtherMenuStrings
          !byte 0
 
 OtherGraphicsLo
-         !byte <BlankGraphics
-         !byte <BlankGraphics
-         !byte <BlankGraphics
-         !byte <BlankGraphics
+         !byte <ProvingGraphics
+         !byte <AtomicWastelandGraphics
+         !byte <BlackStoneGraphics
+         !byte <KnightOfTheGraveGraphics
          !byte <BlankGraphics
 OtherGraphicsHi0
-         !byte >BlankGraphics
-         !byte >BlankGraphics
-         !byte >BlankGraphics
-         !byte >BlankGraphics
+         !byte >(ProvingGraphics+$400)
+         !byte >AtomicWastelandGraphics
+         !byte >BlackStoneGraphics
+         !byte >KnightOfTheGraveGraphics
          !byte >BlankGraphics
 OtherGraphicsHi1
-         !byte >BlankGraphics
-         !byte >BlankGraphics
-         !byte >BlankGraphics
-         !byte >BlankGraphics
+         !byte >(ProvingGraphics+$200)
+         !byte >(AtomicWastelandGraphics+$200)
+         !byte >(BlackStoneGraphics+$200)
+         !byte >(KnightOfTheGraveGraphics+$200)
          !byte >BlankGraphics
 OtherGraphicsHi2
-         !byte >BlankGraphics
-         !byte >BlankGraphics
-         !byte >BlankGraphics
-         !byte >BlankGraphics
+         !byte >ProvingGraphics
+         !byte >(AtomicWastelandGraphics+$400)
+         !byte >(BlackStoneGraphics+$400)
+         !byte >(KnightOfTheGraveGraphics+$400)
          !byte >BlankGraphics
 
 OtherMenuActions

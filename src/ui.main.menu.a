@@ -14,28 +14,28 @@ MainMenuStrings
 MainMenuGraphicsLo
          !byte <ProvingGraphics
          !byte <OConnorGraphics
-         !byte <BlankGraphics
+         !byte <BlackStoneGraphics
          ; !byte <BlankGraphics
          ; !byte <BlankGraphics
          !byte <BlankGraphics
 MainMenuGraphicsHi0
          !byte >ProvingGraphics
          !byte >OConnorGraphics
-         !byte >BlankGraphics
+         !byte >(KnightOfTheGraveGraphics+$400)
          ; !byte >BlankGraphics
          ; !byte >BlankGraphics
          !byte >BlankGraphics
 MainMenuGraphicsHi1
          !byte >(ProvingGraphics+$200)
          !byte >(OConnorGraphics+$200)
-         !byte >BlankGraphics
+         !byte >AtomicWastelandGraphics
          ; !byte >BlankGraphics
          ; !byte >BlankGraphics
          !byte >BlankGraphics
 MainMenuGraphicsHi2
          !byte >(ProvingGraphics+$400)
          !byte >(OConnorGraphics+$400)
-         !byte >BlankGraphics
+         !byte >BlackStoneGraphics
          ; !byte >BlankGraphics
          ; !byte >BlankGraphics
          !byte >BlankGraphics

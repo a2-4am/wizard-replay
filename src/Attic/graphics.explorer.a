@@ -2,7 +2,7 @@
 ;(c) 2023 by 4am
 ;
 !cpu 6502
-!to "build/WZREPLAY.SYSTEM",plain
+!to "build/WZREPLAY.SYSTEM#FF2000",plain
 *=$2000
 
          !source "src/constants.a"              ; no code
@@ -143,7 +143,58 @@ exit
 +        !byte 4
 
 data
-         !bin "res/Attic/LOL.6E00"
+         ; !bin "res/Attic/PROVING.BC00"
+         ; !bin "res/Attic/DRAGONQUEST.BC00"
+         !bin "res/Attic/ATOMIC.WASTELAND.BC00"
+         ; !bin "res/Attic/BLACK.STONE.BC00"
+         ; !bin "res/Attic/KNIGHT.OF.THE.GRAVE.BC00"
+         ;DragonQuest same as Proving Grounds
+         ;
+         ;Knight of the Grave
+         ;$00=tree with eyes
+         ;$01=dancing ghost
+         ;$02=winged ghost
+         ;$03=joker with sword
+         ;$04=muscular guy with sword
+         ;$05=misty guy (2)
+         ;$06=alien bugs
+         ;$07=wizard
+         ;$08=priest
+         ;$09=guy with sword and hat
+         ;$0A=machine-looking guy
+         ;$0B=large guy with sword
+         ;$0C=robed guy
+         ;$0D=horse with horns (1)
+         ;$0E=giant spider
+         ;$0F=hippo
+         ;$10=samurai
+         ;$11=triangular guy
+         ;$12=chest
+         ;$13=sword in stone (3)
+         ;
+         ;Black Stone
+         ;$00=steaming slime (1)
+         ;$02=skullface
+         ;$06=ghost (2)
+         ;$0F=giant snake (3)
+         ;
+         ;Atomic Wasteland
+         ;$00=dragon
+         ;$02=big skull (1)
+         ;$04=machine (3)
+         ;$05=emperor-looking guy
+         ;$06=muscular-looking guy with vest
+         ;$09=Karateka guy
+         ;$0A=dragon
+         ;$0B=giant
+         ;$0C=cyclops
+         ;$0D=dino-bird
+         ;$0E=tribble
+         ;$0F=Sea Dragon snake
+         ;$10=helmet
+         ;$11=giant devil (2)
+         ;$12=building with antenna
+         ;
          ;KOD
          ;$00=smiling slime
          ;$01=flying bugs

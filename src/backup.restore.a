@@ -81,7 +81,7 @@ ExitBackupRestore
 OpenSourceFile
          jsr   OpenFile
          !word gPathname
-         !word $1800
+         !word BackupRestoreSourceBuffer
          bcs   +
          jsr   SetMarkTo0
 +        rts
@@ -89,7 +89,7 @@ OpenSourceFile
 OpenDestFile
          jsr   OpenFile
          !word gPathname
-         !word $1C00
+         !word BackupRestoreDestBuffer
          bcs   +
          jsr   SetMarkTo0
 +        rts

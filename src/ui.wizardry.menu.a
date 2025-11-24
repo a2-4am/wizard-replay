@@ -15,22 +15,22 @@ WizardryGraphicsLo
          !byte <ProvingGraphics
          !byte <KODGraphics
          !byte <LOLGraphics
-         !byte <ProvingGraphics
+         !byte <BlankGraphics
 WizardryGraphicsHi0
          !byte >ProvingGraphics
          !byte >KODGraphics
          !byte >LOLGraphics
-         !byte >ProvingGraphics
+         !byte >BlankGraphics
 WizardryGraphicsHi1
          !byte >(ProvingGraphics+$200)
          !byte >(KODGraphics+$200)
          !byte >(LOLGraphics+$200)
-         !byte >(ProvingGraphics+$200)
+         !byte >BlankGraphics
 WizardryGraphicsHi2
          !byte >(ProvingGraphics+$400)
          !byte >(KODGraphics+$400)
          !byte >(LOLGraphics+$400)
-         !byte >(ProvingGraphics+$400)
+         !byte >BlankGraphics
 
 WizardryMenuActions
          !word SelectWiz

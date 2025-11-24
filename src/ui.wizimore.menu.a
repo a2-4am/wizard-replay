@@ -19,28 +19,28 @@ WizimoreGraphicsLo
          !byte <VladGraphics
          !byte <NihonbashiGraphics
          !byte <EmperorGraphics
-         !byte <OConnorGraphics
+         !byte <BlankGraphics
 WizimoreGraphicsHi0
          !byte >OConnorGraphics
          !byte >BrotherhoodGraphics
          !byte >VladGraphics
          !byte >NihonbashiGraphics
          !byte >EmperorGraphics
-         !byte >OConnorGraphics
+         !byte >BlankGraphics
 WizimoreGraphicsHi1
          !byte >(OConnorGraphics+$200)
          !byte >(BrotherhoodGraphics+$200)
          !byte >(VladGraphics+$200)
          !byte >(NihonbashiGraphics+$200)
          !byte >(EmperorGraphics+$200)
-         !byte >(OConnorGraphics+$200)
+         !byte >BlankGraphics
 WizimoreGraphicsHi2
          !byte >(OConnorGraphics+$400)
          !byte >(BrotherhoodGraphics+$400)
          !byte >(VladGraphics+$400)
          !byte >(NihonbashiGraphics+$400)
          !byte >(EmperorGraphics+$400)
-         !byte >(OConnorGraphics+$400)
+         !byte >BlankGraphics
 
 WizimoreMenuActions
          !word SelectWizimore
