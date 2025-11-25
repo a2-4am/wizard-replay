@@ -61,12 +61,12 @@ GameSelectedIndex=*+1
          bcc   @wizardry
          cmp   #kOtherGameOffset
          bcc   @wizimore
+         bcs   @other
          ; cmp   #kUltimaGameOffset
          ; bcc   @other
          ; cmp   #kUltimoreGameOffset
          ; bcc   @ultima
-         ;TODO rest of menus
-         jmp   $FF59
+         ; jmp   $FF59
 @wizardry
          lda   #0
          +HIDE_NEXT_2_BYTES
