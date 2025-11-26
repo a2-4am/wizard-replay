@@ -15,13 +15,13 @@
 *=0
 
          !byte %00000000 ;  $40  cursor
-         !byte %00110011 ;  $40  cursor
-         !byte %00001100 ;  $40  cursor
-         !byte %00110011 ;  $40  cursor
-         !byte %00001100 ;  $40  cursor
-         !byte %00110011 ;  $40  cursor
-         !byte %00001100 ;  $40  cursor
-         !byte %00110011 ;  $40  cursor
+         !byte %00111111 ;  $40  cursor
+         !byte %00111111 ;  $40  cursor
+         !byte %00111111 ;  $40  cursor
+         !byte %00111111 ;  $40  cursor
+         !byte %00111111 ;  $40  cursor
+         !byte %00111111 ;  $40  cursor
+         !byte %00111111 ;  $40  cursor
          !byte %00000000 ;  $41  A
          !byte %00011110 ;  $41  A
          !byte %00110011 ;  $41  A
