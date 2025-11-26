@@ -1,5 +1,12 @@
 # Wizard Replay changelog
 
+## Version 2.0 / unreleased
+
+- Add four more scenarios based on the Proving Grounds 3.1 engine [Snafaru]
+- Change in-game font in Proving Grounds and compatible scenarios [4am]
+- Speed up scenario backup/restore [4am]
+- Exit properly if launched from GS/OS [qkumba]
+
 ## Version 1.1 / 2024-09-23
 
 - Upgrade "Proving Grounds" and all Wizimore scenarios to new 3.1 engine [Snafaru, qkumba]
