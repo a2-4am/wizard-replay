@@ -17,8 +17,9 @@ ACME=acme
 # https://github.com/mach-kernel/cadius
 CADIUS=cadius
 
-# https://www.gnu.org/software/parallel/
-PARALLEL=parallel
+# https://python.org
+# (only used by make font)
+PYTHON=python3
 
 # VOLUME must match volume name in res/blank.hdv
 VOLUME=WIZARD.REPLAY
@@ -92,8 +93,15 @@ asm: preconditions dirs
 	$(ACME) -r build/wizard.replay.lst src/wizard.replay.a 2>>build/log
 #	$(ACME) -r build/graphics.explorer.lst src/Attic/graphics.explorer.a 2>>build/log
 
-extract: preconditions dirs
-	$(PARALLEL) '$(CADIUS) EXTRACTVOLUME {} build/X/ >>build/log' ::: res/dsk/*.po
+font: preconditions dirs
+	$(PYTHON) "res/Wizard Replay Mono/font.py" < "res/Wizard Replay Mono/font-master.txt" > src/wizfont.a
+	$(ACME) -o res/wizfont.bin src/wizfont.a
+
+extract: font preconditions dirs
+# note: skip non-Wizardry disk images for now
+	for v in res/dsk/Wiz*.po; do \
+		$(CADIUS) EXTRACTVOLUME "$$v" build/X/ >>build/log; \
+	done
 #
 # remove files we don't use (allows using ADDFOLDER later)
 #
@@ -105,13 +113,18 @@ extract: preconditions dirs
 	rm build/X/**/"WIZARDRY2#060800"
 	rm build/X/**/"WIZARDRY3#060800"
 #
+# patch fonts
+#
+	for f in WIZARDRY.PG $(PG.SCENARIOS); do \
+		bin/changefont.sh "build/X/$$f/WIZARDRY1.A#000000" "res/wizfont.bin" 0x122 > "build/X/$$f/WIZARDRY1.A.BAK#000000"; \
+	done
+#
 # create backups
 #
-	rsync -a "build/X/WIZARDRY.PG/WIZARDRY1.A#000000" "build/X/WIZARDRY.PG/WIZARDRY1.A.BAK#000000"
 	rsync -a "build/X/KOD/WIZARDRY2.A#000000" "build/X/KOD/WIZARDRY2.A.BAK#000000"
 	rsync -a "build/X/WIZARDRY3/WIZARDRY3.A#000000" "build/X/WIZARDRY3/WIZARDRY3.A.BAK#000000"
-	for f in $(PG.SCENARIOS); do \
-		rsync -a "build/X/$$f/WIZARDRY1.A#000000" "build/X/$$f/WIZARDRY1.A.BAK#000000"; \
+	for f in WIZARDRY.PG $(PG.SCENARIOS); do \
+		rsync -a "build/X/$$f/WIZARDRY1.A.BAK#000000" "build/X/$$f/WIZARDRY1.A#000000"; \
 	done
 
 clean:
@@ -123,7 +136,7 @@ mount: dsk
 preconditions:
 	@$(ACME) --version | grep -q "ACME, release" || (echo "ACME is not installed" && exit 1)
 	@$(CADIUS) | grep -q "cadius v" || (echo "Cadius is not installed" && exit 1)
-	@$(PARALLEL) --version | grep -q "GNU" || (echo "GNU Parallel is not installed" && exit 1)
+	@$(PYTHON) --version | grep -q "Python 3" || (echo "Python 3 is not installed" && exit 1)
 
 all: clean dsk mount
 
