@@ -66,19 +66,19 @@ rem add loaders and disk images for WizPlus
 %CADIUS% ADDFILE "%BUILDDISK%" "/%VOLUME%/X/WIZ123/" "build\LOADERS\WIZPLUS\WIZPLUS2#060800" -C >>build\log
 %CADIUS% ADDFILE "%BUILDDISK%" "/%VOLUME%/X/WIZ123/" "build\LOADERS\WIZPLUS\WIZPLUS3#060800" -C >>build\log
 rem add disk images for Ultimas
-for %%q in (ULTIMA3 ULTIMA4 ULTIMA5) do (
-%CADIUS% ADDFOLDER "%BUILDDISK%" "/%VOLUME%/X/%%q/" "build\X\%%q" -C >>build\log
-)
+rem for %%q in (ULTIMA3 ULTIMA4 ULTIMA5) do (
+rem %CADIUS% ADDFOLDER "%BUILDDISK%" "/%VOLUME%/X/%%q/" "build\X\%%q" -C >>build\log
+rem )
 rem add loaders and disk images for third-party Ultima III scenarios using Ultima III boot and custom scenario
-for %%q in (ISLANDSOFDEATH LAVALITE.WORLD SWORD.LORDS EGYPT SLAVELORDS SPACESHIP.CRASH A.WORLD.DIVIDED PIRATE.WORLD) do (
-%CADIUS% CREATEFOLDER "%BUILDDISK%" "/%VOLUME%/X/%%q/" -C >>build\log
-%CADIUS% ADDFOLDER "%BUILDDISK%" "/%VOLUME%/X/%%q/GAME" "build\X\ULTIMA3\GAME" -C >>build\log
-for %%s in (build\X\%%q\GAME\*) do (
-1>nul %CADIUS% DELETEFILE "%BUILDDISK%" "/%VOLUME%/X/%%q/GAME/%%~nxs"
-1>nul %CADIUS% ADDFILE "%BUILDDISK%" "/%VOLUME%/X/%%q/GAME/" "%%s"
-)
-%CADIUS% ADDFILE "%BUILDDISK%" "/%VOLUME%/X/%%q/" "build\X\ULTIMA3\U3#060800" -C >>build\log
-)
+rem for %%q in (ISLANDSOFDEATH LAVALITE.WORLD SWORD.LORDS EGYPT SLAVELORDS SPACESHIP.CRASH A.WORLD.DIVIDED PIRATE.WORLD) do (
+rem %CADIUS% CREATEFOLDER "%BUILDDISK%" "/%VOLUME%/X/%%q/" -C >>build\log
+rem %CADIUS% ADDFOLDER "%BUILDDISK%" "/%VOLUME%/X/%%q/GAME" "build\X\ULTIMA3\GAME" -C >>build\log
+rem for %%s in (build\X\%%q\GAME\*) do (
+rem 1>nul %CADIUS% DELETEFILE "%BUILDDISK%" "/%VOLUME%/X/%%q/GAME/%%~nxs"
+rem 1>nul %CADIUS% ADDFILE "%BUILDDISK%" "/%VOLUME%/X/%%q/GAME/" "%%s"
+rem )
+rem %CADIUS% ADDFILE "%BUILDDISK%" "/%VOLUME%/X/%%q/" "build\X\ULTIMA3\U3#060800" -C >>build\log
+rem )
 goto :EOF
 )
 
@@ -107,7 +107,8 @@ goto :EOF
 goto :EOF
 
 :extract
-for %%q in (res\dsk\*.po) do %CADIUS% EXTRACTVOLUME "%%q" build\X\ >>build\log
+rem note: skip non-Wizardry disk images for now
+for %%q in (res\dsk\Wiz*.po) do %CADIUS% EXTRACTVOLUME "%%q" build\X\ >>build\log
 rem remove files we don't use (allows using ADDFOLDER later)
 1>nul 2>nul del /s build\X\.DS_Store build\X\PRODOS* build\X\LOADER.SYSTEM*
 rem remove loaders because we will assemble fresh versions of them from source
