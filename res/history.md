@@ -1,6 +1,6 @@
 # Wizard Replay changelog
 
-## Version 2.0 / unreleased
+## Version 2.0 / 2025-12-01
 
 - Add four more scenarios based on the Proving Grounds 3.1 engine [Snafaru]
 - Change in-game font in Proving Grounds and compatible scenarios [4am]
