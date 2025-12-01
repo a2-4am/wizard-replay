@@ -115,6 +115,8 @@ rem remove loaders because we will assemble fresh versions of them from source
 1>nul 2>nul del build\X\WIZARDRY1#060800
 1>nul 2>nul del build\X\WIZARDRY2#060800
 1>nul 2>nul del build\X\WIZARDRY3#060800
+rem patch fonts
+for %%q in (WIZARDRY.PG CAT.OF.VLAD EMPERORS.SEAL NIHONBASHI OCONNORS.MINE SCARLET.BROTHER DRAGON.QUEST) do cscript /nologo bin\changefont.js build\X\%%q\WIZARDRY1.A#000000 res\wizfont.bin 0x122
 rem create backups
 cscript /nologo bin\rsync.js build\X\WIZARDRY.PG\WIZARDRY1.A#000000 build\X\WIZARDRY.PG\WIZARDRY1.A.BAK#000000
 cscript /nologo bin\rsync.js build\X\KOD\WIZARDRY2.A#000000 build\X\KOD\WIZARDRY2.A.BAK#000000
