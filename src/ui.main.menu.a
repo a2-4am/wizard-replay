@@ -6,8 +6,8 @@ MainMenuStrings
          !word sMenuWizardry
          !word sMenuWizimore
          !word sMenuOther
-         ; !word sMenuUltima
-         ; !word sMenuUltimore
+         !word sMenuUltima
+         !word sMenuUltimore
          !word sMenuQuit
          !byte 0
 
@@ -15,37 +15,37 @@ MainMenuGraphicsLo
          !byte <ProvingGraphics
          !byte <OConnorGraphics
          !byte <BlackStoneGraphics
-         ; !byte <BlankGraphics
-         ; !byte <BlankGraphics
+         !byte <BlankGraphics
+         !byte <BlankGraphics
          !byte <BlankGraphics
 MainMenuGraphicsHi0
          !byte >ProvingGraphics
          !byte >OConnorGraphics
          !byte >(KnightOfTheGraveGraphics+$400)
-         ; !byte >BlankGraphics
-         ; !byte >BlankGraphics
+         !byte >BlankGraphics
+         !byte >BlankGraphics
          !byte >BlankGraphics
 MainMenuGraphicsHi1
          !byte >(ProvingGraphics+$200)
          !byte >(OConnorGraphics+$200)
          !byte >AtomicWastelandGraphics
-         ; !byte >BlankGraphics
-         ; !byte >BlankGraphics
+         !byte >BlankGraphics
+         !byte >BlankGraphics
          !byte >BlankGraphics
 MainMenuGraphicsHi2
          !byte >(ProvingGraphics+$400)
          !byte >(OConnorGraphics+$400)
          !byte >BlackStoneGraphics
-         ; !byte >BlankGraphics
-         ; !byte >BlankGraphics
+         !byte >BlankGraphics
+         !byte >BlankGraphics
          !byte >BlankGraphics
 
 MainMenuActions
          !word WizardryMenu
          !word WizimoreMenu
          !word OtherMenu
-         ; !word UltimaMenu
-         ; !word UltimoreMenu
+         !word UltimaMenu
+         !word UltimoreMenu
          !word QuitMenu
 
 MainMenu
@@ -61,12 +61,11 @@ GameSelectedIndex=*+1
          bcc   @wizardry
          cmp   #kOtherGameOffset
          bcc   @wizimore
-         bcs   @other
-         ; cmp   #kUltimaGameOffset
-         ; bcc   @other
-         ; cmp   #kUltimoreGameOffset
-         ; bcc   @ultima
-         ; jmp   $FF59
+         cmp   #kUltimaGameOffset
+         bcc   @other
+         cmp   #kUltimoreGameOffset
+         bcc   @ultima
+         bcs   @ultimore
 @wizardry
          lda   #0
          +HIDE_NEXT_2_BYTES
@@ -75,10 +74,12 @@ GameSelectedIndex=*+1
          +HIDE_NEXT_2_BYTES
 @other
          lda   #2
-;          +HIDE_NEXT_2_BYTES
-; @ultima
-;          lda   #3
-;          ;TODO reset of menus
+         +HIDE_NEXT_2_BYTES
+@ultima
+         lda   #3
+         +HIDE_NEXT_2_BYTES
+@ultimore
+         lda   #4
          jmp   MainMenuDispatch
 
 MainMenuRefresh
@@ -102,7 +103,7 @@ MainMenuDispatch
          bcs   MainMenuRefresh
 +        rts
 
-; UltimoreMenu
+UltimoreMenu
 QuitMenu
 SelectBack
          pla

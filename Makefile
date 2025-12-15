@@ -25,7 +25,7 @@ PYTHON=python3
 VOLUME=WIZARD.REPLAY
 BUILDDISK=build/wizard-replay.hdv
 PG.SCENARIOS=CAT.OF.VLAD EMPERORS.SEAL NIHONBASHI OCONNORS.MINE SCARLET.BROTHER DRAGON.QUEST ATOMICWASTELAND BLACK.STONE KNIGHT.GRAVE
-# ULTIMAS=ULTIMA3 ULTIMA4 ULTIMA5
+ULTIMAS=ULTIMA3 ULTIMA4 ULTIMA5
 
 dsk: preconditions asm extract
 	cp res/blank.hdv "$(BUILDDISK)"
@@ -64,9 +64,9 @@ dsk: preconditions asm extract
 #
 # add loaders and disk images for Ultimas
 #
-# 	for f in $(ULTIMAS); do \
-# 		$(CADIUS) ADDFOLDER "$(BUILDDISK)" "/$(VOLUME)/X/$$f" "build/X/$$f" -C >>build/log; \
-# 	done
+	for f in $(ULTIMAS); do \
+		$(CADIUS) ADDFOLDER "$(BUILDDISK)" "/$(VOLUME)/X/$$f" "build/X/$$f" -C >>build/log; \
+	done
 #
 # add loaders and disk images for WizPlus
 #
@@ -98,8 +98,7 @@ font: preconditions dirs
 	$(ACME) -o res/wizfont.bin src/wizfont.a
 
 extract: font preconditions dirs
-# note: skip non-Wizardry disk images for now
-	for v in res/dsk/Wiz*.po; do \
+	for v in res/dsk/*.po; do \
 		$(CADIUS) EXTRACTVOLUME "$$v" build/X/ >>build/log; \
 	done
 #
