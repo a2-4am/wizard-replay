@@ -21,7 +21,7 @@ if "%1" equ "asm" (
 :asm
 2>nul md build
 call :dirs
-%ACME% -r build\loader.wizardry1.v31.lst src\loader.wizardry1.v31.a 2>>build\log
+%ACME% -r build\loader.wizardry1.v32.lst src\loader.wizardry1.v32.a 2>>build\log
 %ACME% -r build\loader.wizardry2.lst src\loader.wizardry2.a 2>>build\log
 %ACME% -r build\loader.wizardry3.lst src\loader.wizardry3.a 2>>build\log
 %ACME% -r build\loader.wizplus1.lst src\loader.wizplus1.a 2>>build\log
@@ -40,7 +40,7 @@ call :extract
 %CADIUS% CREATEFOLDER "%BUILDDISK%" "/%VOLUME%/X/" -C >>build\log
 %CADIUS% CREATEFOLDER "%BUILDDISK%" "/%VOLUME%/X/WIZ123/" -C >>build\log
 rem add loaders and disk images for Wizardry I: Proving Grounds of the Mad Overlord
-%CADIUS% ADDFILE "%BUILDDISK%" "/%VOLUME%/X/WIZ123/" "build\LOADERS\WIZ1V31\WIZARDRY1#060800" -C >>build\log
+%CADIUS% ADDFILE "%BUILDDISK%" "/%VOLUME%/X/WIZ123/" "build\LOADERS\WIZ1V32\WIZARDRY1#060800" -C >>build\log
 %CADIUS% ADDFILE "%BUILDDISK%" "/%VOLUME%/X/WIZ123/" "build\X\WIZARDRY.PG\WIZARDRY1.A#000000" -C >>build\log
 %CADIUS% ADDFILE "%BUILDDISK%" "/%VOLUME%/X/WIZ123/" "build\X\WIZARDRY.PG\WIZARDRY1.A.BAK#000000" -C >>build\log
 %CADIUS% ADDFILE "%BUILDDISK%" "/%VOLUME%/X/WIZ123/" "build\X\WIZARDRY.PG\WIZARDRY1.B#000000" -C >>build\log
@@ -54,10 +54,10 @@ rem add loader and disk images for Wizardry III: Legacy of Llylgamyn
 %CADIUS% ADDFILE "%BUILDDISK%" "/%VOLUME%/X/WIZ123/" "build\X\WIZARDRY3\WIZARDRY3.A#000000" -C >>build\log
 %CADIUS% ADDFILE "%BUILDDISK%" "/%VOLUME%/X/WIZ123/" "build\X\WIZARDRY3\WIZARDRY3.A.BAK#000000" -C >>build\log
 %CADIUS% ADDFILE "%BUILDDISK%" "/%VOLUME%/X/WIZ123/" "build\X\WIZARDRY3\WIZARDRY3.B#000000" -C >>build\log
-rem add loader and disk images for third-party Wizardry scenarios (all based on Proving Grounds v3.1, so same loader)
+rem add loader and disk images for third-party Wizardry scenarios (all based on Proving Grounds v3.2, so same loader)
 for %%q in (CAT.OF.VLAD EMPERORS.SEAL NIHONBASHI OCONNORS.MINE SCARLET.BROTHER DRAGON.QUEST) do (
 %CADIUS% ADDFOLDER "%BUILDDISK%" "/%VOLUME%/X/%%q/" "build\X\%%q" -C >>build\log
-%CADIUS% ADDFILE "%BUILDDISK%" "/%VOLUME%/X/%%q/" "build\LOADERS\WIZ1V31\WIZARDRY1#060800" -C >>build\log
+%CADIUS% ADDFILE "%BUILDDISK%" "/%VOLUME%/X/%%q/" "build\LOADERS\WIZ1V32\WIZARDRY1#060800" -C >>build\log
 %CADIUS% ADDFILE "%BUILDDISK%" "/%VOLUME%/X/%%q/" "build\LOADERS\WIZPLUS\WIZPLUS1#060800" -C >>build\log
 )
 rem add loaders and disk images for WizPlus
@@ -69,7 +69,7 @@ rem add disk images for Ultimas
 for %%q in (ULTIMA3 ULTIMA4 ULTIMA5) do (
 %CADIUS% ADDFOLDER "%BUILDDISK%" "/%VOLUME%/X/%%q/" "build\X\%%q" -C >>build\log
 )
-add loaders and disk images for third-party Ultima III scenarios using Ultima III boot and custom scenario
+rem add loaders and disk images for third-party Ultima III scenarios using Ultima III boot and custom scenario
 for %%q in (ISLANDSOFDEATH LAVALITE.WORLD SWORD.LORDS EGYPT SLAVELORDS SPACESHIP.CRASH A.WORLD.DIVIDED PIRATE.WORLD) do (
 %CADIUS% CREATEFOLDER "%BUILDDISK%" "/%VOLUME%/X/%%q/" -C >>build\log
 %CADIUS% ADDFOLDER "%BUILDDISK%" "/%VOLUME%/X/%%q/GAME" "build\X\ULTIMA3\GAME" -C >>build\log
@@ -100,7 +100,7 @@ goto :EOF
 :dirs
 2>nul md build\X
 2>nul md build\LOADERS
-2>nul md build\LOADERS\WIZ1V31
+2>nul md build\LOADERS\WIZ1V32
 2>nul md build\LOADERS\WIZ2
 2>nul md build\LOADERS\WIZ3
 2>nul md build\LOADERS\WIZPLUS

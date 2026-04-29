@@ -10,7 +10,7 @@ ver_02 = 1
 } else { ;ver_02 = 0
   !cpu 65c02
 } ;ver_02
-!to "build/LOADERS/WIZ1V31/WIZARDRY1#060800",plain
+!to "build/LOADERS/WIZ1V32/WIZARDRY1#060800",plain
 *=$800
 
 ;place no code before init label below.
