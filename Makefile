@@ -27,6 +27,13 @@ BUILDDISK=build/wizard-replay.hdv
 PG.SCENARIOS=CAT.OF.VLAD EMPERORS.SEAL NIHONBASHI OCONNORS.MINE SCARLET.BROTHER DRAGON.QUEST ATOMICWASTELAND BLACK.STONE KNIGHT.GRAVE
 ULTIMAS=ULTIMA3 ULTIMA4 ULTIMA5
 
+UNAME_S := $(shell uname -s)
+ifeq ($(UNAME_S),Linux)
+	MOUNTER=xdg-open
+else
+	MOUNTER=osascript bin/V2Make.scpt "`pwd`" bin/wiz.vii
+endif
+
 dsk: preconditions asm extract
 	cp res/blank.hdv "$(BUILDDISK)"
 	$(CADIUS) ADDFILE "${BUILDDISK}" "/$(VOLUME)/" "build/WZREPLAY.SYSTEM#FF2000" >>build/log
@@ -35,7 +42,7 @@ dsk: preconditions asm extract
 #
 # add loaders and disk images for Wizardry I: Proving Grounds of the Mad Overlord
 #
-	$(CADIUS) ADDFILE "$(BUILDDISK)" "/$(VOLUME)/X/WIZ123/" "build/LOADERS/WIZ1V31/WIZARDRY1#060800" -C >>build/log
+	$(CADIUS) ADDFILE "$(BUILDDISK)" "/$(VOLUME)/X/WIZ123/" "build/LOADERS/WIZ1V32/WIZARDRY1#060800" -C >>build/log
 	$(CADIUS) ADDFILE "$(BUILDDISK)" "/$(VOLUME)/X/WIZ123/" "build/X/WIZARDRY.PG/WIZARDRY1.A#000000" -C >>build/log
 	$(CADIUS) ADDFILE "$(BUILDDISK)" "/$(VOLUME)/X/WIZ123/" "build/X/WIZARDRY.PG/WIZARDRY1.A.BAK#000000" -C >>build/log
 	$(CADIUS) ADDFILE "$(BUILDDISK)" "/$(VOLUME)/X/WIZ123/" "build/X/WIZARDRY.PG/WIZARDRY1.B#000000" -C >>build/log
@@ -54,11 +61,11 @@ dsk: preconditions asm extract
 	$(CADIUS) ADDFILE "$(BUILDDISK)" "/$(VOLUME)/X/WIZ123/" "build/X/WIZARDRY3/WIZARDRY3.A.BAK#000000" -C >>build/log
 	$(CADIUS) ADDFILE "$(BUILDDISK)" "/$(VOLUME)/X/WIZ123/" "build/X/WIZARDRY3/WIZARDRY3.B#000000" -C >>build/log
 #
-# add loader and disk images for third-party Wizardry scenarios (all based on Proving Grounds v3.1, so same loader)
+# add loader and disk images for third-party Wizardry scenarios (all based on Proving Grounds v3.2, so same loader)
 #
 	for f in $(PG.SCENARIOS); do \
 		$(CADIUS) ADDFOLDER "$(BUILDDISK)" "/$(VOLUME)/X/$$f" "build/X/$$f" -C >>build/log; \
-		$(CADIUS) ADDFILE "$(BUILDDISK)" "/$(VOLUME)/X/$$f/" "build/LOADERS/WIZ1V31/WIZARDRY1#060800" -C >>build/log; \
+		$(CADIUS) ADDFILE "$(BUILDDISK)" "/$(VOLUME)/X/$$f/" "build/LOADERS/WIZ1V32/WIZARDRY1#060800" -C >>build/log; \
 		$(CADIUS) ADDFILE "$(BUILDDISK)" "/$(VOLUME)/X/$$f/" "build/LOADERS/WIZPLUS/WIZPLUS1#060800" -C >>build/log; \
 	done
 #
@@ -77,14 +84,14 @@ dsk: preconditions asm extract
 
 dirs:
 	mkdir -p build/X
-	mkdir -p build/LOADERS/WIZ1V31
+	mkdir -p build/LOADERS/WIZ1V32
 	mkdir -p build/LOADERS/WIZ2
 	mkdir -p build/LOADERS/WIZ3
 	mkdir -p build/LOADERS/WIZPLUS
 	touch build/log
 
 asm: preconditions dirs
-	$(ACME) -r build/loader.wizardry1.v31.lst src/loader.wizardry1.v31.a 2>>build/log
+	$(ACME) -r build/loader.wizardry1.v32.lst src/loader.wizardry1.v32.a 2>>build/log
 	$(ACME) -r build/loader.wizardry2.lst src/loader.wizardry2.a 2>>build/log
 	$(ACME) -r build/loader.wizardry3.lst src/loader.wizardry3.a 2>>build/log
 	$(ACME) -r build/loader.wizplus1.lst src/loader.wizplus1.a 2>>build/log
@@ -115,7 +122,7 @@ extract: font preconditions dirs
 # patch fonts
 #
 	for f in WIZARDRY.PG $(PG.SCENARIOS); do \
-		bin/changefont.sh "build/X/$$f/WIZARDRY1.A#000000" "res/wizfont.bin" 0x122 > "build/X/$$f/WIZARDRY1.A.BAK#000000"; \
+		bin/changefont.sh "build/X/$$f/WIZARDRY1.A#000000" "res/wizfont.bin" 290 > "build/X/$$f/WIZARDRY1.A.BAK#000000"; \
 	done
 #
 # create backups
@@ -130,7 +137,7 @@ clean:
 	rm -rf build/
 
 mount: dsk
-	osascript bin/V2Make.scpt "`pwd`" bin/wiz.vii "$(BUILDDISK)"
+	$(MOUNTER) "$(BUILDDISK)" &
 
 preconditions:
 	@$(ACME) --version | grep -q "ACME, release" || (echo "ACME is not installed" && exit 1)

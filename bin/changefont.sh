@@ -7,6 +7,6 @@
 #   $ ./changefont.sh <disk image> <font data file> <sector offset>
 #   $ ./changefont.sh WizardryScenarioDisk.po wizfont.bin 0x122
 
-dd bs=0x100 count="$3" < "$1"
-dd bs=0x200 count=1 < "$2"
-dd bs=0x100 skip="$((2+$3))" < "$1"
+dd bs=256 count="$3" < "$1"
+dd bs=512 count=1 < "$2"
+dd bs=256 skip="$((2+$3))" < "$1"
