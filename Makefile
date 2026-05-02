@@ -17,10 +17,6 @@ ACME=acme
 # https://github.com/mach-kernel/cadius
 CADIUS=cadius
 
-# https://python.org
-# (only used by make font)
-PYTHON=python3
-
 # VOLUME must match volume name in res/blank.hdv
 VOLUME=WIZARD.REPLAY
 BUILDDISK=build/wizard-replay.hdv
@@ -100,11 +96,7 @@ asm: preconditions dirs
 	$(ACME) -r build/wizard.replay.lst src/wizard.replay.a 2>>build/log
 #	$(ACME) -r build/graphics.explorer.lst src/Attic/graphics.explorer.a 2>>build/log
 
-font: preconditions dirs
-	$(PYTHON) "res/Wizard Replay Mono/font.py" < "res/Wizard Replay Mono/font-master.txt" > src/wizfont.a
-	$(ACME) -o res/wizfont.bin src/wizfont.a
-
-extract: font preconditions dirs
+extract: preconditions dirs
 	for v in res/dsk/*.po; do \
 		$(CADIUS) EXTRACTVOLUME "$$v" build/X/ >>build/log; \
 	done
@@ -119,14 +111,11 @@ extract: font preconditions dirs
 	rm build/X/**/"WIZARDRY2#060800"
 	rm build/X/**/"WIZARDRY3#060800"
 #
-# patch fonts
-#
-	for f in WIZARDRY.PG $(PG.SCENARIOS); do \
-		bin/changefont.sh "build/X/$$f/WIZARDRY1.A#000000" "res/wizfont.bin" 290 > "build/X/$$f/WIZARDRY1.A.BAK#000000"; \
-	done
-#
 # create backups
 #
+	for f in WIZARDRY.PG $(PG.SCENARIOS); do \
+		rsync -a "build/X/$$f/WIZARDRY1.A#000000" "build/X/$$f/WIZARDRY1.A.BAK#000000"; \
+	done
 	rsync -a "build/X/KOD/WIZARDRY2.A#000000" "build/X/KOD/WIZARDRY2.A.BAK#000000"
 	rsync -a "build/X/WIZARDRY3/WIZARDRY3.A#000000" "build/X/WIZARDRY3/WIZARDRY3.A.BAK#000000"
 	for f in WIZARDRY.PG $(PG.SCENARIOS); do \
