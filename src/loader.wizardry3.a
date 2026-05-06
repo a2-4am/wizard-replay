@@ -621,6 +621,14 @@ multicopy
                 sta     $b580, y
                 iny
                 bne     -
+                ldy     #saveslot_e-saveslot_b
+-               lda     saveslot_b-1, y
+                sta     $957f, y
+                dey
+                bne     -
+                jsr     $9580
+                lda     #$91
+                sta     initpatch
                 lda     #<callback
                 sta     $b75e
                 lda     #>callback
@@ -672,6 +680,34 @@ loadaddr        lda     #$B0
 
 startup         !byte   12
                 !text   "RTSTRP.APPLE"
+
+saveslot_b !pseudopc $9580 {
+                lda     #4
+                sta     $49
+                ldx     #0
+                stx     $48
+                sta     $4a
+--              ldy     #$78
+-               lda     ($48), y
+                pha
+                lda     scrn_array, x
+initpatch       lda     ($48), y
+                pla
+                sta     scrn_array, x
+                inx
+                tya
+                eor     #$80
+                tay
+                bmi     -
+                iny
+                bpl     -
+                inc     $49
+                dec     $4a
+                bne     --
+                rts
+scrn_array
+}
+saveslot_e
 
                 ;read volume directory key block
                 ;self-modified by init code
@@ -1190,6 +1226,7 @@ pblock          !byte   2, 0, 0
   }
 
 callback
+                jsr     $9580
                 lda     #2
                 sta     $BF2D
                 jmp     $922D
