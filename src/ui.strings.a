@@ -3,7 +3,7 @@
 ;
 
 sVersion
-         +PSTRING "v2.2"
+         +PSTRING "v2.3"
 ;
 ; short padded titles for main menu
 ;

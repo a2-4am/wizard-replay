@@ -1,5 +1,17 @@
 # Wizard Replay changelog
 
+## Version 2.3 / 2026-05-06
+
+- fix hang on some mass storage devices (closes [12](https://github.com/a2-4am/wizard-replay/issues/12)) [qkumba]
+
+## Version 2.2 / 2026-05-04
+
+- upgrade "Catacombs of Vlad" to latest Proving Grounds 3.2 game engine [Snafaru]
+
+## Version 2.1 / 2026-05-02
+
+- upgrade to Proving Grounds 3.2 engine for all Proving Grounds scenarios [Snafaru]
+
 ## Version 2.0 / 2025-12-01
 
 - Add four more scenarios based on the Proving Grounds 3.1 engine [Snafaru]
